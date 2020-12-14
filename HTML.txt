@@ -1,0 +1,202 @@
+                     HTML FORMS:
+                    -------------
+
+-> html forms are used to collect data from users and sent to server for processing
+
+-> <form> element is used to create an html form 
+
+-> the <input> tag mentions what type of input
+
+<input type="text">	Displays a single-line text input field
+<input type="radio">	Displays a radio button (for selecting one of many choices)
+<input type="checkbox">	Displays a checkbox (for selecting zero or more of many choices)
+<input type="submit">	Displays a submit button (for submitting the form)
+<input type="button">	Displays a clickable button
+
+<label> element:
+---------------
+
+-> <label> element also help users who have difficulty clicking on very small regions
+
+-> The for attribute of the <label> tag should be equal to the 
+    id attribute of the <input> element to bind them together.
+
+<form>
+       <label for= "fname">FirstName:</label><br>
+       <input type = "text" id = "fname" name = "fname"><br>
+</form>
+
+radio button:
+--------------
+
+  <form>
+        <p>Gender</p>
+        <input type="radio" id = "male" name= "gender" value = "male">
+        <label for= "male" >Male</label><br>
+        <input type = "radio" id ="female" name="gender" value ="female">
+        <label for ="female">female</label><br>
+        <input type ="radio" id ="other" name = "gender" value ="other">
+        <label for ="other">Other</label><br>
+
+    </form>
+
+checkboxes:
+------------
+
+<form>
+  <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+  <label for="vehicle1"> I have a bike</label><br>
+  <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+  <label for="vehicle2"> I have a car</label><br>
+  <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+  <label for="vehicle3"> I have a boat</label>
+</form>
+
+Submit :
+-------
+
+<form action="/action_page.php">
+  <label for="fname">First name:</label><br>
+  <input type="text" id="fname" name="fname" value="John"><br>
+  <label for="lname">Last name:</label><br>
+  <input type="text" id="lname" name="lname" value="Doe"><br><br>
+  <input type="submit" value="Submit">
+</form>
+
+Name attribute for <input>
+
+-> If the name attribute is omitted, the value of the input field 
+   will not be sent at all.
+
+                       Form Attributes:
+                      ------------------
+
+-> action : defines the action to be performed when the form is submitted.
+
+-> target:
+
+_blank	   The response is displayed in a new window or tab
+_self	   The response is displayed in the current window
+_parent	   The response is displayed in the parent frame
+_top	   The response is displayed in the full body of the window
+framename	The response is displayed in a named iframe
+
+<form action="/action_page.php" target="_blank">
+
+-> method:
+
+The method attribute specifies the HTTP method to be 
+ used when submitting the form data. two type: get and post methods.
+
+<form action="/action_page.php" method="get">
+
+-> autocomplete:
+
+ attribute specifies whether a form should have autocomplete on or off.
+
+<form action="/action_page.php" autocomplete="on">
+
+-> novalidate:
+
+doesn't validate at time of submisiion
+
+<form action="/action_page.php" novalidate>
+
+
+           Form Elements: 
+            -------------------
+
+<select>:
+------------
+
+The <select> element defines a drop-down list:
+
+<label for="cars">Choose a car:</label>
+<select id="cars" name="cars" size="4" multiple>
+  <option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="fiat">Fiat</option>
+  <option value="audi">Audi</option>
+</select>
+
+<textarea>:
+---------------
+
+
+<form action="/action_page.php">
+  <textarea name="message" style="width:200px; height:600px;">
+   The cat was playing in the garden.</textarea>
+  <br>
+  <input type="submit">
+</form>
+
+<button>
+-----------
+
+<button type="button" onclick="alert('Hello World!')">Click Me!</button>
+
+
+                      Input Types:
+                   --------------------
+
+<input type="button">
+<input type="checkbox">
+<input type="color">
+<input type="date">
+<input type="datetime-local">
+<input type="email">
+<input type="file">
+<input type="hidden">
+<input type="image">
+<input type="month">
+<input type="number">
+<input type="password">
+<input type="radio">
+<input type="range">
+<input type="reset">
+<input type="search">
+<input type="submit">
+<input type="tel">
+<input type="text">
+<input type="time">
+<input type="url">
+<input type="week">
+
+refer w3 schools:
+
+Input Restrictions: for giving restrictions on input.
+
+<form>
+  <label for="quantity">Quantity:</label>
+  <input type="number" id="quantity" name="quantity" min="0" max="100" step="10" value="30">
+</form>
+
+                         Input Attributes:
+                      -------------------------
+The input value attribute specifies an initial value for an input field:
+
+<form>
+  <label for="fname">First name:</label><br>
+  <input type="text" id="fname" name="fname" value="John"><br>
+  <label for="lname">Last name:</label><br>
+  <input type="text" id="lname" name="lname" value="Doe">
+</form>
+
+
+-> The input readonly attribute specifies that an input field is read-only.
+
+-> min and max attributs:
+
+ <form>
+  <label for="datemax">Enter a date before 1980-01-01:</label>
+  <input type="date" id="datemax" name="datemax" max="1979-12-31"><br><br>
+
+  <label for="datemin">Enter a date after 2000-01-01:</label>
+  <input type="date" id="datemin" name="datemin" min="2000-01-02"><br><br>
+
+  <label for="quantity">Quantity (between 1 and 5):</label>
+  <input type="number" id="quantity" name="quantity" min="1" max="5">
+</form>
+
+-> placeholder attribute for keeping something in box
+

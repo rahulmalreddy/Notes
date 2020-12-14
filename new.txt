@@ -1,0 +1,97 @@
+ 
+
+-> total drives attended by trainee
+
+     
+pma_trainee_round
+
+       -------> status  // attended,no_show,rejected
+       -------> trainee_fk  refer to pma_trainee
+
+select pt.firstname,pt.id, (select count(case
+    ->  status  when 'attended' then 1 else null end)
+    -> from pma_trainee_round as pma where pt.id = pma.trainee_fk
+    -> ) as drives_attended
+    -> from pma_trainee as pt;
+
+
+
+
+-> no of drives applied,eligible,broadcasted
+
+select pt.id,pt.firstname,
+ (select count(applied) from pmb.pma_broadcast where pmb.trainee_fk = pt.id) as 
+  drives_applied
+from pma.trainee as pt
+join pma_broadcast as pmb on pt.id = pmb.trainee_fk;
+
+
+
+
+-> trainee last round status:
+
+pma_selection_round: 
+          roundnumber:------> 
+          drive_fk;-----
+pma_drive_rounds
+          rounds
+          drive_id-----
+ count(rounds)   ---> total no of rounds
+
+pma_trainee ---> id, name;
+
+
+
+select count(rounds) ,round_num as last_round
+ from pma_drive_rounds as pdr
+join pma_selection_round as psr on psr.drive_fk = pdr.drive_id
+group by id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+v1:
+use dashboard;
+select pt.id, pt.firstname, 
+(select count(rounds) from pma_drive_rounds group by drive_id )  as total_no_rounds,
+(select roundnumber  from pma_selection_round as psr where psr.id = pt.id) as lastround
+-- (total_no_rounds - latstround) as status, 
+-- if(status=lastround,"selected","notselected") as result 
+ from pma_trainee as pt 
+order by pt.id asc;
+
+
+
+
+select 
+
+-> (select count(rounds) from pma_drive_rounds groupby drive_id )  as total_no_rounds
+
+-> (select roundnumber  from pma_selection_round as psr
+  where psr.id = pma_trainee.id) as lastround
+
+-> select pt.id,pt.firstname, 
+ 
+
+(total_no_rounds - latstround) as status,  if(status=lastround,"selected","notselected") as result
+
+
+from pma_trainee as pt 
+
+
+
+order by id asc
+   
+

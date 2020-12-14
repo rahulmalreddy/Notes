@@ -1,0 +1,461 @@
+                                  ARRAY CODES
+
+1. Insert an elemnet into array
+
+position :3
+value : 22
+
+array: 21 33 44 55 66
+
+void funvtion(int[] arr ,n , position)
+{
+ for(int i = n-1; i> position-1;i--)
+{
+
+arr[i] = arr[i-1];
+}
+print array:
+
+o/p:
+21 33 22 44 55
+
+-----------------------------------------------------------------------
+2. Delete an element in array?
+
+input n = size;
+arrat : 10,40,30,80,60,20
+
+int delete =30;
+for(int i =0;i<n;i++)
+{
+
+if(a[i]==delete)
+{
+for (int j =i; j<n;j++)
+{
+a[j] = a[j+1];
+}
+break;
+}
+}
+}
+
+o/p:10,40,80,60,20,20.
+----------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+1. Alternate Array:
+
+size of array 6
+elements: 11 44 33 22 77 88
+o/p: 11 33 77
+
+class GfG
+{
+    public static void print(int arr[], int n)
+    {  
+    
+        for ( int i =0 ; i< arr.length;i++){
+           if(i%2 == 0){
+               System.out.println(arr[i]);
+           }
+        }
+    }
+}
+
+-----------------------------------------------------------------------------------------
+
+2. To find min and max number in array:
+
+size of array :5
+elemnets: 11, 33, 22 ,55 44
+
+o/p: 11 44
+
+public class BubbleSort {
+	 void bubbleSort(int arr[])
+	    {
+	        int n = arr.length;
+	        for (int i = 0; i < n-1; i++)
+	            for (int j = 0; j < n-i-1; j++)
+	            	
+	                if (arr[j] > arr[j+1])//(arr[j].compareTo(arr[j+1)>o) for string
+	                {
+	                    
+	                    int temp = arr[j];//String
+	                    arr[j] = arr[j+1];
+	                    arr[j+1] = temp;
+	                }
+	       
+	    }
+	 void printArray(int arr[])
+	    {
+	       for(int i:arr) {
+	    	   System.out.println(i);
+	       }
+	    }
+	 
+	public static void main(String[] args) {
+		Scanner in=new Scanner(System.in);
+		System.out.println("enter no.of elements");
+	
+		int n=in.nextInt();
+		int[] arr=new int[n];
+		System.out.println("enter array elements");
+		for(int i=0;i<n;i++) {
+			arr[i]=in.nextInt();
+		}
+		for(int i:arr) {
+			System.out.println(i);
+		}
+		BubbleSort myObj=new BubbleSort();
+		myObj.bubbleSort(arr);
+		System.out.println("sorted array is");
+		myObj.printArray(arr);
+		 System.out.println("seconfd largest element is"+arr[n-2]);
+		 System.out.println("smallest element is" +arr[0]);
+		 System.out.println("largest element si"+arr[n-1]);
+		
+		in.close();
+	}
+}
+		
+-------------------------------------------------------------------------------------
+3. Sum of array elemnts?
+ 
+n =3
+elements: 2 4 5
+sum of elemnsts: 11
+
+	static void sumElements(int[] arr, int n) {
+		
+		
+		int total=0;
+		for(int a: arr) {
+			total= total+a;
+		}
+		System.out.println(total);
+	}
+	
+
+--------------------------------------------------------------------------------------
+
+4. Reverse an array?
+
+n =3
+elements: 2 4 5
+sum of elemnsts: 5 4 2
+
+static void reversArray(int[] arr, int n) {
+		
+		for(int i = n-1;i>= 0 ;i--) {
+			System.out.println(arr[i]);
+		}
+	}
+
+--------------------------------------------------------------------------------------
+5. left rotate an arrray:
+
+n=5;
+elements = 2,3,4,5,6;
+rotate= 2;
+
+
+		
+		int [] a = {2,4,5,6,7,8};
+		int r = 2;
+		int n = a.length;
+			
+			for(int i =0 ;i<r;i++) {
+				int j,last;
+				last= a[0];
+				
+				for(j=0;j<n-1;j++) {
+					a[j]= a[j+1];
+					
+				}
+				a[j]= last;
+			}
+			
+			for(int i=0;i<n;i++) {
+				System.out.println(a[i]);
+				
+			
+		}
+		
+o/p: 4,5,6,2,3
+
+---------------------------------------------------------------------------------------
+
+6. Right rotate an array;
+
+
+
+
+	
+		
+		int [] a = {2,4,5,6,7,8};
+		int r = 2;
+		int n = a.length;
+			
+			for(int i =0 ;i<r;i++) {
+				int j,last;
+				last= a[n-1];
+				
+				for( j=n-1; j>0; j--) {
+					
+					a[j] = a[j-1];
+				}
+				a[0] = last;
+			}
+			
+			for(int i=0;i<n;i++) {
+				System.out.println(a[i]);
+				
+			
+		}
+
+o/p: 7,8,2,4,5,6;
+
+------------------------------------------------------------------------------
+
+7 .Smaller thna elements in array:
+
+input :2 3 4 5 6
+elemnt 2
+o/p: 1
+
+	while(t-->0){
+					System.out.println("enter array size");
+				    int n = in.nextInt();
+				    int[] a = new int[n];
+				    System.out.println("enter array elments");
+				   /* String line  = in.nextLine();
+				    String srs[] =line.trim().split("\\s+");
+				    for(int i =0;i<n;i++){
+				        a[i] = Integer.parseInt(srs[i]);
+				    }*/
+				    for(int i =0;i<n;i++) {
+				    	a[i]= in.nextInt();
+				    }
+				    int x =in.nextInt();
+				    int count =0;
+				    for(int i =0;i<n;i++){
+				     if(a[i] <= x)
+				     {
+				         count = count+1;
+				     }
+				        
+				    }
+				    System.out.println(count);
+				    t--;
+				}
+				in.close();
+
+------------------------------------------------------------------------------------
+
+7. Frequency of elemnsts in array:
+
+
+public class Frequency {  
+      
+    public static void main(String[] args) {  
+          
+        //Initialize array   
+        int [] arr = new int [] {1, 2, 8, 3, 2, 2, 2, 5, 1};   
+        //Array fr will store frequencies of element  
+        int [] fr = new int [arr.length];  
+        int visited = -1;  
+        
+        for(int i = 0; i < arr.length; i++){  
+            int count = 1;  
+            for(int j = i+1; j < arr.length; j++){  
+                if(arr[i] == arr[j]){  
+                    count++;  
+                    //To avoid counting same element again  
+                    fr[j] = visited;  
+                }  
+            }  
+            if(fr[i] != visited)  
+                fr[i] = count;  
+        }  
+        
+        //Displays the frequency of each element present in array  
+        System.out.println("---------------------");  
+        System.out.println(" Element | Frequency");  
+        System.out.println("---------------------");  
+        for(int i = 0; i < fr.length; i++){  
+            if(fr[i] != visited)  
+                System.out.println("    " + arr[i] + "    |    " + fr[i]);  
+        }  
+        System.out.println("---------------------");  
+    }  
+}  
+
+
+output: 
+
+→next← prev
+Q. Program to find the frequency of each element of an array.
+Explanation
+In this program, we need to count the occurrence of each unique element present in the array. One of the approach to resolve this problem is to maintain one array to store the counts of each element of the array. Loop through the array and count the occurrence of each element and store it in another array fr.
+
+Program to find the frequency of each element of an array
+In the above array, 1 has appeared 1 time, so, the frequency of 1 is 1. Similarly, 2 has appeared 4 times. The frequency of 2 is 4 and so on.
+
+Algorithm
+Declare and initialize an array arr.
+Declare another array fr with the same size of array arr. It is used to store the frequencies of elements present in the array.
+Variable visited will be initialized with the value -1. It is required to mark an element visited that is, it helps us to avoid counting the same element again.
+The frequency of an element can be counted using two loops. One loop will be used to select an element from an array, and another loop will be used to compare the selected element with the rest of the array.
+Initialize count to 1 in the first loop to maintain a count of each element. Increment its value by 1 if a duplicate element is found in the second loop. Since we have counted this element and didn't want to count it again. Mark this element as visited by setting fr[j] = visited. Store count of each element to fr.
+Finally, print out the element along with its frequency.
+Solution
+Python
+#Initialize array   
+arr = [1, 2, 8, 3, 2, 2, 2, 5, 1];   
+#Array fr will store frequencies of element  
+fr = [None] * len(arr);  
+visited = -1;  
+   
+for i in range(0, len(arr)):  
+    count = 1;  
+    for j in range(i+1, len(arr)):  
+        if(arr[i] == arr[j]):  
+            count = count + 1;  
+            #To avoid counting same element again  
+            fr[j] = visited;  
+              
+    if(fr[i] != visited):  
+        fr[i] = count;  
+   
+#Displays the frequency of each element present in array  
+print("---------------------");  
+print(" Element | Frequency");  
+print("---------------------");  
+for i in range(0, len(fr)):  
+    if(fr[i] != visited):  
+        print("    " + str(arr[i]) + "    |    " + str(fr[i]));  
+print("---------------------");  
+Output:
+
+
+----------------------------
+Element | Frequency
+----------------------------
+         1    |    2
+         2    |    4
+         8    |    1
+         3    |    1
+         5    |    1
+----------------------------
+C
+#include <stdio.h>  
+   
+int main()  
+{  
+    //Initialize array   
+    int arr[] = {1, 2, 8, 3, 2, 2, 2, 5, 1};   
+      
+    //Calculate length of array arr  
+    int length = sizeof(arr)/sizeof(arr[0]);  
+      
+    //Array fr will store frequencies of element  
+    int fr[length];  
+    int visited = -1;  
+      
+    for(int i = 0; i < length; i++){  
+        int count = 1;  
+        for(int j = i+1; j < length; j++){  
+            if(arr[i] == arr[j]){  
+                count++;  
+                //To avoid counting same element again  
+                fr[j] = visited;  
+            }  
+        }  
+        if(fr[i] != visited)  
+            fr[i] = count;  
+    }  
+      
+    //Displays the frequency of each element present in array  
+    printf("---------------------\n");  
+    printf(" Element | Frequency\n");  
+    printf("---------------------\n");  
+    for(int i = 0; i < length; i++){  
+        if(fr[i] != visited){  
+            printf("    %d", arr[i]);  
+            printf("    |  ");  
+            printf("  %d\n", fr[i]);  
+        }  
+    }  
+    printf("---------------------\n");  
+    return 0;  
+}  
+Output:
+
+----------------------------
+Element | Frequency
+----------------------------
+         1    |    2
+         2    |    4
+         8    |    1
+         3    |    1
+         5    |    1
+----------------------------
+JAVA
+public class Frequency {  
+      
+    public static void main(String[] args) {  
+          
+        //Initialize array   
+        int [] arr = new int [] {1, 2, 8, 3, 2, 2, 2, 5, 1};   
+        //Array fr will store frequencies of element  
+        int [] fr = new int [arr.length];  
+        int visited = -1;  
+        
+        for(int i = 0; i < arr.length; i++){  
+            int count = 1;  
+            for(int j = i+1; j < arr.length; j++){  
+                if(arr[i] == arr[j]){  
+                    count++;  
+                    //To avoid counting same element again  
+                    fr[j] = visited;  
+                }  
+            }  
+            if(fr[i] != visited)  
+                fr[i] = count;  
+        }  
+        
+        //Displays the frequency of each element present in array  
+        System.out.println("---------------------");  
+        System.out.println(" Element | Frequency");  
+        System.out.println("---------------------");  
+        for(int i = 0; i < fr.length; i++){  
+            if(fr[i] != visited)  
+                System.out.println("    " + arr[i] + "    |    " + fr[i]);  
+        }  
+        System.out.println("---------------------");  
+    }  
+}  
+Output:
+
+----------------------------
+Element | Frequency
+----------------------------
+         1    |    2
+         2    |    4
+         8    |    1
+         3    |    1
+         5    |    1
+----------------------------
+
+*****************************************************************************************

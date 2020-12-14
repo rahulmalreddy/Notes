@@ -1,0 +1,68 @@
+                    AWS: Amazon Web Services
+Services:
+---------------------------------------------
+Compute:
+---------
+
+1. Ec2: Elastic Compute Cloud.
+  -> Infrastructure as a service
+ -> u get access to os
+
+2. ECS: Elastic Bean Stack
+
+3. Lambda :
+
+----------------------------------------------------------------------------------
+
+2. RDS: Relational Database Services
+-----------------------------------
+      -> Makes it easy to setup , operate abd scale a relational database int he cloud
+
+           a. amazon aurora[ same as mysql but faster]
+           b. maria DB
+           c. postgre SQL
+           d. sql Server
+           e. Mysql
+           f. Oracle
+*************************************************************************************
+                           STORAGE
+                        ---------------
+
+a. S3 : Simple Storage Services
+
+-> Is an object storage service that offers industry leading scalalbility , data validating
+   security and performnace
+ -> It is similar to  google drive
+
+b. Amazon Glacier
+c. AMazon Elastic System
+d. AWS Storage Gateway
+
+
+
+***************************************************************************************
+
+4. Networking Services/ Cloud Front:
+
+-> Example Content Delivery Network[CDN]: 
+   For example youtube doesnt store evry video on its origin server instead it stores in 
+   edge locations if user wants any video the request goes to edge locations based on his 
+   region and if the video/response is not present in edge location it goes to origin server
+   and response is stored in edge location.
+
+-> It is known as CloudFront in aws.
+
+5.Security Services : IAM[Identity and Access Management]:
+
+ -> Enables u to manage access AWS Services securly
+ 
+6. CloudFormation:
+
+-> Infrastrucate as code:
+     so u can code entire infrastructe into one file nd when u run the file it creates 
+     an entire infra
+     i.e I need 10 servers , Storage etc
+     code it into one file i.e Json yml file and ruun it
+
+    
+

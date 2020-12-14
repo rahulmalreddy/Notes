@@ -1,0 +1,442 @@
+
+
+1. what is diff b/w JVM, JRE, JDK ?
+ 
+ JVM: Jvm is an abstract machine , it provides runtime environment in which bytecode is 
+      executed
+
+JRE : Java RunTime Envuironment: is a runtime environment which implements JVM and provides 
+      class libraries and other files that jvm uses at runtime.
+
+    - > It is a set of software tools which are used for developing Java applications.
+
+JDK : JDK is necessary to compile, document, and package java programs.
+    -> The Java Development Kit (JDK) is a software development environment which is used to
+    develop Java applications and applets. It physically exists. 
+   -> It contains JRE + development tools.
+-------------------------------------------------------------
+2.Synchronization?
+
+ -> Synchronization is a process which keeps all the concurrent threads in execution
+    to be in sync
+
+-> It avoids memory consistency errors
+
+** -> Synchronization in java is the capability to control the access of multiple threads 
+      to any shared resource
+------------------------------------------------------------
+3. What is Process and thread?
+
+-> The process can be referred as program in execution where thread is part of process
+
+-> process has its own address space and multiple thread share same addres space of 
+   space .Each aaddress has its own stack.
+
+-> Thread is the smallest unit which can execute concurrently with other threads.
+
+->process are heavyweight and threads are lightweight
+
+-> You do not require synchronization in case of process. Threads require synchronization   
+
+-> Process do not depend on each other whereas threads are not independent as they
+    share address space.
+
+
+
+-------------------------------------------------------------
+4. What are wrapper classes?
+
+-> eight primitive data types has each class dedicated to it. known as wrapper class
+-> this class wrap the primitive data types into objects.
+
+datatype     wrapperclass   constructor
+boolean   -> Boolean   -> boolean/String
+-----------------------------------------------------------
+5. What is final, finally, finalize?
+
+final:  Keyword
+-> Final is used to apply restrications on class methods and variables
+-> final variable cant be modified method cant be override and class cant be inherited.
+
+finally ; -> bloc
+ -> finally is used to place important code 
+ -> It is executed even though no exception occurs
+
+finalize: -> Method.
+
+-> whenever an object is removed from memory by garbage collector finialize method is 
+   executed
+-> It is used to perform clean up processing.
+------------------------------------------------------------
+
+6. Diff between StringBuffer and StringBuilder?
+
+-> both are mutable objects
+
+-> StringBuffer : 1. Synchronized
+                  2. thread safe
+
+-> StringBuilder: 1. Not Synchronized
+                  2. Performance is faster 
+------------------------------------------------------------------
+7. What are diff between Stack and heap memory
+
+Heapmemory: Java Heap space is used by java runtime to allocate memory to Objects and 
+            JRE classes. 
+            ->  Whenever we create an object, it’s always created in the Heap space.
+
+1. Heap memory is used by all the parts of the application 
+2. Whenever an object is created, it’s always stored in the Heap space 
+   and stack memory contains the reference to it.
+3. Objects stored in the heap are globally accessible
+4. Heap memory is divided into Young-Generation, Old-Generation etc, more details at 
+
+
+Stack memory : Java Stack memory is used for the execution of a thread
+
+
+1. whereas stack memory is used only by one thread of execution.
+2. Stack memory only contains local primitive variables and 
+    reference variables to objects in heap space.
+3. stack memory can’t be accessed by other threads.
+4. Memory management in stack is done in LIFO manner 
+
+-------------------------------------------------------------------
+8. Garbage Collection?
+
+-> Java garbage collection is the process by which Java programs perform automatic memory 
+   management
+
+-> Java programs compile to bytecode that can be run on a Java Virtual Machine, 
+    When Java programs run on the JVM, objects are created on the heap, 
+
+-> Eventually, some objects will no longer be needed. The garbage collector finds
+   these unused objects and deletes them to free up memory.
+
+-------------------------------------------------------------------
+9. Diff between ArrayLsiat and Vector?
+
+ArrayList:
+-> ArrayList is not Synchronised
+-> arratList is fast as it is not synchronied
+-> It increases its size by 50%
+-> Array list can use iterator for traversing an ArrayLsit
+
+Vector: 
+-> it is synchronized
+-> It is slower
+-> doubling size of its array
+-> Vector uses both Enumeration and Iterator.
+
+------------------------------------------------------------------------
+10.Difference between Abstract Class and interface:
+
+Abstract:
+-> Abstarct class can have abstarct methods and default method
+-> Abstarct class can extend only one abstarct class
+-> Abstarct class can contain constructors
+-> abstarct class are fast
+
+
+Interface:
+-> Interface is used to achieve 100% abstraction
+->interface cannot contain constructors
+-> Interface consist only anstract methods
+
+-> a class can achieve multiple inheritence by interface
+
+-> -> methods in interface are default public abstract
+       i.e public abstract method();
+-> Interfaces are slow
+------------------------------------------------------------------------------
+11. What is ploymorphism?
+
+-> It can be briefly  described as one interface and many implementations.
+
+--------------------------------------------------------------------------------------
+12. Runtime Polymorphism / Dynamic method dispatch?
+
+->Method overriding is one of the ways in which java suppoerts run time polymoephism.
+
+-> Dynamic method dispatch is the mechanism by which a call to an overridden method 
+   is resolved at run time, rather than compile time.
+---------------------------------------------------------------------------------------
+
+13. Method overloading and method overriding
+
+
+---------------------------------------------------------------------------------------
+
+14.Can you override a private or static method  in java?
+
+-> A private method cannot be overriden because it is not visible to another class
+
+->But If you create a method with same method name, return type and same method arguments 
+  in the child class then it wil hide the parent class. this is known as method hiding.
+
+ Can we override ststic method in java?
+
+ -> the answer is no and yes.
+
+  1.We can overload static methods. But remember that the method signature must be
+    different. i.e arguments passing or return type or number  of arguments etc
+
+  2.he answer is No. We cannot override two methods if they differ only by static keyword. 
+---------------------------------------------------------------------------------------
+15. What is multiple inheritence and does java support it?
+
+-> If a child class inherits the properties from multiple classes is known as multiple
+   inheritence
+
+-> the problem with multiple inheritence is that if that if multiple classes has same method
+   name then at runtime it becomes difficult for the compiler to decide which method 
+   to execute.
+-
+-> The reason behind this is to prevent ambiguity. Consider a case where class B extends 
+   class A and Class C and both class A and C have the same method display(). Now java 
+   compiler cannot decide, which display method it should inherit. To prevent such
+   situation, multiple inheritances is not allowed in java
+
+------------------------------------------------------------------------------------
+16. What is Break and continue?
+
+Break: Break statement mainly used to terminate the enclosing loop such as while, do-while,
+       for or switch statement wherever break is declared.
+
+Continue: Continue statement mainly skip the rest of loop wherever continue is declared
+         and execute the next iteration.
+
+--------------------------------------------------------------------------------
+17. What is Servlet?
+
+-> Servlets are used to create dynamic web pages
+-> they reside at server side and generate dynamic web pages.
+-> Servlet is a web component that is deployed on the server to create a dynamic web page.
+-> Servlet is an interface that must be implemented for creating any Servlet.
+-----------------------------------------------------------------------------------
+
+18. what is diff between Get and post Methods.
+
+-> Get and Post method are http requests.
+
+Get:
+->  In case of Get request, only limited amount of data can be sent because 
+   data is sent in header.
+-> Get request is not secured because data is exposed in URL bar.
+
+Post:
+-> In case of post request, large amount of data can be sent because data is sent in body.
+-> Post request is secured because data is not exposed in URL bar.
+----------------------------------------------------------------------------------
+19. what is session management?/ different methods of session management?
+
+*  Http protocol and web servers are stateless i.e every request is new request  for process
+  and they cant identify where is it coming from so. session management comes into
+ play.
+
+-> Since http and server are both stateless the only way to maintain a session 
+is when some unique information about the session (Session id) is passed between server 
+ and client for every request and response
+-> so we can send datat from one servlet to another by session management.
+
+There are several ways through which we can provide unique identifier in 
+ request and response.
+1. User Authentication
+2.URL Rewriting 
+3. Cookies 
+4.Session Management API 
+5.HTML Hidden Field 
+6. User Authentication
+------------------------------------------------------------------------------------------
+20. what is diff between servlet config and servlet contxt?
+
+servlet congig:
+-> servlet config object represts  only single servelt.
+-> It is like local parameter asscoiated with particular servlet
+-> it has servlet wide scope. It is name value pair defined inside servlet section in 
+   web.xml file.
+-> getservletConfig() is used to get coonfig object.
+
+Servlet Context:
+-> It represts whole web application running on jvm.
+-> it is like global paramameter associated with all servlets.
+-> It has application wide scope.so defiend outside servlet tag in web.xml file.
+
+--------------------------------------------------------
+
+21. what is servlet life cycle.
+
+-> It has 5 stages;
+1. Servlet is loaded
+2. Servlet is instanited
+3.  Servlet is initalization
+4. request / service method is invoked.
+5. Destruction/   destroy method is invoked.
+
+-------------------------------------------------------------------------------
+
+22. What is RequestDispatcher?
+
+-> Request Dispatcher is an interface is used to forward the request to another resource
+  that can be html, jsp or anothe rservlet.
+-> we can also include the content of anothe rresource to the respose
+
+methods. void forward().
+          void incude();
+--------------------------------------------------------------------
+23. How does cookies work in servlet?
+
+-> Cookies are data that is stored in client browser
+
+-> when browser makes a new request the cookies are added to request default and send to 
+   server whch helps o determine the user as old user.
+Two types of cookies:
+
+Non-persistent cookie
+It is valid for single session only. It is removed each time when user closes the browser.
+
+Persistent cookie
+It is valid for multiple session . It is not removed each time when user closes the browser.
+ It is removed only if user logout or signout.
+----------------------------------------------------------------------------
+24. what is jdbc Driver?
+
+-> jdbc driver is a software componet that enables java application to interact wth database 
+
+4 types:
+
+1. jdbc-odbc bridge
+2. native api driver(partially java driver)
+3. network protocol driver(fully java driver)
+4 thin driver (fully java driver)
+
+-----------------------------------------------------------------------------------
+25 . steps to connect to databse
+
+1. regestaring the driver class
+2. creting connection
+3. creating statement
+4. executig queries
+5. closing connections
+-----------------------------------------------------------------------------------
+26. What is clob and blob? 
+
+ BLOB stands for binary large objects, which are used for storing binary data, such as an image. ... 
+CLOB stands for character large objects, which are used to store string data too large
+ to be stored in a VARCHAR column.
+
+-------------------------------------------------------------------------------
+27 . What are different jdbc api components?
+
+interfaces:
+1. connection 
+2. statemnet
+3. prepared statement
+4. resultset
+4.resultsetmetadata
+5.databasemetsdata
+6.callable statement
+
+classes:
+1. drivermanager
+2.clob
+3.blob
+4.sql exception
+5.types.
+-----------------------------------------------------------------------------------
+28. What is connection interface?
+
+-> the connection interface maintains a session with the databse.it is used for 
+   transaction management
+
+1) public Statement createStatement(): creates a statement object that can be used to 
+                                       execute SQL queries.
+
+2) public Statement createStatement(int resultSetType,int resultSetConcurrency): Creates 
+a Statement object that will generate ResultSet objects with the given type and concurrency.
+
+3) public void setAutoCommit(boolean status): is used to set the commit status.By default 
+it is true.
+
+4) public void commit(): saves the changes made since the previous commit/rollback
+ permanent.
+
+5) public void rollback(): Drops all changes made since the previous commit/rollback.
+
+6) public void close(): closes the connection and Releases a JDBC resources immediately.
+
+
+-------------------------------------------------------------------------------------
+29. What is executeQuery(), executeUpdate(), execute();
+
+-> executeQuery() is used to execute sql queries which returns sone data
+ i.e select statement
+
+-> execeuteupdate() : is used to execute queries which updates or modify the databases
+
+-> execute() ; When we dont know what is the query;
+
+-----------------------------------------------------------------------
+
+30.What is spring?
+
+-> Spring is an application framework and inversion of control container for java platform.
+-> Spring is alightweight framework.
+-> it can be thought of as a framework of frameworks because it provides support to various
+    frameworks such as Struts, Hibernate, Tapestry, EJB, JSF, etc.
+-> Spring is essentially a lightweight integrated framwork used to develop
+   enterprsie applications in java
+
+-> * The Spring framework comprises several modules such as IOC, AOP, jdbc
+  DAO, Context, ORM, WEB MVC etc. We will learn these modules in next page. 
+------------------------------------------------------------------------------
+
+31. What are important annotaions in spring frame work?
+
+1. @autowired
+2. @qualifier
+3. @Resource
+4. @postconstruct
+5. @preDestroy
+6. @required
+  
+ ----------------------------------------------------------------------------------  
+
+32.What is bean in spring and expain diffrent scopes of bean?
+
+-> The objects that form the backbone of your application and that are managed by
+  the Spring IoC container are called beans.       
+
+-> A bean is an object that is instantiated, assembled, and 
+   otherwise managed by a Spring IoC container  
+
+Scopes of bean: 5
+1. Singleton
+2. Prototype
+3. request
+4. session
+5. global session   
+
+--------------------------------------------------------------------
+33. How is bean added to spring application
+
+by using beans tag in xml file.
+
+----------------------------------------------------------------------
+34. What is diff between constructor injection and settor injection?
+
+Constructor injection:
+1. no partial injection
+2. Doesnt override setter property
+3. creates new instance if any modification occurs
+4. better for to many properties
+
+Setter injection:
+1. partial injection
+2. overrides constructor if both are defined
+3. doesnt create new instance
+4. bettr for some properties
+
+----------------------------------------------------------------
+
+

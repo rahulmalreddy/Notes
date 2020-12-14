@@ -1,0 +1,544 @@
+                                        JSP:
+                                   ---------------
+
+-> The JSP API consists of two packages:
+
+1. javax.servlet.jsp
+2. javax.servlet.jsp.tagext
+
+The javax.servlet.jsp package has two interfaces and classes.The two interfaces are as follows:
+
+a. JspPage
+b. HttpJspPage
+
+ and classes are:
+
+JspWriter
+PageContext
+JspFactory
+JspEngineInfo
+JspException
+JspError
+
+
+
+*******************************************************************************************
+-> We can move frome one jsp page to another jsp page by this method (same for servlets )
+                  1. RequestDispathcher
+                  2. RequestRedirect(sendRedirect)
+                  3. HttpSession
+                  4. Cookies
+-> In order to send data between one jsp page to another we can do it by They are known as scope
+                   1. request
+                   2. session
+                   3. Application
+
+Eg: request
+
+
+index.html:
+
+<form action="welcomenow.jsp">  
+FirstName:<input type="text" name="firstname">  <br>
+SecondNAme:<input type="text" name="secondname"><br> 
+<input type="submit" > 
+</form>
+
+welcomenow.jsp:
+<%
+String firstname = request.getParameter("firstname");
+String secondname = request.getParameter("secondname");
+
+Bean b = new Bean();
+b.setFirstname(firstname);
+b.setSecondname(secondname);
+
+
+
+RequestDispatcher rd = request.getRequestDispatcher("loginnow.jsp");
+request.setAttribute("b",b);
+rd.forward(request,response);
+%>
+
+Loginnow.jsp:
+
+<%
+Bean b = (Bean)request.getAttribute("b");
+out.println(b.getFirstname());
+out.println(b.getSecondname());
+%>
+
+Beanclass.java:
+
+Getter/setter methods:
+
+------------------------------------------------------------------------------------------------
+FOR SESSION
+
+Note: we replace request with session:
+i.e
+in Welcome.jsp Page:
+
+session.setAttribute("b",b);
+
+In Lohin.jsp Page:
+
+Bean b = (Bean)session.getAttribute("b");
+------------------------------------------------------------------------------------------------
+
+
+                                                scope: 
+                                               -------
+-> represents the scope of the bean. It may be page, request, session or application. The default
+   scope is page.
+
+  -> page: specifies that you can use this bean within the JSP page. The default scope is page.
+
+  -> request: specifies that you can use this bean from any JSP page that processes the same request. 
+              It has wider scope than page.
+
+  -> session: specifies that you can use this bean from any JSP page in the same session whether
+               processes the same request or not. It has wider scope than request.
+
+  -> application: specifies that you can use this bean from any JSP page in the same application.
+                   It has wider scope than session.
+
+
+
+*********************************************************************************************
+
+
+
+                                JSP/SERVLETS
+                                 ------------
+
+ -> we write java code in jsp
+ ->jsp is converted into servlet by server
+ ->we dont need to create or get refernce of objects we can directly use it
+ -> for creating pages use jsp and for processing servlets(i.e they are implicit objects created 
+    by web container).
+    they are:
+
+->** basically with the help of implicit objects in jsp there will be npo need for us to create the 
+     objects as we do in servlets
+-> they are created by web container
+
+            1. request.: for getting parameter from client
+            ---------------------------------------------------
+
+-> basically in servlet we extend servlet or http or generic  to get the request and response 
+  objects but in jsp , directly web container creates the objects of request and response we simply use 
+  it 
+
+ex:
+
+<form action="welcome.jsp">  
+<input type="text" name="uname">  
+<input type="submit" value="go"><br/>  
+</form>  
+
+jsp file:
+
+<%   
+String name=request.getParameter("uname");  
+out.print("welcome "+name);  
+%>  
+
+
+            2. response: sending response to client by different methods send redirect etc
+-             -----------------------------------------------------------------------
+-> is also simliar to request object:
+
+
+
+            3. config: initalize parameter for particular jsp page in xml we container by using
+               ------------------------------------------------------------------------
+
+<servlet>  
+<servlet-name>sonoojaiswal</servlet-name>  
+<jsp-file>/welcome.jsp</jsp-file>  
+  
+<init-param>  
+<param-name>dname</param-name>  
+<param-value>sun.jdbc.odbc.JdbcOdbcDriver</param-value>  
+</init-param>  
+  
+</servlet>  
+  
+<servlet-mapping>  
+<servlet-name>sonoojaiswal</servlet-name>  
+<url-pattern>/welcome</url-pattern>  
+</servlet-mapping>  
+ 
+Jsp file: for accesing parameter
+
+           String driver=config.getInitParameter("dname");  
+
+-----------------------------------------------------------------------
+            4. application:This object can be used to get
+                            initialization parameter from configuaration file (web.xml)
+             -> it is outside of servlet and servlet mapping so it can be used for any 
+                jsp/servlet file
+
+<servlet>  
+<servlet-name>sonoojaiswal</servlet-name>  
+<jsp-file>/welcome.jsp</jsp-file>  
+</servlet>  
+  
+<servlet-mapping>  
+<servlet-name>sonoojaiswal</servlet-name>  
+<url-pattern>/welcome</url-pattern>  
+</servlet-mapping>  
+  
+<context-param>  
+<param-name>dname</param-name>  
+<param-value>sun.jdbc.odbc.JdbcOdbcDriver</param-value>  
+</context-param>  
+
+
+Jspfile:
+
+       String driver=application.getInitParameter("dname");  
+------------------------------------------------------------------------------------------
+            5. session:   used for data transfer from one jsp to nother jsp
+
+welcomefile.jsp:
+           session.setAttribute("user",name);  
+
+2ndfile.jsp:
+            String name=(String)session.getAttribute("user");  
+
+
+
+---------------------------------------------------------------------------------------------
+            6. page context: The pageContext object can be used to set,get or remove attribute
+                              from one of the following scopes:
+                                      page,request,session,application
+
+
+welcome.jsp:
+         String name=request.getParameter("uname");  
+         out.print("Welcome "+name);  
+  
+           pageContext.setAttribute("user",name,PageContext.SESSION_SCOPE);  
+2ndfile.jsp:
+         String name=(String)pageContext.getAttribute("user",PageContext.SESSION_SCOPE);  
+         out.print("Hello "+name);  
+
+---------------------------------------------------------------------------------------------
+            7. page
+            8. Exception
+*************************************************************************************** 
+ -> consists of four section/tags
+  1. scriptlet   : logic or body<% %>
+  2. declaration : for methods and declarations of variables(i.e whatever you want
+                  inside the class and outside service method )     <%! %>
+  3. directive   : for importing packages <%@page import="java.util.Date", "", %>
+  4. Expression  : for printing (goes into out.println)<% =  %>
+
+
+<Note> in servlet Mapping use "/"  i.e<jsp-file>/demomyProject.index6.jsp</jsp-file>
+        else results in error server not found.
+
+*******************************************************************************************
+Directives:
+              1. page directive  
+              2. include
+              3. taglib
+
+1. Page Directive:
+ -> basically used for importing packages , interfaces etc:
+          <%@ page import="java.util.Date" %>  
+ -> If an error occurs in current jsp page it redirects to the error page
+      <%@ page errorPage="myerrorpage.jsp" %>  
+---------------------------------------------------------
+
+2. include:
+  -> used to include html or jsp or any file in the working file.
+            <%@ include file="header.html" %>  
+
+                 or 
+          <jsp: include page = "userform.html"></jsp:include>
+
+------------------------------------------------------------
+
+3. Taglib:
+-> used for external tags
+->
+ <%@ taglib uri= "url" prefix="fx">
+ 
+ <fx:h1>
+
+
+****************************************************************************************
+                      EXCEPTION IN JSP
+
+-> Exception Handling is the process to handle the runtime errors.
+-> There may occur exception any time in your web application.
+
+-> In JSP, there are two ways to perform exception handling:
+
+By errorPage and isErrorPage attributes of page directive
+By <error-page> element in web.xml file
+------- --------------------------------------------------------------------------------
+                                  ErrorPage:
+
+-> here ErrorPage file should be specified in each page.
+index6.jsp: File:
+<%@ page errorPage="error.jsp" %>  
+<%  
+  
+String num1=request.getParameter("n1");  
+String num2=request.getParameter("n2");  
+  
+int a=Integer.parseInt(num1);  
+int b=Integer.parseInt(num2);  
+int c=a/b;  
+out.print("division of numbers is: "+c);  
+  
+%>  
+
+
+error.jsp:File:
+
+<%@ page isErrorPage="false" %> // if true results in error 5000: 
+  
+<h3>Sorry an exception occured!</h3>  
+  
+Exception is: <%= exception %> 
+------------------------------------------------------------------------------------------------
+                          <error-page> element in web.xml file
+
+-> specify the error page in xml:
+<web-app>  
+  
+ <error-page>  
+  <exception-type>java.lang.Exception</exception-type>  
+  <location>/error.jsp</location>  
+  </error-page>  
+   
+</web-app> 
+
+
+-> These exception is better if we want to handle any exception it gives error 500:
+<web-app>  
+  
+ <error-page>  
+  <error-code>500</error-code>  
+  <location>/error.jsp</location>  
+  </error-page>  
+   
+</web-app> 
+
+********************************************************************************************
+
+                                ACTION TAGS
+
+-> The action tags are used to control the flow between pages and to use Java Bean
+-> The jsp:forward action tag is used to forward the request to 
+     another resource it may be jsp, html or another resource.
+Eg
+html page
+<html>  
+<body>  
+<h2>this is index page</h2>  
+  
+<jsp:forward page="printdate.jsp" />  
+</body>  
+</html>  
+
+printdate.jsp
+
+<html>  
+<body>  
+<% out.print("Today is:"+java.util.Calendar.getInstance().getTime()); %>  
+</body>  
+</html> 
+
+Note: It doesnt print anything from the page which it is redirected i.e no print anything from page which is 
+    it is redirected/forwardd
+*********************************I****************************************************************
+                     include (Action/Directive)
+
+-> Include directive and Include action are same with some differences 
+-> which are both used to add header or footer in pages
+-> Code reusability.
+
+
+include action:
+<jsp:include page="relativeURL | <%= expression %>">  
+<jsp:param name="parametername" value="parametervalue | <%=expression%>" />  
+</jsp:include>  
+*************************************************************************************************
+                                       JAVA BEAN
+
+A JavaBean is a Java class that should follow the following conventions:
+
+It should have a no-arg constructor.
+It should be Serializable.
+It should provide methods to set and get the values of the properties,
+ known as getter and setter methods.
+Eg of java bean:
+
+package mypack;  
+public class Employee implements java.io.Serializable{  
+private int id;  
+private String name;  
+public Employee(){}  
+public void setId(int id){this.id=id;}  
+public int getId(){return id;}  
+public void setName(String name){this.name=name;}  
+public String getName(){return name;}  
+}  
+
+-> to access java bean class:
+
+package mypack;  
+public class Test{  
+public static void main(String args[]){  
+Employee e=new Employee();//object is created  
+e.setName("Arjun");//setting value to the object  
+System.out.println(e.getName());  
+}}  
+
+***************************************************************************************************
+
+                                       useBean Action Tag
+                                ----------------------------------
+
+Syntax of Use Bean:
+------------------
+
+
+-> <jsp: useBean id="unique_name_to_identify_bean" 
+       class="package_name.class_name" />
+
+
+Set Property:
+-------------------
+
+<jsp:setProperty property="*" name="userinfo"/>
+
+
+-> name is id of usebean
+
+-> for setting all the properties from the client into the usebean class * represents that
+
+GetProperty:
+-----------------
+
+<jsp:getProperty property="propertyname" name="userinfo"/>
+
+-> name is id of usebean
+
+
+And It can also have a scope:  scope = "page | request | session | application">
+
+syntax: <jsp:useBean id = "beanName" class = "className" 
+              scope = "page | request | session | application">
+
+
+
+
+
+Note: It is best to use lowercases in get and set methods in bean class:
+***********************************************************************************************
+MVC in JSP:
+
+->  It is a design pattern that separates the business logic, presentation logic and data.
+->  Controller acts as an interface between View and Model. Controller intercepts all the
+    incoming requests.
+->  Model represents the state of the application i.e. data. It can also have business logic.
+->  View represents the presentaion i.e. UI(User Interface).                              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,801 @@
+                               SPRING           <----> EJB
+                            ------------
+
+Devloper: Rod Johnson
+
+Organization : Spring// pivotal (now)
+
+Initial name : interface 21.
+
+
+
+what is light weight and Heavy Weight?
+ 
+  -> while running AWT applications . AWT applications use OS Libraries
+     AWT are heavy weight.
+
+  -> But Spring requires and runs only on JDK, Spring doesnt have any depeendent on
+     OS linraries and application servers
+     -> So Spring are light weight
+
+-> Finally Spring does not require and not run on Os libaries so Spring is 
+  light weight
+
+-> And EJB are dependent on application servers so they are heavy weight.
+
+Note: For Banking applications EJB are preffered because budget is hight and they  
+      can afford application servers. But for small projects Spring is suitable
+
+Note : EJB are heavy weight and tightly coupled
+
+
+What is loosely Coupled?
+
+-> Loosely coupling is achieved by run time polymorphism RTP.
+-> Making the classes indepnendt of one another is known as loosely coupling
+-> removing the dependencies of one class on another is known as loose coupling
+
+
+MVC:
+
+
+
+
+         View  --------> html, css, javscript//// front end
+
+         Controller --------->  Jsp , Servlets /// dynamic web pages/// navigation
+
+         Model::
+
+             Services::
+           
+             Businesss:: ------>  WEB-Tx|WEB- Security// JBoss-Tx|JBoss-Security
+  
+             DAO:: -------> jdbc, hibernate, JPA, ORM///   
+
+-> so inorder to make one layer not dependent on another layer we use concept of
+  Loosely coupling by java RTP  
+    
+-> And To make one class not dependent on another class we use an interface 
+   and instaniate using the inteface by java RTP  this is Loosly coupled
+
+And At run time we can send objects or parameters using XMl file
+
+
+For Eg: if we have two classes A and B in order to communivcate with two class 
+        we instaniate the oabject of Class b inn CLass A
+-> But with the help of loose coupling we create an another interface and implement 
+  the class b in class A by using the interface
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+What is spring?
+-> Spring framework makes the easy development of JavaEE application.
+-> Spring is a lightweight framework.
+-> It can be thought of as a framework of frameworks because it provides support to
+    various frameworks such as Struts, Hibernate, Tapestry, EJB, JSF, etc.  
+-> 
+
+
+
+
+
+Advatages of SPring?
+
+->Predefined Templates
+2) Loose Coupling
+3) Easy to test
+4) Lightweight
+5) Fast Development
+6) Powerful abstraction
+7) Declarative support
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       IoC( Inversion of Control):
+----------------------------------------
+-> The IoC container is responsible to instantiate, configure and assemble objects.
+-> The IoC container gets informations from the XML file
+
+The main tasks performed by IoC are:
+1. to instatntiate class(i.e to create objects)
+2. To configure objects
+3. To assemble dependencies between objects.
+
+---------------------
+1. create objects for us
+2. manage our objects
+3. helping our application to be configurable
+4. managing dependencies. 
+
+IoC Container are of two types.
+-------------------------------
+
+1. Bean Factory[Interface]:
+
+      Resource resource=new ClassPathResource("applicationContext.xml");  
+      BeanFactory factory=new XmlBeanFactory(resource);  
+
+2. ApplicationContect.[Interface]:
+   
+      ApplicationContext context =   
+       new ClassPathXmlApplicationContext("applicationContext.xml");  
+
+Note: Basically IoC container consisits of class and with the help of Bean Factory and 
+      Application Context we can create and configure objects.
+---------------------------------------------------------------------------------
+     Dependency Injection:
+    ------------------------
+
+-> Dependency injection is a design pattern the removes the dependency of the programs.
+
+-> It makes code loose coupled and easier for testing.
+
+-> Spring provides two ways to inject depependencies
+
+           1. By Constructor
+           2. By Setter method.
+
+->  Dependencies Injection for:
+
+   1. Primitive and String based values
+       i.e variables
+   2. Dependent Object
+   3. Collection values.
+
+         Collections are three types:
+        1. list - > maintains insertion order and duplicate values
+        2. Set  - > no  order and no duplicate values
+        3. Map - > key and value pair.
+
+-------------------------------------------------------------------------------------------
+Example 1:      By Getter/Constructor method using Applictaoncontext/BeanFactory 
+                to provide  primitive and String based dependencies.
+
+
+
+Driving.java [Interface]:
+------------------------
+ 
+package package1;
+
+public interface Driving {
+	
+	public void drive();
+
+}
+
+Car.java : file:
+------- --------
+
+public class Car implements Driving{
+	private String carName;
+	
+	public void setCarName(String carName) {
+		this.carName = carName;
+	}
+
+	public void drive() {
+		System.out.println("you will be going by car");
+	}
+
+}
+Bike.java : File:
+-----------------
+public class Bike implements Driving {
+	private String bikeName;
+	
+	public void setBikeName(String bikeName) {
+		this.bikeName = bikeName;
+	}
+
+	public void drive() {
+		System.out.println("you will be travelling by bike" + bikeName);
+	}
+
+}
+Drive.java:File
+----------------
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class Drive {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+//		Driving d = new Car();
+//		d.drive();
+
+//	      By using Spring
+		
+		
+	//	ApplicationContext  context = new ClassPathXmlApplicationContext("config.xml");
+	//	
+	//	Driving d = context.getBean("id1", Driving.class);
+	//	d.drive();
+
+
+
+	
+		Resource r = new ClassPathResource("Config.xml");
+		BeanFactory  factory = new XmlBeanFactory(r);
+		Driving d = factory .getBean("id1" , Driving.class);
+		d.drive();
+	}
+
+}
+Config.xml:
+------------
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+   <bean id = "id1" class = "package1.Bike">
+   <property name = "bikeName" value = "pulsar"></property>
+-------------------------
+for constructors.
+
+ <bean id = "id1" class = "package1.Bike">
+  <!-- > <property name = "bikeName" value = "pulsar"></property>-->
+ <constructor-arg  value = "2345" type = "int"></constructor-arg> 
+ <constructor-arg  value = "pulsar" type = "String"></constructor-arg>
+</bean>
+</bean>
+ 
+</beans>
+
+-----------------------------------------------------------------------------------------
+                           Setter/constructor Injection of  with Dependent Object 
+                        
+EvCar.java: Fie:
+---------------
+
+public class EvCar {
+	
+	private String evmodel;
+
+
+	private int cost;
+	
+	
+public void setEvmodel(String evmodel) {
+		this.evmodel = evmodel;
+	}
+
+	public void setCost(int cost) {
+		this.cost = cost;
+	}
+
+	//	public EvCar(String evmodel, int cost) {
+//		
+//		this.evmodel = evmodel;
+//		this.cost = cost;
+//	}
+	public void evcarworking() {
+		System.out.println("works awesome with nopollution"+ evmodel+"and cost is"+cost);
+	}
+	
+	public String toString() {
+		return evmodel+" "+cost;
+	}
+	
+
+}
+
+------------------------------
+
+Car.java:  File:
+----------------
+
+public class Car implements Driving{
+	private String carName;
+	private int model;
+	private EvCar evcar;
+	
+//	public void setCarName(String carName) {
+//		this.carName = carName;
+//	}
+	
+//	 By using Constructor
+	
+	
+
+	public Car(int model) {
+		
+		this.model = model;
+	}
+	
+	public Car(String carName) {
+		
+		this.carName = carName;
+	}
+	public Car(String carName, int model, EvCar evcar) {
+		this.model = model;
+		this.carName = carName;
+		this.evcar= evcar;
+	}
+
+
+	public void drive() {
+		System.out.println("you will be going by car "+carName+" and model will be"+model);
+		System.out.println(evcar.toString());
+		evcar.evcarworking();
+	}
+
+
+}
+
+Drive.java: File
+--------------------
+
+public class Drive {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+//		Driving d = new Car();
+//		d.drive();
+		
+//     By using Spring with Application Context
+		
+		
+//		ApplicationContext  context = new ClassPathXmlApplicationContext("config.xml");
+//		
+//		Driving d = context.getBean("id1", Driving.class);
+//		d.drive();
+		// Using BeanFactory Interface:
+		
+		Resource r = new ClassPathResource("Config.xml");
+		BeanFactory  factory = new XmlBeanFactory(r);
+		Driving d = factory .getBean("id1" , Driving.class);
+		d.drive();
+		
+	}
+----------------------------
+
+Config.Xml:
+------------------
+
+
+<bean  id ="e" class = "package1.EvCar"> 
+<property name="evmodel" value="tata nexon ev"></property>
+<property name="cost" value ="450000"></property>
+</bean>
+
+
+
+
+   <bean id = "id1" class = "package1.Car">
+<constructor-arg value = "Ev" type = "String" ></constructor-arg>
+<constructor-arg value ="233342" type = "int" ></constructor-arg> 
+<constructor-arg ><ref bean = "e"/></constructor-arg>
+</bean>
+
+
+ 
+</beans>
+-----------------------------------------------------------------------------------------
+
+Note:
+
+-> We can't have one constructor and one getter in objects creation forObject dependent .
+
+---------------------------------------------------------------------------------------
+                  dependency injection of   Collection: list with String based values:
+
+Answers.java:
+--------------
+
+public class Question {
+	private int questionno;
+	private String questionname;
+	private List<String> answers;
+	public void setQuestionno(int questionno) {
+		this.questionno = questionno;
+	}
+	public void setQuestionname(String questionname) {
+		this.questionname = questionname;
+	}
+	public void setAnswers(List<String> answers) {
+		this.answers = answers;
+	}
+	
+	public void displayInfo() {
+		System.out.println("the question number is"+questionno+"and name is"+questionname);
+		System.out.println("answers are");
+		Iterator<String> itr = answers.iterator(); 
+		while(itr.hasNext()) {
+			System.out.println(itr.next());
+		}
+	}
+	
+
+}
+
+Test.java:
+-----------
+
+public class Test {
+
+	 public static void main(String[] args) {
+		 
+		 
+		 ApplicationContext context = new  ClassPathXmlApplicationContext("config.xml");
+		 Question ques  =context.getBean("answers",Question.class);
+		 ques.displayInfo();
+	 }
+------------
+Config.xml:
+------------
+
+   <bean id = "id1" class = "package1.Car">
+<constructor-arg value = "Ev" type = "String" ></constructor-arg>
+<constructor-arg value ="233342" type = "int" ></constructor-arg> 
+<constructor-arg ><ref bean = "e"/></constructor-arg>
+</bean>
+
+<bean id ="answers" class = "package1.Question">
+   <property name="questionno" value  = "1"></property>
+   <property name="questionname" value  = "SpringCollection using list"></property>
+   <property name="answers">
+<list>
+<value>answer1</value>
+<value>answer2</value>
+</list>
+</property>
+</bean>
+---------------------------------------------------------------------------
+                    dependency injection of   Collection: list with Object Injection:
+
+
+config.xml: File:
+-------------------
+
+
+<bean id = "ans1" class = "package1.Answer">
+<property name="answerid" value = "1"></property>
+<property name="answername" value = "collection with List"></property>
+<property name="by" value = "Rahul"></property>
+</bean>
+
+<bean id = "ans2" class = "package1.Answer">
+<property name="answerid" value = "2"></property>
+<property name="answername" value = "collection with List2"></property>
+<property name="by" value = "Rahulk"></property>
+</bean>
+
+<bean id = "id1" class = "package1.Question">
+<property name="questionno" value = "1"></property>
+<property name="questionname" value = "collection with List"></property>
+<property name="answers">
+<list>
+<ref bean = "ans1"/>
+<ref bean = "ans2"/>
+</list>
+
+</property>
+</bean>
+</beans>
+
+Answer.File:
+-----------------
+public class Answer {
+ private int answerid ;	
+ private String answername;
+ private String by ;
+public void setAnswerid(int answerid) {
+	this.answerid = answerid;
+}
+public void setAnswername(String answername) {
+	this.answername = answername;
+}
+public void setBy(String by) {
+	this.by = by;
+}
+	public String toString() {
+		return answerid+" "+answername+" "+by;
+	}
+	
+}
+Question.File:
+--------------------
+
+public class Question {
+	private int questionno;
+	private String questionname;
+	private List<Answer> answers;
+	public void setQuestionno(int questionno) {
+		this.questionno = questionno;
+	}
+	public void setQuestionname(String questionname) {
+		this.questionname = questionname;
+	}
+	public void setAnswers(List<Answer> answers) {
+		this.answers = answers;
+	}
+	
+	public void displayInfo() {
+		System.out.println("the question number is"+questionno+"and name is"+questionname);
+		System.out.println("answers are");
+		Iterator<Answer> itr = answers.iterator(); 
+		while(itr.hasNext()) {
+			System.out.println(itr.next());
+		}
+	}
+	
+
+}
+---------------
+Test.java: file:
+--------------
+public class Test {
+
+	 public static void main(String[] args) {
+		 
+		 
+		 ApplicationContext context = new  ClassPathXmlApplicationContext("config.xml");
+		 Question ques  =context.getBean("id1",Question.class);
+		 ques.displayInfo();
+	 }
+	
+}
+--------------------------------------------------------------------
+ Note: List and Set are Partically sam ewith little defferences
+      i,e list maintains order and duplicate values 
+      and Set doesn't.
+----------------------------------------------------------------------------------- 
+                                        MAP 
+                              -------------------------
+
+Employee.java: Fie:
+------------
+
+import java.security.KeyStore.Entry;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+
+public class Employee {
+	private int empid;
+	private String empname;
+	private Map<String, String> skills;
+	public void setEmpid(int empid) {
+		this.empid = empid;
+	}
+	public void setEmpname(String empname) {
+		this.empname = empname;
+	}
+	public void setskills(Map<String, String> skills) {
+		this.skills = skills;
+	}
+	
+	public void displayinfo() {
+		
+		System.out.println("employee is is"+empid+"and his name"+empname);
+		Set<java.util.Map.Entry<String, String>> set = skills.entrySet();
+		 Iterator<java.util.Map.Entry<String, String>> itr=set.iterator();  
+		 while(itr.hasNext()){  
+		        java.util.Map.Entry<String, String> entry=itr.next();  
+		        System.out.println("Answer:"+entry.getKey()+" Posted By:"+entry.getValue());  
+		 }
+	}
+//	public Map<String, String> getskills() {
+//		System.out.println(skills);
+//		return skills;
+//	}
+//	
+
+}
+------------------
+Test.java:File:
+----------
+public class Test {
+
+	 public static void main(String[] args) {
+		 
+		 
+		 ApplicationContext context = new  ClassPathXmlApplicationContext("config.xml");
+		 Employee emp  =context.getBean("emp1",Employee.class);
+		emp.displayinfo();
+		//emp.getskills();
+	 }
+	
+}
+-
+-------------------------
+Config.xml:File:
+-----------
+
+<bean id = "emp1" class = "package1.Employee">
+
+<property name="empid" value = "01"></property>
+<property name="empname" value = "rahul"></property>
+<property name="skills">
+<map>
+<entry key = "abc" value ="java"/>
+<entry key = "ab" value ="c"/>
+<entry key = "abe" value ="python"/>
+<entry key = "abd" value ="spring"/>
+</map>
+
+</property>
+
+
+
+
+</bean>
+------------------------------------------------------------------
+******************************************************************************************
+ 
+
+Difference between constructor and setter injection:
+
+-.> Partial dependency: can be injected using setter injection but 
+    it is not possible by constructor.
+-> Overriding: Setter injection overrides the constructor injection.
+-> Changes: We can easily change the value by setter injection.
+-   It doesn't create a new bean instance always like constructor. So setter injection 
+   is flexible than constructor injection.
+--------------------------------------------------------------------------------
+***************************************************************************************
+                              AutoWire:
+                            ------------
+-> Autowiring feature of spring framework enables you to inject the object dependency 
+   implicitly. It internally uses setter or constructor injection. 
+      i.e In aggregataion we have inject implicitlly one object refernce in another object 
+          bean.
+
+     i,e :  bean id= "heart" class = "package1.Heart"  >
+            <property name  = "bp" value = "120" ></property> </bean>
+            <bean id = "id1" class = "package1.Human" >
+            property name = "Heart" ref = "heart"></property> 
+            </bean>
+
+
+ -> with the help of auto wire there is no need to specify other object in main object.
+
+            bean id= "heart" class = "package1.Heart"  >
+            <property name  = "bp" value = "120" ></property> </bean>
+            <bean id = "id1" class = "package1.Human" autowire = "byName">
+comments         <!--property name = "Heart" ref = "heart"></property> -->
+            </bean>
+
+-> Autowiring can't be used to inject primitive and string values. It works with
+    reference only.
+
+Disadvantage of Autowiring
+--------------------------
+ -> No control of programmer.
+
+ -> It can't be used for primitive and string values.
+
+                                    Autowiring modes:
+                                -------------------------
+byName	:
+-----------
+ -> The byName mode injects the object dependency according to name of the bean.
+         In such case, property name and bean name must be same. It internally calls
+         setter method. 
+
+
+ byType autowiring mode:
+-----------------------
+
+ -> In case of byType autowiring mode, bean id and reference name may be different. 
+    But there must be only one bean of a type.
+
+<bean id="b1" class="org.sssit.B"></bean>  
+<bean id="a" class="org.sssit.A" autowire="byType"></bean>  
+
+But if u have multiple bean of one type, it will not work and throw exception.
+
+<bean id="b1" class="org.sssit.B"></bean>  
+<bean id="b2" class="org.sssit.B"></bean>  
+<bean id="a" class="org.sssit.A" autowire="byName"></bean>  
+
+Error
+
+-------------------------------------------
+
+ constructor autowiring mode
+-------------------------------
+
+-> In case of constructor autowiring mode, spring container injects the 
+   dependency by highest parameterized constructor.
+
+no autowiring mode
+-----------------------
+ -> In case of no autowiring mode, spring container doesn't inject the dependency by 
+    autowiring.
+
+------------------------------------------------------------------------------------
+  Autowiring with Annotation.
+---------------------------------
+Step1: 
+   the dependecy should be metioned with @Autowired in the 
+
+Step2:
+   the dependency Injection will be done with cosntructor so it is mandatory
+    for creating constructor dependecy injection .
+ -> then we can place @Autowired above constructor or setter method.
+Step3:
+We have activete it by using:
+<contexr:annotation-config/> in the xml file.
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+
+Note: search fine tuning autowiring eith context.
+
+Sttep4:
+no we can remove autowired ="heart" in bean 
+-> it automatically creates object using  constructor of dependent object.
+------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+

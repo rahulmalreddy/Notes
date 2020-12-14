@@ -1,0 +1,496 @@
+                        SERVLET API
+                      ------------------
+
+** For compiling the servlet,jar file is required:
+   for tomcat: servlet-api.jar
+
+-> Servlet technology is used to create a web application (resides at server side 
+    and generates a dynamic web page).
+
+-> Before Servlet, CGI (Common Gateway Interface) scripting language was common 
+    as a server-side programming language
+
+-> There are many interfaces and classes in the Servlet API such as Servlet, 
+   GenericServlet, HttpServlet, ServletRequest, ServletResponse, etc.
+
+Container: It is used in java for dynamically generating the web pages on the 
+            server side.
+
+Servlet Container: The client/user can request only a static WebPages from the
+ server. If the user wants to read the web pages as per input then the
+ servlet container is used in java.
+
+ -> The servlet container is the part of web server which can
+     be run in a separate process. 
+  
+ -> We can classify the servlet container states in three types:
+
+Standalone: It is typical Java-based servers in which the servlet container and
+              the web servers are the integral part of a single program. 
+    For example:- Tomcat running by itself
+
+In-process: 
+
+Out-of-process:
+
+-> the servlet container performs many operations they are:
+ 1. life cycle management
+ 2. multithreaded support
+ 3. object pooling
+ 4. security:
+
+WebServer/Application Server :
+
+-> Web Server is mostly designed to serve static content, though most Web Servers 
+have plugins to support scripting languages like Perl, PHP, ASP, JSP etc. 
+ through which these servers can generate dynamic HTTP content.
+
+ eg: tomcat 
+
+-> Most of the application servers have Web Server as integral part of them,
+ that means App Server can do whatever Web Server is capable of. 
+Additionally App Server have components and features to support Application level
+ services such as Connection Pooling, Object Pooling, Transaction Support,
+ Messaging services etc.
+
+Eg: jboss
+
+                       Servlet API: 
+
+-> the servlet api consits of two Packages they are:
+
+   1. javax.servlet
+   2. javax.servlet.http
+
+javax.servlet : The javax.servlet package contains many interfaces and classes
+that are used by the servlet or web container. These are not specific to 
+any protocol.
+
+javax.servlet.http: The javax.servlet.http package contains interfaces and classes
+ that are responsible for http requests only.
+
+-> javax.servlet consists of many interfaces and class (look jtpoint)
+
+-> javax.servlet.http consists of many interfaces and class but they are specific
+   to only http requests:
+
+-> Servlet interface needs to be implemented for creating any servlet 
+   (either directly or indirectly). 
+
+
+ We can create servlet by three ways :
+
+  1. implementing servlet interface
+  2. extending generic servlet class
+  3. extending http servlet class
+
+
+                1. implementing servlet interface  :
+
+-> servlet interface consists of 5 methods: 
+  
+1. void init(ServletConfig config): When Servlet container starts up 
+ (that happens when the web server starts up) it loads all the servlets and 
+  instantiates them. After this init() method gets called for each instantiated 
+  servlet, this method initializes the servlet.
+
+2. void destroy(): This method is called by Servlet container at the end of 
+                    servlet life cycle. 
+
+3. void service(ServletRequest req, ServletResponse res): This is the only method 
+  that is called multiple times during servlet life cycle. This methods serves
+  the client request, it is called every time the server receives a request.
+
+4.ServletConfig getServletConfig(): Returns a ServletConfig object, which 
+  contains initialization and startup parameters for this servlet.
+
+-> basically xml descriptor has some vlaues given by dev they are accessed by it
+
+5. java.lang.String getServletInfo(): Returns information about the servlet,
+   such as author, version, and copyright.
+
+EG:
+
+public class First implements Servlet{  
+ServletConfig config=null;  
+  
+public void init(ServletConfig config){  
+this.config=config;  
+System.out.println("servlet is initialized");  
+}  
+  
+public void service(ServletRequest req,ServletResponse res)  
+throws IOException,ServletException{  
+  
+res.setContentType("text/html");  
+  
+PrintWriter out=res.getWriter();  
+out.print("<html><body>");  
+out.print("<b>hello simple servlet</b>");  
+out.print("</body></html>");  
+  
+}  
+public void destroy(){System.out.println("servlet is destroyed");}  
+public ServletConfig getServletConfig(){return config;}  
+public String getServletInfo(){return "copyright 2007-1010";}  
+  
+}  
+
+
+                 2. Extending Generic servlet Class:
+
+
+-> GenericServlet class implements Servlet, ServletConfig and Serializable
+   interfaces.
+
+-> You may create a generic servlet by inheriting the GenericServlet class 
+  and providing the implementation of the service method.
+
+
+eg:
+
+public class First extends GenericServlet{  
+public void service(ServletRequest req,ServletResponse res)  
+throws IOException,ServletException{  
+  
+res.setContentType("text/html");  
+  
+PrintWriter out=res.getWriter();  
+out.print("<html><body>");  
+out.print("<b>hello generic servlet</b>");  
+out.print("</body></html>");  
+  
+}  
+}  
+
+                    3. HttpServlet Class:
+
+-> The HttpServlet class extends the GenericServlet class and implements
+    Serializable interface. It provides http specific methods such as doGet,
+     doPost, doHead, doTrace etc.
+
+
+ 
+                   LIFE CYCLE OF SERVLET:
+
+1. Servlet class is loaded: The classloader is responsible to load the servlet 
+   class. The servlet class is loaded when the first request for the servlet
+     is received by the web container.
+
+2. Servlet instance is created: The web container creates the instance of a 
+servlet after loading the servlet class. The servlet instance is created only
+ once in the servlet life cycle.
+
+3. init method is invoked:The web container calls the init method only once
+  after creating the servlet instance. The init method is used to initialize 
+  the servlet.
+
+   Syntax: public void init(ServletConfig config) throws ServletException  
+
+4. service method is invoked: The web container calls the service method
+ each time when request for the servlet is received. If servlet is not 
+initialized, it follows the first three steps as described above then calls the
+ service method. If servlet is initialized, it calls the service method. 
+Notice that servlet is initialized only once.
+
+5.destroy method is invoked: The web container calls the destroy method before 
+removing the servlet instance from the service. It gives the servlet an 
+opportunity to clean up any resource for example memory, thread etc. 
+
+                How Servlet Works?
+
+-> The server checks if the servlet is requested for the first time.
+
+If yes, web container does the following tasks:
+
+-> loads the servlet class.
+-> instantiates the servlet class.
+-> calls the init method passing the ServletConfig object
+
+else
+
+-> calls the service method passing request and response objects
+
+The web container calls the destroy method when it needs to remove the servlet
+ such as at time of stopping server or undeploying the project.
+
+***The web container is responsible to handle the request. Let's see how it handles the request.
+
+-> maps the request with the servlet in the web.xml file.
+->creates request and response objects for this request
+->calls the service method on the thread
+->The public service method internally calls the protected service method
+->The protected service method calls the doGet method depending on the type of request.
+->The doGet method generates the response and it is passed to the client.
+->After sending the response, the web container deletes the request and 
+  response objects. The thread is contained in the thread pool or deleted
+   depends on the server implementation.
+
+
+
+Welcome-file-list:
+
+-. basically it specifies which page to open first: 
+
+<web-app>  
+ ....  
+  
+  <welcome-file-list>  
+   <welcome-file>home.html</welcome-file>  
+   <welcome-file>default.html</welcome-file>  
+  </welcome-file-list>  
+</web-app>  
+
+
+Load on startup in web.xml:
+
+-> The load-on-startup element of web-app loads the servlet at the time of 
+deployment or server start if value is positive. It is also known as pre 
+initialization of servlet.
+
+->You can pass positive and negative value for the servlet.
+
+Advntage: 
+
+As you know well, servlet is loaded at first request. That means it consumes
+ more time at first request. If you specify the load-on-startup in web.xml, 
+servlet will be loaded at project deployment time or server start. So, it will
+ take less time for responding to first request.
+
+-> basically it wont wait for the req from the client it initally loads will server
+   start up
+
+Eg:
+
+<web-app>  
+ ....  
+  
+  <servlet>  
+   <servlet-name>servlet1</servlet-name>  
+   <servlet-class>com.javatpoint.FirstServlet</servlet-class>  
+   <load-on-startup>0</load-on-startup>  
+  </servlet>  
+  
+  <servlet>  
+   <servlet-name>servlet2</servlet-name>  
+   <servlet-class>com.javatpoint.SecondServlet</servlet-class>  
+   <load-on-startup>1</load-on-startup>  
+  </servlet>  
+  
+ ...  
+</web-app>  
+
+
+
+                    Request Dispatcher:
+                      ------------------
+
+-> The RequestDispatcher interface provides the facility of dispatching the
+ request to another resource it may be html, servlet or jsp. This interface 
+can also be used to include the content of another resource also. 
+   It is one of the way of servlet collaboration.
+
+      Request Dispatcher interface provides two classes they are:
+
+1. public void forward(ServletRequest request,ServletResponse response)throws
+  ServletException,java.io.IOException
+
+-> Forwards a request from a servlet to another resource (servlet, JSP file, 
+   or HTML file) on the server.
+
+->here the control doesnt return back to main servlet
+
+
+2. public void include(ServletRequest request,ServletResponse response)throws 
+   ServletException,java.io.IOException
+
+-> Includes the content of a resource (servlet, JSP page, or HTML file)
+   in the response.
+
+-> here the control returns to the main servlet.
+
+
+SendRedirect():
+---------------
+
+-> The sendRedirect() method of HttpServletResponse interface can be used to
+   redirect response to another resource, it may be servlet, jsp or html file.
+
+-> It accepts relative as well as absolute URL.
+
+-> It works at client side because it uses the url bar of the browser to
+    make another request. So, it can work inside and outside the server.
+
+       public void sendRedirect(String URL)throws IOException;  
+
+Example of sendRedirect() method:
+
+response.sendRedirect("http://www.javatpoint.com");  
+
+
+eg;
+
+public class MySearcher extends HttpServlet {  
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)  
+            throws ServletException, IOException {  
+  
+        String name=request.getParameter("name");  
+        response.sendRedirect("https://www.google.co.in/#q="+name);  
+    }  
+}  
+
+
+
+
+                                  ServletConfig Imterface :
+                               -------------------------------
+
+-> An object of ServletConfig is created by the web container for each servlet. 
+This object can be used to get configuration information from web.xml file.
+
+-> basically we can give information in web.xml and access it in servlet and if we 
+   want to change the info we can do it in we.xml file not in each and every servlet.
+
+-> The core advantage of ServletConfig is that you don't need to edit the servlet 
+   file if information is modified from the web.xml file.
+
+          public ServletConfig getServletConfig();
+  
+Example of getServletConfig() method
+ServletConfig config=getServletConfig();  
+
+
+Example:
+
+servlet>  
+<servlet-name>DemoServlet</servlet-name>  
+<servlet-class>DemoServlet</servlet-class>  
+  
+<init-param>  
+<param-name>driver</param-name>  
+<param-value>sun.jdbc.odbc.JdbcOdbcDriver</param-value>  
+</init-param>  
+  
+</servlet>  
+  
+<servlet-mapping>  
+<servlet-name>DemoServlet</servlet-name>  
+<url-pattern>/servlet1</url-pattern>  
+</servlet-mapping>  
+
+class:
+  
+public class DemoServlet extends HttpServlet {  
+public void doGet(HttpServletRequest request, HttpServletResponse response)  
+        throws ServletException, IOException {  
+  
+    response.setContentType("text/html");  
+    PrintWriter out = response.getWriter();  
+      
+    ServletConfig config=getServletConfig();  
+    Enumeration<String> e=config.getInitParameterNames();  
+          
+    String str="";  
+    while(e.hasMoreElements()){  
+    str=e.nextElement();  
+    out.print("<br>Name: "+str);  
+    out.print(" value: "+config.getInitParameter(str));  
+    }  
+          
+    out.close();  
+}  
+  
+
+                ServletContext Interface:
+                -----------------------------
+
+
+-> An object of ServletContext is created by the web container at time of
+   deploying the project. This object can be used to get configuration
+   information from web.xml file. There is only one ServletContext object 
+    per web application.
+
+-> If any information is shared to many servlet, it is better to provide 
+  it from the web.xml file using the <context-param> element.
+
+ex:
+
+ 
+public class DemoServlet extends HttpServlet{  
+public void doGet(HttpServletRequest req,HttpServletResponse res)  
+throws ServletException,IOException  
+{  
+res.setContentType("text/html");  
+PrintWriter out=res.getWriter();  
+  
+ServletContext context=getServletContext();  
+Enumeration<String> e=context.getInitParameterNames();  
+      
+String str="";  
+while(e.hasMoreElements()){  
+    str=e.nextElement();  
+    out.print("<br> "+context.getInitParameter(str));  
+}  
+}}  
+
+  
+<servlet>  
+<servlet-name>sonoojaiswal</servlet-name>  
+<servlet-class>DemoServlet</servlet-class>  
+</servlet>  
+  
+<context-param>  
+<param-name>dname</param-name>  
+<param-value>sun.jdbc.odbc.JdbcOdbcDriver</param-value>  
+</context-param>  
+  
+<context-param>  
+<param-name>username</param-name>  
+<param-value>system</param-value>  
+</context-param>  
+  
+<context-param>  
+<param-name>password</param-name>  
+<param-value>oracle</param-value>  
+</context-param>  
+  
+<servlet-mapping>  
+<servlet-name>sonoojaiswal</servlet-name>  
+<url-pattern>/context</url-pattern>  
+</servlet-mapping>  
+  
+
+                 Attributes in Servlet:
+                -------------------------
+
+-> An attribute in servlet is an object that can be set, get or removed from one
+   of the following scopes:
+
+request scope
+session scope
+application scope
+
+-> The servlet programmer can pass informations from one servlet to another 
+   using attributes. It is just like passing object from one class to another 
+    so that we can reuse the same object again and again.
+
+
+                          SESSION TRACKING:
+                       -------------------------
+
+-> Session simply means a particular interval of time.
+
+-> Session Tracking is a way to maintain state (data) of an user. It
+    is also known as session management in servlet.
+
+-> Http protocol is a stateless so we need to maintain state using session
+  tracking techniques. Each time user requests to the server, server treats
+  the request as the new request. So we need to maintain the state of an user 
+  to recognize to particular user.
+
+There are four techniques used in Session tracking:
+
+1.Cookies
+2.Hidden Form Field
+3.URL Rewriting
+4.HttpSession

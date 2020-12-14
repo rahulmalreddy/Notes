@@ -1,0 +1,1806 @@
+                                    
+                                       JAVA:
+
+CLASS:
+
+-> Class is a collection of objects
+-> Class is a template or blueprint or prototype
+-> It is not real world entity
+-> Class does not occupy memory.
+-> Class is logical Entity
+---------------------------------------------------------------------------------------
+****************************** *************************************************************
+OBJECT:
+
+-> Object is instance of class.
+-> it is a real world entity.
+-> It occupires memory.
+-> Object is physcal entity.
+
+3 ways to create object.
+
+-> new keyword
+-> new instance() method
+-> clone() method.
+--------------------------------------------------------------------------------------
+                            Object Class:
+
+      =>  The Object class is the parent class of all the classes in java by default.
+         In other words, it is the topmost class of java.
+        -> The Object class is beneficial if you want to refer any object whose
+          type you don't know
+        ->Let's take an example, there is getObject() method that returns an 
+          object but it can be of any type like Employee,Student etc
+        -> we can use Object class reference to refer that object.
+
+EG: Object obj=getObject();
+-------------------------------------------------------------------------------
+
+                          Object Cloning in java:
+
+-> The object cloning is a way to create exact copy of an object. 
+
+-> The clone() method of Object class is used to clone an object.
+
+->The java.lang.Cloneable interface must be implemented by the class whose 
+     object clone we want to create.
+
+-> If we don't implement Cloneable interface, clone() method generates 
+   CloneNotSupportedException.
+
+-> The clone() method is defined in the Object class. Syntax of the clone() method is
+Syntax:
+     protected Object clone() throws CloneNotSupportedException  
+
+
+EG:
+
+class Student18 implements Cloneable{  
+int rollno;  
+String name;  
+  
+Student18(int rollno,String name){  
+this.rollno=rollno;  
+this.name=name;  
+}  
+  
+public Object clone()throws CloneNotSupportedException{  
+return super.clone();  
+}  
+  
+public static void main(String args[]){  
+try{  
+Student18 s1=new Student18(101,"amit");  
+  
+Student18 s2=(Student18)s1.clone();  
+  
+System.out.println(s1.rollno+" "+s1.name);  
+System.out.println(s2.rollno+" "+s2.name);  
+  
+}catch(CloneNotSupportedException c){}  
+  
+}  
+}  
+
+Advantages: You don't need to write lengthy and repetitive codes.
+            Clone() is the fastest way to copy array.
+
+Disadvantages:To use the Object.clone() method, we have to change a lot of syntaxes to 
+              our code, like implementing a Cloneable interface, defining the clone()
+              method and handling CloneNotSupportedException, and finally,
+               calling Object.clone() etc.
+
+-----------------------------------------------------------------------------------------
+
+                                     Math class:
+
+-> Math class is a static method so there is no need to create an object to call Math
+   class . We can do it by Math.method();
+
+Methods of Math class are:
+  min(), max(), avg(), sin(), cos(), tan(), round(), ceil(), floor(), abs() etc.
+
+-> it consists of logerithmic methods, trigonometric method, hyperbolic methods, Angular Math 
+   methods etc.
+
+Example:
+
+public class JavaMathExample1    
+{    
+    public static void main(String[] args)     
+    {    
+        double x = 28;    
+        double y = 4;    
+          
+        // return the maximum of two numbers  
+        System.out.println("Maximum number of x and y is: " +Math.max(x, y));   
+          
+        // return the square root of y   
+        System.out.println("Square root of y is: " + Math.sqrt(y));   
+          
+        //returns 28 power of 4 i.e. 28*28*28*28    
+        System.out.println("Power of x and y is: " + Math.pow(x, y));      
+  
+        // return the logarithm of given value       
+        System.out.println("Logarithm of x is: " + Math.log(x));   
+        System.out.println("Logarithm of y is: " + Math.log(y));  
+          
+        // return the logarithm of given value when base is 10      
+        System.out.println("log10 of x is: " + Math.log10(x));   
+        System.out.println("log10 of y is: " + Math.log10(y));    
+          
+        // return the log of x + 1  
+        System.out.println("log1p of x is: " +Math.log1p(x));    
+  
+        // return a power of 2    
+        System.out.println("exp of a is: " +Math.exp(x));    
+          
+        // return (a power of 2)-1  
+        System.out.println("expm1 of a is: " +Math.expm1(x));  
+    }    
+}    
+
+-------------------------------------------------------------------------------------------
+                           Wrapper Class :
+
+-> wrapper class in jave provides mechanism to convert primitive data types(i.e int, char, float
+   etc ) to objects and vice versa.
+
+-> It has to features
+    1. autoboxing. // automaatic conversion of premitive into object is konown as autboxing.
+     2. unboxing.  // object to primitive.
+
+
+
+Auto Boxing:
+------------
+
+public class WrapperExample1{  
+public static void main(String args[]){  
+//Converting int into Integer  
+int a=20;  
+Integer i=Integer.valueOf(a);//converting int into Integer explicitly  
+Integer j=a;//autoboxing, now compiler will write Integer.valueOf(a) internally  
+  
+System.out.println(a+" "+i+" "+j);  
+}} 
+
+Unboxing:-
+------------
+
+public class WrapperExample2{    
+public static void main(String args[]){    
+//Converting Integer to int    
+Integer a=new Integer(3);    
+int i=a.intValue();//converting Integer to int explicitly  
+int j=a;//unboxing, now compiler will write a.intValue() internally    
+    
+System.out.println(a+" "+i+" "+j);    
+}}   
+-------------------------------
+
+Interview Questions:
+
+Boolean b = new Boolean("true"); -> True
+Boolean b1 = new Boolean(true);  -> True
+System.out.println(b.equals(b1)); -> equals checks the content
+ true/ false ===  True
+
+Boolean class consisits of two constructore one takes String as parguments and other default
+true or false boolean value
+-------------------------------------------------
+Boolean b2 = new Boolean("True"); -> True -> because b2 object is case insensitive.It doesnt 
+                                             matter as long as you pass True value
+                                             i.e Boolean(String value);
+Boolean b3 = new Boolean("tRue);  -> True
+System.out.println(b2.equals(b3));  -> True
+
+-------------------------------------------------
+Boolean b4 = new Boolean("hey"); -> False -> apart from ture whatever u pass to constructor
+                                            it is considered as false
+Boolean b5 = new Boolean("bye");  -> False
+System.out.println(b4.equals(b5)); > True.
+
+*****************************************************************************************
+                                  Recursion:
+                             --------------------
+
+-> Recursion is a process in ehich a method clls itself .
+
+-> A method in java that calls itself is called recursiv emethod.
+---------------------------------
+Example:1:
+public class RecursionExample1 {  
+static void p(){  
+System.out.println("hello");  
+p();  
+}  
+  
+public static void main(String[] args) {  
+p();  
+}  
+}  
+
+-> It calls itself infinate times results in stackoverflow error.
+--------------------------------------
+Example 2: Factorial
+
+public class FactorialUsingRecurssion {
+	public static void main(String[] args) {
+		int fact =5;
+	System.out.println(	factorial(fact));
+		
+
+}
+	static int factorial(int fact) {
+		if (fact==1) {
+			return 1;
+		}
+		else {
+			return fact*factorial(fact-1);
+		}
+		
+	}
+************************************************************************************
+                    Call by value/call by reference:
+                    --------------------------------
+
+-> java supports only call by value.
+
+ -> If we call a method passing a value, it is known as call by value. 
+The changes being done in the called method, is not affected in the calling method.
+
+->  If we pass object in place of any primitive value, original value will be changed. 
+   In this example we are passing object as a value.
+
+
+
+
+
+
+
+
+
+
+
+***************************************************************************************
+                               Strictfp keyword: classes/methods/interfaces.
+                              -------------------
+
+->  used for restricting floating-point calculations and ensuring same result 
+    on every platform
+
+->  while performing operations in the floating-point variable.Floating point
+    calculations are platform dependent i.e. different output(floating-point values)
+    is achieved when a class file is run on different platforms(16/32/64 bit processors). 
+ 
+So we use Strictfp keyword to get same o/p on every platform when floating point variables
+  calculations are performed.
+
+Staticfp keyword is used with classes/methods/interfaces. but not with abstract methods.
+Syntax: 
+      strictfp class A{}//strictfp applied on class  
+
+     strictfp interface M{}//strictfp applied on interface  
+
+    class A{  
+   strictfp void m(){}//strictfp applied on method  
+   }
+
+Example:
+
+   public class Test 
+{ 
+    // calculating sum using strictfp modifier 
+    public strictfp double sum() 
+    { 
+        double num1 = 10e+10; 
+  
+        double num2 = 6e+08; 
+  
+        return (num1+num2); 
+  
+    } 
+  
+    public static strictfp void main(String[] args) 
+    { 
+        Test t = new Test(); 
+  
+        System.out.println(t.sum()); 
+    } 
+} 
+
+**************************************************************************************
+                                String :
+                          --------------------
+
+-> String is an Object that represents sequence of characters.
+         Syntax: String name = "rahul";
+
+
+                 char[] n = {'r','a','h','u','l'}
+                 String name = new String(n);
+
+-> The Java String is immutable which means it cannot be changed.
+
+-> The java.lang.String class implements Serializable, Comparable and CharSequence
+   interfaces.
+
+->The CharSequence interface is used to represent the sequence of characters. String,
+  StringBuffer and StringBuilder classes implement it. It means, we can create strings 
+  in java by using these three classes.
+
+-> String Object can be created in two ways.
+   1. By String literal. i.e String s = "rahul";
+   2. by new Keyword.    i.e String s = new String("rahul");
+
+-> If we create a String object using String literal it. creates one  object and it is 
+    Stored in String literal pool
+
+-> if we create a String using new keyword it creates two objects one in String literal pool 
+    and second in heap memory.
+
+String Constatnt Pool:
+----------------------
+
+-> When we create a String variable i.e String str1 = "hello". Jvm directly creates String 
+ object with given value  in seperate block of memory caalled String constant pool.
+
+-> and whenever we create a another String variable with same value.
+   String str2 = "hello";
+
+->JVM verifies whether any String object with the same value exists in the String constant 
+   pool, if so, instead of creating a new object JVM assigns the reference of the 
+   existing object to the new variable.
+
+
+Immutable String:
+----------------
+-> String objects are immutable i.e once String object is created its data or state can't 
+   be modified or changed.
+Eg;
+
+class Testimmutablestring{  
+ public static void main(String args[]){  
+   String s="Sachin";  
+   s.concat(" Tendulkar");//concat() method appends the string at the end  
+   System.out.println(s);//will print Sachin because strings are immutable objects  
+ }  
+}  
+
+o/p: Sachin
+
+But if we explcitly mention it.
+ i.e s = s.conact("tendular");
+
+o/p: SachinTendular.
+----------------------------------------------------------------------------------------------
+
+String Comaprison:
+--------------------
+By equals() method  - > Checks Content 
+By = = operator     - > Checks reference
+By compareTo() method
+
+Example 1:
+
+ class Teststringcomparison1{  
+ public static void main(String args[]){  
+   String s1="Sachin";  
+   String s2="Sachin";  
+   String s3=new String("Sachin");  
+   String s4="Saurav";  
+   System.out.println(s1.equals(s2));//true  
+   System.out.println(s1.equals(s3));//true  
+   System.out.println(s1.equals(s4));//false  
+ }  
+} 
+
+Example 2:
+
+class Teststringcomparison2{  
+ public static void main(String args[]){  
+   String s1="Sachin";  
+   String s2="SACHIN";  
+  
+   System.out.println(s1.equals(s2));//false  
+   System.out.println(s1.equalsIgnoreCase(s2));//true  
+ }  
+} 
+---------------------------------------------------
+-> The = = operator compares references not values.
+
+
+Example 3:
+class Teststringcomparison3{  
+ public static void main(String args[]){  
+   String s1="Sachin";  
+   String s2="Sachin";  
+   String s3=new String("Sachin");  
+   System.out.println(s1==s2);//true (because both refer to same instance)  
+   System.out.println(s1==s3);//false(because s3 refers to instance created in nonpool)  
+ }  
+---------------------------------------------------------
+Substring:
+
+String s="hello";  
+System.out.println(s.substring(0,2));//he  
+
+------------------------------------------------------------
+                            String Buffer/ StringBuilder
+                          ----------------------------------
+
+Differnce: StringBuffer is synchronized and String builder is non-synchronized.
+-> String Builder is more Efficeinet than String Buffer
+
+StringBuffer:
+
+class StringBufferExample{  
+public static void main(String args[]){  
+StringBuffer sb=new StringBuffer("Hello ");  
+sb.append("Java");//now original string is changed  
+System.out.println(sb);//prints Hello Java  
+}  
+}  
+
+Methods:
+--------
+StringBuffer append() method
+StringBuffer insert() method
+StringBuffer replace() method
+StringBuffer delete() method
+StringBuffer reverse() method
+ StringBuffer capacity() method: 
+ ->  The default capacity of the buffer is 16. If the number of character increases 
+     from its current capacity, it increases the capacity by (oldcapacity*2)+2. 
+
+
+StringBuilder:
+----------------
+
+  Java StringBuilder class is used to create mutable (modifiable) string. The Java
+  StringBuilder class is same as StringBuffer class except that it is non-synchronized.
+
+Methods;
+----------
+Same as of String Buffer.
+
+Example:
+
+class StringBuilderExample{  
+public static void main(String args[]){  
+StringBuilder sb=new StringBuilder("Hello ");  
+sb.append("Java");//now original string is changed  
+System.out.println(sb);//prints Hello Java  
+}  
+} 
+-------------------------------------------------------------------------------------------
+                                  toString() Method:
+                                ----------------------
+
+-> If u want to represent an object as string we use toString() method.
+
+-> if u want to print an object java compiler internally invokes the toString() 
+   method on the object.but it gives he hashcode values of the objects 
+
+-> we can override it by toString() method in the class which we want to print object
+
+Eample:
+
+class Student{  
+ int rollno;  
+ String name;  
+ String city;  
+  
+ Student(int rollno, String name, String city){  
+ this.rollno=rollno;  
+ this.name=name;  
+ this.city=city;  
+ }  
+   
+ public String toString(){//overriding the toString() method  
+  return rollno+" "+name+" "+city;  
+ }  
+ public static void main(String args[]){  
+   Student s1=new Student(101,"Raj","lucknow");  
+   Student s2=new Student(102,"Vijay","ghaziabad");  
+     
+   System.out.println(s1);//compiler writes here s1.toString()  
+   System.out.println(s2);//compiler writes here s2.toString()  
+ }  
+}  
+
+Output:101 Raj lucknow
+       102 Vijay ghaziabad
+-------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------
+*********************************************************************************************
+METHODS: A set of code which performs a particular task.
+
+Advantages:
+  -> code reusability
+  -> code optimization
+
+                                           methods
+1.methods are used to perform actions
+2.and it runs only when it is called
+3.in order to send data to methods we use parameters and parameter are specified adter
+method name inside paranthesis
+4.we can send multiple parameters and should be defined in method
+5.if we dont want method to return any value we use void an dif not int or double
+6.it has method overloading and method over riding
+
+
+                   staticmethod/public method
+
+static methods can be called directly  with the help of class name.
+   i.e class.method();
+
+public method need objects to call them.
+ i.e obj.method();
+
+--------------------------------------------------------------------------------------
+CONSTRUCTOR:
+
+-> main purpose of a constructor is to instalize an object.
+
+-> has same name as of class. does not have an return type.
+
+->  it excecutes automatically when we create objects.
+
+-> it has only four modifiers applicable to it 
+     Public, Private, Protected, Default.
+
+Constructors are of three types:
+
+1. Default constructor: -> Default constructor is called when there is
+                           no constructor available in the class. provided by java compiler
+
+
+2.  No argument constructor: -> constructor doesnt have any parameters
+
+3. Parameterized constructor: Construcor receive parameters to initalize
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+******************************************************************************************
+
+                                  INHERITANCE :[IS-A]
+
+-> Inheritance is amechanism in which one object can acquire all the properties and behaviours
+    of parent class
+-> Inheritance represents the IS-A relationship which is also known as a parent-child relationship.
+
+Why Inheritence ?:
+-> code reusablility
+-> method Overriding(So run time Polymorphism can be achieved)
+
+Eg:
+
+class Employee{  
+ float salary=40000;  
+}  
+class Programmer extends Employee{  
+ int bonus=10000;  
+ public static void main(String args[]){  
+   Programmer p=new Programmer();  
+   System.out.println("Programmer salary is:"+p.salary);  
+   System.out.println("Bonus of Programmer is:"+p.bonus);  
+}  
+}  
+
+-------------------------------------------
+    Types of inheritance in java:
+
+-> Single Inheritance: When a class inherits another class, it is known as a single inheritance. 
+       EG: above one.
+
+-> Multilevel Inheritance : When there is a chain of inheritance, it is known as 
+                             multilevel inheritance.
+       Eg: 
+ class Animal{  
+void eat(){System.out.println("eating...");}  
+}  
+class Dog extends Animal{  
+void bark(){System.out.println("barking...");}  
+}  
+class BabyDog extends Dog{  
+void weep(){System.out.println("weeping...");}  
+}  
+class TestInheritance2{  
+public static void main(String args[]){  
+BabyDog d=new BabyDog();  
+d.weep();  
+d.bark();  
+d.eat();  
+}}  
+
+Hierarchical Inheritance: When two or more classes inherits a single class
+   
+ Eg:
+
+class Animal{  
+void eat(){System.out.println("eating...");}  
+}  
+class Dog extends Animal{  
+void bark(){System.out.println("barking...");}  
+}  
+class Cat extends Animal{  
+void meow(){System.out.println("meowing...");}  
+}  
+class TestInheritance3{  
+public static void main(String args[]){  
+Cat c=new Cat();  
+c.meow();  
+c.eat();  
+//c.bark();//C.T.Error  
+}}  
+
+
+Note: Multiple and Hybrid Inheritence is not suported in java.
+      because of
+  -> When a class inherits from more than one class.
+  -> To reduce the complexity and simplify the language, 
+  -> it reults in ambiguity error.
+-------------------------------------------------------------------------------------------------
+                             ASSOCIATION[HAS-A]
+
+-> Association is relation between two separate classes which establishes
+   through their Objects.                                      
+->  Association can be one-to-one, one-to-many, many-to-one, many-to-many.
+->  Composition and Aggregation are the two forms of association.
+                1. Aggregation
+                2. Composition
+
+--------------------------------------------------------------------------------------------
+                             AGGREGATION [HAS-A]
+
+-> If a class have an entity reference, it is known as Aggregation.
+-> to reduce code Duplicacy and code reusability.
+-> Aggregation is a weak association. An association is said to be 
+   aggregation if both Objects can exist independently.
+-> It is a unidirectional association i.e. a one way relationship. For example,
+   department can have students but vice versa is not possible and thus 
+   unidirectional in nature.
+Eg:
+
+  class Employee{  
+int id;  
+String name;  
+Address address;//Address is a class   -> these is known as reference
+...  
+}  
+
+
+EG:
+
+ Address.java:
+--------------
+
+public class Address {  
+String city,state,country;  
+  
+public Address(String city, String state, String country) {  
+    this.city = city;  
+    this.state = state;  
+    this.country = country;  
+}  
+  
+} 
+
+Emp.java:
+--------- 
+
+public class Emp {  
+int id;  
+String name;  
+Address address;  
+  
+public Emp(int id, String name,Address address) {  
+    this.id = id;  
+    this.name = name;  
+    this.address=address;  
+}  
+  
+void display(){  
+System.out.println(id+" "+name);  
+System.out.println(address.city+" "+address.state+" "+address.country);  
+}  
+  
+public static void main(String[] args) {  
+Address address1=new Address("gzb","UP","india");  
+Address address2=new Address("gno","UP","india");  
+  
+Emp e=new Emp(111,"varun",address1);  
+Emp e2=new Emp(112,"arun",address2);  
+      
+e.display();  
+e2.display();  
+      
+}  
+}  
+
+
+output:
+       111 varun
+       gzb UP india
+       112 arun
+       gno UP india  
+
+----------------------------------------------------------
+EG: 2nd example:
+
+// Java program to illustrate 
+//the concept of Aggregation. 
+import java.io.*; 
+import java.util.*; 
+
+// student class 
+class Student 
+{ 
+	String name; 
+	int id ; 
+	String dept; 
+	
+	Student(String name, int id, String dept) 
+	{ 
+		
+		this.name = name; 
+		this.id = id; 
+		this.dept = dept; 
+		
+	} 
+} 
+
+/* Department class contains list of student 
+Objects. It is associated with student 
+class through its Object(s). */
+class Department 
+{ 
+	
+	String name; 
+	private List<Student> students; 
+	Department(String name, List<Student> students) 
+	{ 
+		
+		this.name = name; 
+		this.students = students; 
+		
+	} 
+	
+	public List<Student> getStudents() 
+	{ 
+		return students; 
+	} 
+} 
+
+/* Institute class contains list of Department 
+Objects. It is asoociated with Department 
+class through its Object(s).*/
+class Institute 
+{ 
+	
+	String instituteName; 
+	private List<Department> departments; 
+	
+	Institute(String instituteName, List<Department> departments) 
+	{ 
+		this.instituteName = instituteName; 
+		this.departments = departments; 
+	} 
+	
+	// count total students of all departments 
+	// in a given institute 
+	public int getTotalStudentsInInstitute() 
+	{ 
+		int noOfStudents = 0; 
+		List<Student> students; 
+		for(Department dept : departments) 
+		{ 
+			students = dept.getStudents(); 
+			for(Student s : students) 
+			{ 
+				noOfStudents++; 
+			} 
+		} 
+		return noOfStudents; 
+	} 
+	
+} 
+
+// main method 
+class GFG 
+{ 
+	public static void main (String[] args) 
+	{ 
+		Student s1 = new Student("Mia", 1, "CSE"); 
+		Student s2 = new Student("Priya", 2, "CSE"); 
+		Student s3 = new Student("John", 1, "EE"); 
+		Student s4 = new Student("Rahul", 2, "EE"); 
+	
+		// making a List of 
+		// CSE Students. 
+		List <Student> cse_students = new ArrayList<Student>(); 
+		cse_students.add(s1); 
+		cse_students.add(s2); 
+		
+		// making a List of 
+		// EE Students 
+		List <Student> ee_students = new ArrayList<Student>(); 
+		ee_students.add(s3); 
+		ee_students.add(s4); 
+		
+		Department CSE = new Department("CSE", cse_students); 
+		Department EE = new Department("EE", ee_students); 
+		
+		List <Department> departments = new ArrayList<Department>(); 
+		departments.add(CSE); 
+		departments.add(EE); 
+		
+		// creating an instance of Institute. 
+		Institute institute = new Institute("BITS", departments); 
+		
+		System.out.print("Total students in institute: "); 
+		System.out.print(institute.getTotalStudentsInInstitute()); 
+	} 
+} 
+
+
+
+o\p: Total students in institute: 4
+----------------------------------------------------------------------------------
+                                       COMPOSITION:
+
+-> The composition is the strong type of association.
+-> An association is said to composition if an Object owns another object and 
+   another object cannot exist without the owner object.
+-> Consider the case of Human having a heart. Here Human object 
+   contains the heart and heart cannot exist without Human.
+
+*************************************************************************************************
+                                         ABSTRACTION:
+
+-> Abstraction is a process of hiding the implementation details and showing only the funcationality
+   to the user.
+-> Another way, it shows only essential things to the user and hides the internal details, 
+-> There are two ways to achieve abstraction in java
+           1.  Abstract class (0 to 100%)
+           2.  Interface (100%)
+
+--------------------------------------------------------------------------------------
+                                        ABSTRACT CLASS:
+
+-> An abstarct class must be declared with abstract keyword.
+      abstract class A{}  
+
+-> A method which is declared as an abstarct method should not have body.
+      abstract void printStatus();//no method body and abstract  
+
+-> It can have abstract and non-abstract methods.
+
+-> Rule: If there is an abstract method in a class, that class must be abstract.
+
+-> It can have constructors and static methods also. [i.e methods without abstract keyword]
+
+Eg:
+
+ abstract class Bike{  
+   Bike(){System.out.println("bike is created");}  
+   abstract void run();  
+   void changeGear(){System.out.println("gear changed");}  
+ }  
+//Creating a Child class which inherits Abstract class  
+ class Honda extends Bike{  
+ void run(){System.out.println("running safely..");}  
+ }  
+//Creating a Test class which calls abstract and non-abstract methods  
+ class TestAbstraction2{  
+ public static void main(String args[]){  
+  Bike obj = new Honda();  
+  obj.run();  
+  obj.changeGear();  
+ }  
+}  
+** constructor of abstract class is called when an instance of a inherited class is created.
+output:
+      bike is created
+       running safely..
+       gear changed
+
+* Refer geeks for geeks for more examples.
+
+-------------------------------------------------------------------------------------------
+                                      INTERFACE:
+
+-> An interface in Java is a blueprint of a class. 
+
+-> The interface in Java is a mechanism to achieve abstraction. There can be only 
+    abstract methods in the Java interface, not method body.
+
+-> It is used to achieve abstraction and multiple inheritance in Java.
+
+-> Interface has only abstract methods(without body)
+
+-> methods in interface are default public abstract
+       i.e public abstract method();
+
+-> variables/ fields are default public static final
+        i.e public static final int a=10;
+
+-> Since Java 8, we can have default and static methods in an interface.
+ i.e methods with body and it implemented using defalut keyword.
+
+              
+
+*************************************************************************************************
+                                      EXCEPTION
+
+-> An exception is an event that disrupts the normal flow of program.
+-> it is an object which is thrown at at run time.
+                             
+                                    EXCEPTION HANDLING
+
+-> Exception Handling is a mechanism to handle runtime errors 
+     such as ClassNotFoundException, IOException, SQLException, RemoteException, etc.
+-> Throwable class is root class of java Exception.
+-> it is inherited into two classes 
+        a. Exception [ Mainly program errors , Recoverable]
+        b. Error     [ Due to lack of system resources, Not recoverable]
+                  eg:OutOfMemoryError, VirtualMachineError, AssertionError etc.
+
+  Exceptions:
+
+-> Exceptions are of two types 1. Checked Exceptions [ Compile time Exception]
+                                    eg:  IOException, SQLException etc.
+                               2. Un Checked Exceptions. [Run time Exceptions]
+                                     Eg: ArithmeticException, NullPointerException,
+                                             ArrayIndexOutOfBoundsException 
+
+-> Exception always occurs at run time. not at compile time.
+
+-> Exception handling is done by 5 keyword:
+     1. try
+     2. Catch
+     3. finally
+     4. throw
+     5. throws
+
+ try{  
+      //code that may raise exception  
+      int data=100/0;  
+   }
+catch(ArithmeticException e)
+{
+System.out.println(e);
+}  
+
+-> try block contains the risky code in which an exception may occur
+-> if an exception occurs in try block catch block is executed.
+-> A try block can be followed by one or more catch blocks
+-> finally block is always excuted
+-> finnaly block consists of cea up code.
+
+Eg:
+  try{    
+                int a[]=new int[5];    
+                a[5]=30/0;    
+               }    
+               catch(ArithmeticException e)  
+                  {  
+                   System.out.println("Arithmetic Exception occurs");  
+                  }    
+               catch(ArrayIndexOutOfBoundsException e)  
+                  {  
+                   System.out.println("ArrayIndexOutOfBounds Exception occurs");  
+                  }    
+               catch(Exception e)  
+                  {  
+                   System.out.println("Parent Exception occurs");  
+                  }             
+               System.out.println("rest of the code");    
+    }  
+o/p: Arthematic exception
+     rest of code
+
+
+Nested Try Block:
+----------------
+        The try block within a try block is known as nested try block in java.
+
+->Sometimes a situation may arise where a part of a block may cause one error and the entire block 
+   itself may cause another error. In such cases, exception handlers have to be nested.
+
+Eg:
+class Excep6{  
+ public static void main(String args[]){  
+  try{  
+    try{  
+     System.out.println("going to divide");  
+     int b =39/0;  
+    }catch(ArithmeticException e){System.out.println(e);}  
+   
+    try{  
+    int a[]=new int[5];  
+    a[5]=4;  
+    }catch(ArrayIndexOutOfBoundsException e){System.out.println(e);}  
+     
+    System.out.println("other statement);  
+  }catch(Exception e){System.out.println("handeled");}  
+  
+  System.out.println("normal flow..");  
+ }  
+}
+------------------------------------------------------------------------------
+                                    THROW :
+
+-> to throw custom exceptions by Programmer
+-> The throw keyword is mainly used to throw custom exception. 
+-> We can throw either checked or uncheked exception in java by throw keyword.
+
+Eg:
+public class TestThrow1{  
+   static void validate(int age){  
+     if(age<18)  
+     ***** throw new ArithmeticException("not valid");  
+     else  
+      System.out.println("welcome to vote");  
+   }  
+   public static void main(String args[]){  
+      validate(13);  
+      System.out.println("rest of the code...");  
+  }  
+}  
+-----------------------------------------------------------------------------------------
+                              Exception Propogation:
+
+An exception is first thrown from the top of the stack and if it is not caught,
+ it drops down the call stack to the previous method,If not caught there, 
+the exception again drops down to the previous method, and so on until they are caught
+ or until they reach the very bottom of the call stack.This is called exception propagation.
+
+i.e if exception is not handled in same method which it occured it is propogated to previous method
+   and if it is not handled there also it is propogated to previous one.until it is handled
+--------------------------------------------------------------------------------------------
+                            throws Keyword:
+
+ The Java throws keyword is used to declare an exception.
+ It gives an information to the programmer that there may occur an exception 
+ so it is better for the programmer to provide the exception handling code 
+ so that normal flow can be maintained.
+
+   Eg:
+
+class M{  
+ void method()throws IOException{  
+  throw new IOException("device error");  
+ }  
+}  
+public class Testthrows2{  
+   public static void main(String args[]){  
+    try{  
+     M m=new M();  
+     m.method();  
+    }catch(Exception e){System.out.println("exception handled");}     
+  
+    System.out.println("normal flow...");  
+  }  
+}  
+
+------------------------------------------------------------------------------------------------
+final: Keyword
+
+-> Final is used to apply restrictions on class, method and variable. 
+->  Final class can't be inherited, final method can't be overridden and
+->   final variable value can't be changed.
+->  final is a keyword.
+------------------------------
+finally: Block
+
+-> Finally is used to place important code, it will be executed whether exception is handled or not.
+-> Finally is a block.
+
+--------------------------------
+finalize :Method
+
+->Finalize is used to perform clean up processing just before object is garbage collected.
+-------------------------------------------------------------------------------------------
+                    ExceptionHandling with MethodOverriding in Java
+
+ If the superclass method does not declare an exception:
+
+-> If the superclass method does not declare an exception, subclass overridden method cannot 
+declare the checked exception but it can declare unchecked exception.
+
+If the superclass method declares an exception:
+
+-> If the superclass method declares an exception, subclass overridden method can declare same, 
+ subclass exception or no exception but cannot declare parent exception.
+
+ie. Exception is top in hierarchy i.e child class cannot declare Ecxception unless Parent class 
+    declares it.
+
+************************************************************************************************
+                           POLYMORPHISM:
+
+-> Polymorphism is one of the OOPs feature that allows us to perform a single action in 
+    different ways
+
+-> **In other words, polymorphism allows you define one interface and have multiple implementations. 
+
+-> Polymorphism is of two types:
+                1. Compiletime Polymorphism[Static polymorphism][ method overloading]
+                2. Runtime Polymorphism
+
+Compile time polymorphism: It is also known as static polymorphism. This type of polymorphism
+                            is achieved by method overloading or operator overloading.
+ 
+                              Method Overloading:
+   -> Same class 
+   -> same method name
+   -> change in number of arguments 
+   -> change in type of arguments.
+
+Eg:
+ 
+class MultiplyFun { 
+  
+    // Method with 2 parameter 
+    static int Multiply(int a, int b) 
+    { 
+        return a * b; 
+    } 
+  
+    // Method with the same name but 2 double parameter 
+    static double Multiply(double a, double b) 
+    { 
+        return a * b; 
+    } 
+} 
+  
+class Main { 
+    public static void main(String[] args) 
+    { 
+  
+        System.out.println(MultiplyFun.Multiply(2, 4)); 
+  
+        System.out.println(MultiplyFun.Multiply(5.5, 6.3)); 
+    } 
+} 
+-----------------------------------------------------------------------------------------------
+                                    Runtime Polymorphism:
+
+                                     Method overriding:
+
+-> different class
+-> Same method name
+-> inheritence[IS-A relationship]
+
+Eg:
+
+class Bank{  
+int getRateOfInterest(){return 0;}  
+}  
+//Creating child classes.  
+class SBI extends Bank{  
+int getRateOfInterest(){return 8;}  
+}  
+  
+class ICICI extends Bank{  
+int getRateOfInterest(){return 7;}  
+}  
+class AXIS extends Bank{  
+int getRateOfInterest(){return 9;}  
+}  
+//Test class to create objects and call the methods  
+class Test2{  
+public static void main(String args[]){  
+SBI s=new SBI();  
+ICICI i=new ICICI();  
+AXIS a=new AXIS();  
+System.out.println("SBI Rate of Interest: "+s.getRateOfInterest());  
+System.out.println("ICICI Rate of Interest: "+i.getRateOfInterest());  
+System.out.println("AXIS Rate of Interest: "+a.getRateOfInterest());  
+}  
+
+******************************************************************************************
+
+                                  ENCAPSULATION:
+
+-> Encapsulation is a process of wrapping code and data together into a single unit
+
+->Java Bean class is example of encapsulated class.
+
+-> It provides you the control over the data.
+
+-> It is a way to achieve data hiding in Java because other class will not be able to 
+  access the data through the private data members.
+
+-> It can be done using getter and setter methods.
+
+     Ex:
+ package com.javatpoint;  
+public class Student{  
+//private data member  
+private String name;  
+//getter method for name  
+public String getName(){  
+return name;  
+}  
+//setter method for name  
+public void setName(String name){  
+this.name=name  
+}  
+} 
+
+***************************************************************************************
+-> There are two types of Modifiers in java they are:
+             1. Access Modifiers
+             2. Non Access modifiers
+
+                                   ACCESS MODIFIERS
+
+-> The access modifiers in Java specifies the accessibility or scope of a 
+    field, method, constructor, or class.
+-> We can change it by apllying access modifiers to it.
+
+There are four types of Java access modifiers:
+
+Private:  The access level of a private modifier is 
+          only within the class. It cannot be accessed from outside the class.
+
+Default:  The access level of a default modifier is only within the package. 
+          It cannot be accessed from outside the package. If you do not 
+          specify any access level, it will be the default.
+
+Protected:  The access level of a protected modifier is within the package 
+            and outside the package through child class. 
+            If you do not make the child class, 
+            it cannot be accessed from outside the package.
+
+Public:     The access level of a public modifier is everywhere. It can be accessed from 
+            within the class, outside the class, within the package and outside the package.
+
+-------------------------------------------------------------------------------------------
+                                     NON ACCESS MODIFIERS:
+
+-> static, abstract, synchronized, native, volatile, transient, staticfp, final.
+
+
+
+
+STATIC: 
+
+-> applicable for methods ,variables and blocks.
+
+-> we can't declare a class as static but inner class as ststic
+
+-> in case of instance variables for every object a seperate copy will be created but in case 
+   of static variables a single copy will be created at class level and shared by all objects 
+   of that class.
+-> instance variables can be accessed only from instance area directly but we cant access 
+   from ststic aarea
+-> but static variables can be accessed from instance area and stttic area.
+   
+
+Ex: class test{
+     static int x =10;
+       int y =20;
+p.s.v.m(S[ a)
+{
+test t1= new test();
+t1.x= 888;
+t2.y = 999;
+test t2 = new test();
+S.opln(t2.x + ""+t2.y);
+
+0/p: 888 20 
+
+i.e x=10
+    y =20
+
+t1 object:
+t1.x =888
+t1.y = 999
+
+t2 object:
+t2.x =888
+t2.y = 20.
+
+----------------------------------------------------------------------------- 
+TRANSIENT:
+
+-> Transient is the modifier applicable only for variables but not for methods and class
+-> At the time of serialization if we dont want to serialize the value of a particular
+  variable to meet security constraints then we should declare the variable as 
+   transient
+-> At the time os serilization jvm ignores the original value of the transient 
+  variable and save the default value that is transient means not to serilaize
+
+-> static variables are not part of object state hence serialization concept
+ is not applicabe to them.
+
+
+SERIALIZATION:
+
+->  the process of saving or writing state of an object to a file is called srialization
+
+-> Java provides a mechanism, called object serialization where an object can be represented as a 
+  sequence of bytes that includes the object's data as well as information about the 
+  object's type and the types of data stored in the object.
+
+
+-> It is the process of conevrting an object from java supported form to either network
+   supported or file supported form.
+
+-> by using file output stream and object output streaam classes we can achieve 
+   serialization process
+
+--------------------------------------------------------------------------------
+
+VOLATILE:
+
+-> volatile is the moifier applicable only for variabels
+
+-> of the value of variable keeps on changing such type of variables we have to declare as 
+   volatile variables
+
+-> if the variable is declared as volatile for evrey thread a seperate local copy will be 
+   created by jvm.
+-> all imeddiate modificatians performed by the thread will takes place on local copy 
+  instead of master copy.
+-> once the value got fanialized before termination then it is updated on master copy
+
+-> volatile modifier helps in data inxcinsistency.
+
+--------------------------------------------------
+
+Synchronized:
+
+-> synchronized is applicable for only methods and blocks.
+-> if a method or block is declared as synchronized then only one thread can access it
+ at any given point of time.
+
+
+------------------------------------------------
+
+NATIVE:
+
+-> native is applicable only for methods
+
+-> the methods which are impelented in non java are called native methods.
+
+-> for native methods implementation is already available and we are not responsible
+   for providing implementation hence native methods declaration should compulsory 
+   end with semi colon.
+
+i.e public native void methodOne() --> invalid
+    public native void methodOne(); -> valid should have semocolon.
+
+------------------------------------------------------------------
+
+ABSTRACT:
+
+-> abstarct is applicable only for methods and classes
+
+-> when we dont know the implementation then method iis declared as abstract
+
+-> if a class as a sinlge abstract method then the class must be abstarct class.
+
+
+--------------------------------------------------------------------
+
+STRICT FP:
+
+-> is applicable only for methods and classes 
+
+-> usually the result of floating point of artehmatic is varying from platform to
+platform to overcome that problem we shpuld use strictfp kryword.
+
+----------------------------------------------------------------
+
+FINAL:
+
+
+*******************************************************************************************
+
+                                    ARRAYS:
+
+-> Array can be defined as collecton of similar data types elements wihich has  continous 
+   memory location
+-> Array in Java is index-based, the first element of the array is stored at the 0th index
+   , 2nd element is stored on 1st index and so on
+-> Arrays are stored in heap memory
+-> Arrays are faster than heap memory.
+-> Array in java is object
+-> Super class of array is object class
+
+Advantages:
+
+Code Optimization: It makes the code optimized, we can retrieve or sort the data efficiently.
+Random access: We can get any data located at an index position.
+
+Disadvantage:
+-> Arrays size is always fixed.
+
+There are two types of array:
+
+          a. Single Dimensional Array
+          b. Multidimensional Array: 2D,3D
+
+
+Single Dimensional Array: 1D: 
+
+Synatx: 
+             Declaration: int[] a;
+             creation : a = new int[3];
+
+in oneline int[] a = new int[3];
+
+initalization: int[] a = {2,3,4,5,6};
+
+Example: 1D Array:
+
+class Testarray{  
+public static void main(String args[]){  
+int a[]=new int[5];//declaration and instantiation  
+a[0]=10;//initialization  
+a[1]=20;  
+a[2]=70;  
+a[3]=40;  
+a[4]=50;  
+//traversing array  
+for(int i=0;i<a.length;i++)//length is the property of array  
+System.out.println(a[i]);  
+}}  
+
+-----------------------------
+Example:
+
+class Testarray1{  
+public static void main(String args[]){  
+int a[]={33,3,4,5};//declaration, instantiation and initialization  
+//printing array  
+for(int i=0;i<a.length;i++)//length is the property of array  
+System.out.println(a[i]);  
+}}  
+
+----------------------------------
+
+MultiDimensional Array:
+
+-> In multideimensional array data is stored in rows and columns i.e matrix form
+
+Syntax:
+         int[][] arr=new int[3][3];
+
+Example:
+
+class Testarray3{  
+public static void main(String args[]){  
+//declaring and initializing 2D array  
+int arr[][]={{1,2,3},{2,4,5},{4,4,5}};  
+//printing 2D array  
+for(int i=0;i<3;i++){  
+ for(int j=0;j<3;j++){  
+   System.out.print(arr[i][j]+" ");  
+ }  
+ System.out.println();  
+}  
+}}  
+
+o/p: 1 2 3
+     2 4 5
+     4 4 5
+-------------------------------------------
+Jugged Array:
+
+-> If we are creating odd number of columns in a 2D array, it is known as a jagged array.
+
+Example:
+
+class TestJaggedArray{  
+    public static void main(String[] args){  
+        //declaring a 2D array with odd columns  
+        int arr[][] = new int[3][];  
+        arr[0] = new int[3];  
+        arr[1] = new int[4];  
+        arr[2] = new int[2];  
+        //initializing a jagged array  
+        int count = 0;  
+        for (int i=0; i<arr.length; i++)  
+            for(int j=0; j<arr[i].length; j++)  
+                arr[i][j] = count++;  
+   
+        //printing the data of a jagged array   
+        for (int i=0; i<arr.length; i++){  
+            for (int j=0; j<arr[i].length; j++){  
+                System.out.print(arr[i][j]+" ");  
+            }  
+            System.out.println();//new line  
+        }  
+    }  
+}  
+
+
+o/p: 0 1 2 
+     3 4 5 6 
+     7 8 
+-------------------------------------------------
+For copying array:
+
+      //declaring a destination array  
+        char[] copyTo = new char[7];  
+        //copying array using System.arraycopy() method  
+        System.arraycopy(copyFrom, 2, copyTo, 0, 7);  
+
+For clonning an array:
+
+  int carr[]=arr.clone();  
+
+-------------------------------------------
+****************************************************************************************
+MultiTasking: Executing several tasks simultaneously is the concept of multitasking
+
+It is of two types: 1.Process based  MultiTasking
+                    2. Thread based multiTasking
+
+ProcessBased MultiTasking: Executing several tasks simultaneously where each task is 
+                           seperate independent program is called process based MT
+
+-> At os level.
+-> A process is heavyweight.
+
+Thread based multiTasking: Executing several tasks simultaneously where each task is 
+                           seperate independent part of same program is called Thread based MT
+
+-> Each indpendent task is called thread.
+-> at Programetic level
+->A thread is lightweight.
+
+                               MULTITHREADING:
+                               ------------------
+
+-> Multithreading in Java is a process of executing multiple threads simultaneously.
+
+-> A thread is a lightweight subprocess, the smallest unit of processing. 
+   It is a separate path of execution.
+
+-> Threads are independent. If there occurs exception in one thread, it doesn't 
+  affect other threads. It uses a shared memory area.
+
+
+Java Thread Class:
+--------------------
+
+
+-> Java provides Thread class to achieve thread programming.
+-> Thread class provides constructors and methods to create and perform operations on a 
+   thread.
+-> Thread class extends Object class and implements Runnable interface.
+
+-> A thread has 4 states according to sun
+ they are ; new, runnable, non-runnable and terminated.
+
+-> The life cycle of the thread in java is controlled by JVM. 
+
+We can create a thread in two ways: 
+
+1. By exteding Thread class
+2. By implementing runnable interface.
+
+Extending thread Class:
+----------------------
+Step1: In order to create thread by extending thread class first we have to extend the class 
+       with thread class
+
+Step2: Create object in main method of class
+
+Step3: now call start() method which overrides run method
+
+->.
+
+
+Example:
+
+Mythread.java :File:
+-------------------
+
+class Mythread extends thread{
+
+public void run(){
+for(int i=0 ;i< 5;i++){
+System.out.println("child thread");
+}
+}
+
+TestClass.java.File
+------------
+
+class TestClass {
+
+public static void main(Strimg[] args){
+
+Mythread thread = new Mythread();
+thread.start();
+for(int i=0;i<5;i++){
+System.out.pritnln("main thread");
+}
+}
+
+
+---------------------------------------------------------------------------------
+
+By implementing runnable interface.:
+---------------------------------
+
+-> we can create thread by implementing Runnable interface:
+
+Mythread.java :File:
+-------------------
+
+class Mythread implements runnable{
+
+public void run(){
+for(int i=0 ;i< 5;i++){
+System.out.println("child thread");
+}
+}
+
+TestClass.java.File
+------------
+
+class TestClass {
+
+public static void main(Strimg[] args){
+
+Mythread m = new Mythread();
+thread t = new thread(m);
+t.start();
+for(int i=0;i<5;i++){
+System.out.pritnln("main thread");
+}
+}
+
+------------------------------------------------------------------------------------
+What if we call run() method directly instead start() method? 
+
+-> Then it is consodered as normal method calling no thread is created / started.
+-------------------------------------------------------------------------------
+Getting aand setting name of thread:
+---------------------------------------
+
+-> We can create name for threads and also get name for threads
+
+i.e for default thread 
+
+Thread.currentThread.getName();-> Main thread
+
+Thread.currentThread.setName("name");-> NAme thread
+
+here main thread name is set as name thred.
+
+
+  TestMultiNaming1 t1=new TestMultiNaming1();  
+  TestMultiNaming1 t2=new TestMultiNaming1();  
+  System.out.println("Name of t1:"+t1.getName());  
+  System.out.println("Name of t2:"+t2.getName());   
+
+---------------------------------------------------------------------------------------
+
+ThreadPriority:
+-----------------
+
+-> Default priority of a thread is 5 (NORM_PRIORITY).
+-> The value of MIN_PRIORITY is 1 
+-> and the value of MAX_PRIORITY is 10.
+
+inorder to set priority and get priority:
+
+S.o.s(Thread.currentThread.getPriority());
+
+-> Thread.currentThread.setPriority()
+
+TestMultiPriority1 m1=new TestMultiPriority1();  
+  TestMultiPriority1 m2=new TestMultiPriority1();  
+  m1.setPriority(Thread.MIN_PRIORITY);  
+  m2.setPriority(Thread.MAX_PRIORITY);  
+
+-----------------------------------------------------------------------
+                          DEMON THREAD:
+
+-> Demon thread provides services to user thread for background supporting tasks.
+
+-> It life depends on user threads.
+
+-> it is low priority thread.
+
+-> jvm will not wait for demon threads to complete their work.
+
+-> Daemon threads are design as to support the user threads.
+
+
+-------------------------------------------------------------------------------
+
+Different method to prevent thread from Execution:
+
+1.yield();
+-> It pauses current executing thread and gives chance to remaining waiting thread.
+        threaad.yield();
+
+2. join():
+-> If a thread want to wait until completing some other thread we should go for join()
+   method.
+
+3.Sleep();
+-> It is used to stop thread from executing for some time.
+  thread.sleep(3000)   time: longms
+                             intms;
+
+4. interrupt();
+-> It is used to interrupt sleeping thread or dead thread.
+             thread.interrupt();
+-------------------------------------------
+                          SYNCHRONIZATION
+                       --------------------
+-> Synchronization in java is the capability to control the access of multiple threads
+   to any shared resource.
+
+-> Java Synchronization is better option where we want to allow only one thread to access
+   the shared resource.
+
+-> If a method or block is declared as sunc then only one method thread can acceess it at
+   given point of time.
+
+Advantages: It is used to solve data inconsistency.
+Disaadvantages: IT increases waiting time.
+
+-----------------------------------------------------------------------------
+                         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,333 @@
+
+                                     COLLECTIONS:
+                                     --------------
+
+
+--------------------------------------------------------------------------------------
+
+                                  lIST(Interface): 
+                                  -----------------
+1.list interface provisdes a way to store the ordered elements.
+2.  It contains the index-based methods to insert, update, delete and search the elements.
+2.duplicate values can be stored.
+3.implemented by ArrayList,LinkedList,Vector ,Stack.
+
+---------------------------------------------------------------------------------------
+                   ArrayList(CLass):
+              -------------------------
+1. Array list uses dynamic array to store elements.
+
+2. it is like an array but there is no size limit.
+3. It maintains insertion order.
+4. non synchronized.
+5. can access elemets at random order.
+6. can traverse using Iterator,foreachloop,for loop.
+7. manipulation is slower because elements are shifted if an elemet is removed.
+7. we can insert unorderd elements which can be sorted using Collections.sort(); method.
+8. we can reverse the array list using Collection.reverse();
+9. we can do it by writing our own function using for loops.
+10. It increases its size by 50%
+
+a.for adding elemets:
+ list.add();
+b.forr adding another list:
+ list.addAll();
+b.for changing elements:
+ list.set();
+c.for removing elements:
+ list.remove();
+
+eg:
+
+import java.util.*;   
+public class SortArrayListExample1  
+{   
+public static void main(String args[])   
+{   
+// creating object of ArrayList class  
+ArrayList<String> list = new ArrayList<String>();   
+// adding elements to the ArrayList   
+list.add("Volkswagen");   
+list.add("Toyota");   
+list.add("Porsche");   
+list.add("Ferrari");   
+list.add("Mercedes-Benz");   
+list.add("Audi");   
+list.add("Rolls-Royce");  
+list.add("BMW");  
+// printing the unsorted ArrayList   
+System.out.println("Before Sorting: "+ list);   
+// Sorting ArrayList in ascending Order   
+Collections.sort(list);   
+// printing the sorted ArrayList   
+System.out.println("After Sorting: "+ list);   
+}   
+}  
+
+-----------------------------------------------------------------------------------------
+
+                   LinkedList(Class):
+                     ---------------------
+2. linked list is a linear data structure, in which elements are stored in contagious
+memory locations.
+3. the elements in linked list are linked using pointers.
+4. In simple words, a linked list consists of nodes where each node contains a data field 
+and a reference(link) to the next node in the list.
+1. LinkedList uses doubly linked list to store elements.
+Doublylinkedlist: each node consits of a prev pointer, data and next.
+8. We can add elements from both front and back by using list.addFirst(),list.addLast();
+5. maintains insertion order, contains duplicate elemnts,non synchronized
+6. In Java LinkedList class, manipulation is fast because no shifting needs to occur.
+7. has same method of arraylist.
+8.It also implemnets DequeInterface.
+-------------------------------------------------------------------------------------
+
+                 Vector (Class):
+                ------------------
+1. It is same as ArrayList the only diffrence is it is thread safe i.e it is synchronied.
+2.  doubling size of its array
+---------------------------------------------------------------------------------
+
+                  Stack(Class):
+                 --------------
+1. Stack is a linear datastructure used to store the collection of objects.
+2. It is based on Last-In-First-Out (LIFO).
+3. Stack class  provides different operations such as push, pop, search, etc.
+4. The stack data structure has the two most important operations that are push and pop.  
+5. The push operation inserts an element into the stack and pop operation removes an element 
+from the top of the stack. 
+6.It maintains the insertion order.
+
+methods of Stack are:
+
+stack.push(); adding the element
+stack.pop();  :removing last element
+stack.peep();  it returns the top elemnets of stack
+stack.search(); searches the elemnt in stack
+stack.size()'
+stk.forEach(n ->  {  System.out.println(n);  });  we can use for iterating the objects 
+in stack
+-------------------------------------------------------------------------------------------
+**************************************************************************************
+
+                                Set(Interface):
+
+                            ----------------------
+1. Set doesnt contain any duplicate elements. it is implemented using hashset,linkedhashset,
+ sortedset classes
+
+--------------------------------------------------------------------------------
+                  HashSet(Calss):
+                  -------------------
+1. HashSet class is used to create a collection that uses a hash table for storage
+2. HashSet stores the elements by using a mechanism called hashing.
+3. HashSet contains unique elements only.
+4. HashSet allows null value.
+5. HashSet class is non synchronized.
+6. HashSet doesn't maintain the insertion order. we cannot sort the hashset.
+7. Here, elements are inserted on the basis of their hashcode.
+8. HashSet is the best approach for search operations.
+9. default capacity of hashset is 16 and loadfactor is 0.75
+
+-------------------------------------------------------------------------------------
+
+                LinkedHashSet(Class):
+                 ---------------------
+1. Java LinkedHashSet class contains unique elements only like HashSet.
+2. Java LinkedHashSet class provides all optional set operation and permits null elements.
+3. Java LinkedHashSet class is non synchronized.
+4. Java LinkedHashSet class maintains insertion order. sorting is not posible.
+
+--------------------------------------------------------------------------------------------
+***********************************************************************
+
+
+                              SortedSet(Interface):
+               ----------------------------------------------
+
+            TreeSet(Class);
+        ---------------------
+1.  TreeSet class implements the Set interface that uses a tree for storage. 
+2. The objects of the TreeSet class are stored in ascending order.
+3. Java TreeSet class contains unique elements 
+4. Java TreeSet class access and retrieval times are quiet fast.
+5. Java TreeSet class doesn't allow null element.
+6. Java TreeSet class is non synchronized.
+7. Java TreeSet class maintains ascending order. 
+8. for descending order Iterator itr = set.descendingIterator();
+9. sorting is possible by comparable interface.
+   String and wrapper class are comparable by default.
+   In tree set to add userdefined objects we have to implement comparableInterface.
+ public int compareTo(Book b) {  
+    if(id>b.id){  
+        return 1;  
+    }else if(id<b.id){  
+        return -1;  
+    }else{  
+    return 0;  
+    }  
+
+*********************************************************************************************
+
+ 
+                            Comparable(Interface):
+
+ Java Comparable interface is used to order the objects of the user-defined class. 
+This interface is found in java.lang package and contains only one method named compareTo(Object). 
+It provides a single sorting sequence only, i.e., you can sort the elements on the basis of 
+single data member only. For example, it may be rollno, name, age or anything else.
+2. we can reverse the the collection by changing the > with < (1). in comparable method
+
+--------------------------------------------------------------------------------------
+*******************************************************************************************
+
+                               Queue(Interface)
+
+          PriorityQueue(Class):
+          ----------------------
+1.Java Queue interface orders the element in FIFO(First In First Out) manner. In FIFO, first 
+element is removed first and last element is removed at last.
+2. The PriorityQueue class provides the facility of using queue. 
+But it does not orders the elements in FIFO manner. It inherits AbstractQueue class.
+3.It doesnt maintain any order.
+methods in queue:
+queue.remove();  
+queue.poll();  for removing elements
+queue.add() for adding
+
+----------------------------------------------------------------------------------------
+*********************************************************************************************
+ 
+                                 Deque(Interface)
+
+Java Deque Interface is a linear collection that supports element insertion and removal at both ends. 
+Deque is an acronym for "double ended queue".
+
+     ArrayDeque(Class):
+1. The ArrayDeque class provides the facility of using deque and resizable-array.
+2. Unlike Queue, we can add or remove elements from both sides.
+3. Null elements are not allowed in the ArrayDeque.
+4. non synchronized
+5. ArrayDeque has no capacity restrictions.
+6. ArrayDeque is faster than LinkedList and Stack.
+7. doesnt maintain any order.
+*************************************************************************************
+                              Map(Iterface)
+
+1. A map contains values on the basis of key, i.e. key and value pair.
+2. Each key and value pair is known as an entry. A Map contains unique keys.
+3. A Map is useful if you have to search, update or delete elements on the basis of a key.
+4. Map doesn't allow duplicate keys, but you can have duplicate values.
+5. HashMap and LinkedHashMap allow null keys and values, 
+6. but TreeMap doesn't allow any null key or value.
+7. A Map can't be traversed, so you need to convert it into Set using keySet() or entrySet() method.
+   
+   for(Map.Entry m:map.entrySet()){  
+   System.out.println(m.getKey()+" "+m.getValue());  
+  }  
+to traverse user defined objects:book
+  for(MAp.Entry <Interger,Book>  entry: map.entrySet()){
+     int key = entry.getKey();
+     Book b = entry,getValues();
+s.op.ln(key + "details");
+s.op.ln(b.id+""+b.name+""+);}
+--------------------------------------------------------------------------
+
+              HashMap(Class):
+              -----------------
+            
+1. Uses Technique called hashmap for storage of objects.
+2. Hashmap implements map interface which allows us to store key and value pairs.
+3. where keys should be unique.
+3. if we try to insert duplicate key it replaces the element of corresponding key.
+4. non synchronized
+5. Conatine one null key, but manay null values
+6. maintains no order
+7.initial default capacity is 16 with load factor of 0.75
+------------------------------------------------------------------------------
+
+            HashMap Working:
+         ---------------------
+
+ 1. it uses both arrays and linked list for implementation
+          Map<String, Integer> map1 = new HAshMap<String, Integer>();
+ a. so this creates an aarray of buckets. and the array size is 16.
+ b. each bucket is called a node or linked list
+
+map.put("abc" ,1) -> Key, value pair
+map.put("abs" ,2) - >
+
+-> this creates hashcode
+   i.e hashcode = hash(key);
+-> hashcode helps us to store the key/value  in specific index.
+
+Ex: hashcode = hash(abc) = 11112;
+
+furthur: hash&(n-1) => 11112&(n-1)
+ gives index =2;
+The value is stored at this index
+
+Hash collision:what happens if two keys have same hashcode results in same index value.
+
+-> here linked list comes into play.
+ map.put("abd", 3 ) - > hashccode = 111112
+ here next consists of address of hashcode(i.e pointer to next node);
+
+---------------------------------------------------------------------------------
+
+Linked HashMap:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.
+
+
+
+
+

@@ -1,0 +1,863 @@
+               MANUAL TESTING:
+              ---------------------
+
+Types of Testing:
+----------------
+1. white box Testing(Dev): It is a type of testing which is performed by the developers
+                           In this type of testing the developers cheeck their own code 
+                           line by line. In order to reduce the count of errors in the
+                           code. The more the number of bugs the test engineer founds the 
+                           more the bad name for the devlopers.
+
+Types of White Box Testing:
+
+1. Path Testing
+2. Loop Testing
+3. Condition Testing
+4. Memory Testing
+5. Response Time
+
+Note: White box testing is not responsible to make the applcaton stable.It is done by the
+      developers for their own satisfaction.
+   -> white box testing is also known as glass box testing. or transparent testing.
+      since in this type of testing codes are visible to the developers.
+--------------------------------------
+
+2. Black Box Testing(TEs): In this type of testing the test engineers test the application.
+                           the test engineer use the application to identify the bugs or 
+                           defects and get it fixed by thee developers
+
+Note: In ths type of testing the codes are not visible to the test engineers. hence it is
+      also known as closed box testing.
+
+Types of Black Box Testing:
+
+1. Functionality Testing:
+
+   a. Functional Testing
+   b. Integration Tesing
+   c. System Testing
+   d. UAT
+
+2. Non-Functionality Testing:
+
+   a. Usability Testing
+   b. Comaptibilty Testing
+   c. Performance Testing
+
+a. Usability Testing: Checking the user friendlieness of an application is known as useability 
+                   testing. The various factors of usability testing are 
+  
+         a. Easy to Use: important features must be exposed first and highlitined
+         b. Easy to understand: Simple Language[ logout/sui]
+         c. Look and Feel : Color and font size.
+         d. Response Quick.
+
+Note: Usability testing is the type of non functional testing 
+      -> usability testing is not cumpolsory type of testing since in usablty testing
+         we need the ui of application but in some application we do not have the ui.
+           for eg: qickheal (Antiirus test)
+  
+   Usability Checklist:
+
+     1. page must have a help.
+     2. page must have logout.
+     3. logo should be there
+     4. page must have home link
+     5. all tags must exist
+
+Process of USability Testing:
+
+ -> Identify need of checklist
+ -> derive checlist
+ -> customer review and approval
+ -> Implementing the checklist
+ -> Executing the list in app
+ -> usability testing checklist report
+
+b. Compatability Testing: 
+
+  
+         Requirements(BA) --> Coding//WBT(Dev) --->FT/IT/ST/CompatabilityTesting(TE)
+              --->UAT(customer) --->P.S(End user)
+
+-> Generally we go for compatability testing whwenver the application is used by the end 
+  user and we have no control over their system configuration 
+-> compatabilty testing means to test the application if flexible to be used in different
+   system configuration 
+-> Checking the application in different hardware and software platform(config) is known as 
+   compatability testing
+-> the software compatabilty indicates the mulptiple oparating system and multiple browser
+   and hardware indicates different size and make 
+-> Generally once the application is released to customers it may be accessed by different
+   user from different platform. and during this process they may face compatabilty issues
+   to avoid this issues we do one round of compatabilty testing 
+-> basically compatbilty testing may not be done on all the application since in some 
+   application we may have control over the user machine
+-> Compatabilty testing is the type of non fuctional testing. we go for compatabilty testing
+   once the application is functionally stable .
+
+Compatabilty Testing is of Two Types:
+
+      1. software Compatabilty 
+            a. OperatingSystem(OS) : windows/unix/vista/ios
+            b. Browsers :  chrome/safari/uc
+      2. Hardware Compatabilty
+            a. Size : RAM/ROM
+            b. Make :Dell/HP/Sand disk
+
+Compatabilty Testing Process:
+---------------------------
+
+software Compatabilty(OS):
+  
+1. List of all the required platforms eg: xp,windows 10 , ubantu
+2. Identify the base platform(most used on which platform)
+3. Install the base platform in every TE machine
+4. TE will perform tetsing (FT,IT,ST)-->3months
+5. VM Server(This is a virtual machine consists of diff OS can be accessed by TE by remote
+              access)
+6. Remote access
+7. End to end testing
+8. Compatability issues
+       -> UI allignment 
+       -> overlapping/missing object
+       -> look and feel
+9. Developers will do the changes
+10. Once again TE Will retest the application on all platforms required by customers
+
+--------------
+c. Performance Testing:
+     
+     1. Load
+     2. Response Time
+     3. Stablity
+
+    
+  ReqDoc(B.A) ---> Coding/WBT(Developer)---> FT/IT/ST(TE) ---> CT/PT ---> UAT(Customer)
+        ------> PS
+
+-> Checking the behaviour of an app by applying load is known as performance testing
+-> In P.T we check the app for certain factors for response time, load and stability
+  
+    1. Load: It is the number of user uaing the app simultaneously or ata time
+    2. Response time: It is a time taken by the server to respond to the client request
+    3. Stability: It is "n" no of user using the app simutaneously for a particular 
+                  period of time.
+
+    These are the 3 factors on which we perform the performance testing
+
+Note: It is cumpolsory for some type of applications
+
+Note 2: Once the product is stable and moved to the production it may be accesed by 
+        n no.of users simulatneously and while using it simultaneously they(user)
+        may says save performance issues in order to avoid it we use go for performance
+        testing.
+
+Note 3: Generally , P.T cannot be done manually since it is a costlier approach to get
+        all the resouurces as well as accuracy cannot be maintained while sending
+        the request and getting the reaponse time . HEnce , P.T is always
+        done with the help of P.T tool.
+
+ -> Most commonly used P.T tools are:
+    1. J-Meter
+    2. Load Runner
+    3. New Load
+    4. Web stress
+    5. E-Load
+
+Performance Testing process:
+  
+  1. Identify the P.T scenerios
+   -> most frequeny=tly used scenerios
+   -> Most critical scenerios
+   -> Huge data transaction Scenerios
+
+  2. Create scripts according to the scenerios
+  3. distribute the load according to the usage pattern
+  4. Mention duration , run the scripts
+  5. result
+       a. Max R.T - 5 sec
+       b. Min R.T - 2 sec
+       c. Avg R.T - 2.4 sec
+
+  6. Analysing the result 
+        ----- team
+  7. Identify the "bottle neck'(Performnace issues) h/w and s/w , network , code 
+  8. Tunning
+  9. Re run the scripts
+  10. this process continues until we achieve the goal
+  
+  Types of performance testing:
+   
+     -> load testing
+     -> stress testing
+     -> Scalabilty testing
+     -> Stability testing  --> which should not take until they ask
+     -> Soak testing 
+     -> volume testing.
+
+ 1. Load Testing:  10,000<=
+--------------------------
+      Checking the behaviour of the app by applying the load less than or equal 
+  to the desire load 
+
+-> For exampe, if customer want their app used by 10,000 users ata a time then we check t
+  the behaviour of the app by applying load less than or equal to 10,000
+
+2. Stress Testing: 10000 >
+----------------------------
+       Checking the behaviour of the app by applying the loas more than the desired 
+ load is known as stress testing
+
+-> for example, if customer want their app used by 10000 users ata time then we 
+   check the behaviour of the app by applying load more than 10000.
+
+3. Stability Testing:
+------------------------
+       Checking the behaviour of the app by applying load for a long period of time 
+
+ -> for example, if customer want their app used by 10000 user tahn we check the 
+    behaviour of the app by applying load for long period of time
+ 
+4. Scalabilty Testing:
+---------------------------
+
+Upward Scalability Testing
+
+  11000 --- 1.2 sec - Response time
+  12000 --- 1.4 sec
+  13000 ---- 1.6 sec
+  14000 --- 1.7 sec
+ ----
+
+
+Downward Scalabilty testing:
+
+  10000  -- 1.2 sec
+  9000  --  1.2 sec
+  8000 --   1.01 sec
+  7000  --  1.0 sec
+
+-> Checking the behaviour of an app by increasing or decreasing the load in a particular
+   load is known as scalabilty testing
+
+-> By decreasing the load we check whether it reached the desired goal or not.
+   
+-> It is of two types:
+    a. Upward Scalabilty Testing
+    b. Downward Scalabilty Testing
+
+5. Soak Testing:
+----------------
+       Checking the ebhaviour of an app in an unsuppory=tive environment is known as
+   soak testing
+   EG:  4gb ram , 5 gb....... 
+  -> the testing should be done in 4gb ram , 500gb. if we reduce it will not work 
+     properly
+
+6. Volume Testing:
+-----------------
+         Checking the behaviour of an app with huge amount of data transaction is 
+known as volume testing
+
+Note: Do ot talk about soak and volume testing until unless the interviewer ask u.
+      
+
+***********************************************************************************
+------------------------------------------
+3. Gray Box Testing (TEs):  
+                       It is combination of white box testing and black box testing.
+
+Note: Gray box tetsing is a bad approach.Since checking the code as well as application
+ by the same set of people may causes lack of accuracy.
+
+-----------------------------------------------------------
+
+Black Box testing furthur classified into:
+
+-> Functional Testing
+-> Integration Testing
+-> System Testing.
+
+
+What is Testing?
+
+-> The process of finding the defects and getting it fixed by the developer is known as
+ testing.
+
+-> The process of verifivcation and validation is known as testing.
+
+-> The process of cheking the application according to the client requirements
+   is known as testing.
+
+-> The process of using the application as a user to find defects in it is known as
+   testing.
+--------------------------------------------
+
+Functional Testing: Checking each abd every module and components of modules independently
+                    or one by one is known as Functional Testing.
+
+Rules to be followed while performing functional Testing?
+
+Rule 1: During testing one componenet and all other components must be +ve or valid,
+        to identify where exactly the bug is
+
+
+Rule 2: Whenever we start testing always start withe +ve testing i.e give the valid
+        input and then go for -ve testing.
+
+Rule 3: Do not check for similar type of values during the testng process. Since
+        it may be time consuming process and overtesting.
+
+Rule 4: Whenver we are testing and if the requirement is not clear. do not blindly 
+       assume the requirement get it clarified by concerned person.
+
+Note : the toughest part of during the testing  process is to decide when to stop testing
+ and it is always decided by TE whenver they feel all the possible values i.e
+valid and invalid  are covered is knoen as maximum test coverage.
+
+
+-> Whenever all the modeules of application or each and every modules and components
+  are tested with various combinations of inputes then the functional testing is completed.
+
+
+EG:
+
+Online Banknig:
+
+Modules: 
+
+4. Amount Transfer Module
+4.1 FAN(For Account Number) --> Object.
+4.1.1 FAN Accepts only four digits.
+
+--------------------------------------------------
+
+Integrating Testing:
+
+Once an application is given to us(TE) Initially we check wether evey module is 
+independently working or not. Then on the basis of our product knowledge
+we start checking the relationship or the data flow between the modules which is known as 
+integration testing.
+
+
+Rules to perform integration Testing?
+
+Rule 1: Functional testing is done in  independent module.
+
+Rule 2: Integaration testing is done between the dependent modules( where data transfer)
+
+Rule 3: Integrating testing is done after functional testing is over.
+
+Rule 4: In order to perform Integration testing very good product knowledge is required.
+
+Rule 5: Integration testing is done only between the dependent modules
+          (login, home,  help, logout we dont perform integration testing)
+
+Rule 6: Integration testing is done between source to destination module.
+
+Rule 7: Integration testing needs source ,destination and data.
+
+Rule 8: Data always transfers from source module to destination module. and compulsory
+        data should be get saved in destination module.
+
+Rule 9: Sometimes dataflows from single source to multiple destination and vice versa.
+
+Rule 10: Data Transfer may some time happen in the same module as well, hence integration
+         testng is done on the same module also.
+
+Types Of Integration Testing:
+----------------------
+
+1. Incremental Integration Testing.
+
+2. Non Incremental Integrating testing.
+
+
+Incremental Integration Testing:
+
+ Whenevr data flow in sequential oredr i.e one module to another module in a proper 
+ sequence is known as incremental
+
+It is of two types:
+-> To to Bottom
+-> Bottom to Top.
+
+Non Incremental Integrating testing:
+  
+  In this type of testing data flow randomly from one to the next module without following any
+   sequemce or rule.
+
+
+
+----------------------------------------------
+
+System Testing: 
+----------------
+
+End to End testing of an application.
+
+-> checking the end to end flow of the application like an end user is known as 
+   System Testing.
+
+-> In system testing we navigate through all necessary modules to test the application
+   as a whole System.
+
+Note : an application may consist of various modules each module may consist of several 
+       submodules and each submodule may consist of differnet components or objects.
+
+-> every test engineer perform functional tetsing, Integration testing and system testing
+   on their assigned module.
+
+-> Dependent modules should be assigned to the same test engineer.because he can identify
+   and send report if we give it to different persons it will   repetative task.
+
+Life Cycle of project:
+---------------------------
+
+                Reguirements(Business analyst) --> 
+                Coding, WBT(Dev)             -->
+                FT,IT,ST(Test Engineers)      --> 
+                UAT(customer testing)       -->
+                Production/server/end user
+
+
+User Acceptence Testing(Customer):
+----------------------
+
+-> It is type of testing performed by the customer in this type of testing  the customer
+   use the application as the user to identify the defects  in it 
+
+Note : User Acceptance testing is not a cumpolsory type of testing It is done by the customer
+       for their own satisfaction. as well as a small error or defect may some time
+       ruin the business of the customer.
+       -> hence to be in the safer safer side the TE will do one round of UAT.
+
+-> Main business scenarios
+-> real time scenarios
+-> most used scenerios
+
+Note : In use acceptane testing the customer checks the end to end flow of the application
+
+Differnces:
+------------
+
+System Testing :
+-> Int system testing the test engineers check all the end to end flow of the application
+                                                
+
+UAT:
+-> In UAT the customer mainly checks the main business scenerios.
+
+Cases of UAT:
+--------------
+
+-> By the customer(Domain Expert)
+-> By the customer(internal employees) --> cannot be new application
+-> By the customer(TE of the company) ---> goes to client location and learns about business
+                                          and performs testing.
+
+
+
+********************************************************************************
+
+    Application has Three Layers:
+      ------------------------------
+
+-> User Interface
+-> Business Logic
+-> Database
+
+UserInterface Layer: It acts as a mediator between the user and application and generally 
+                     user interacts with application using pages.
+
+Business Logic Layer: It is the man part of application which makes the features of
+                      application to work.
+
+Database: It is collection of tables where complete information about the user is stored.
+
+-------------------------------
+
+Types of Application:
+
+-> Stand alone application
+-> Clent Server application
+-> web based application
+
+StandAlone Application: 
+----------------------
+ -> OS
+ -> MsOffice
+ -> calculator
+  -> Note pad
+
+Advantages:
+-> Faster in access
+-> Security(No hackeng)
+
+
+Disadvatages:
+-> installation is reguired
+-> user system memory is consumed
+-> single user access ata a time.
+-> maintanence is tough
+(should go to customer place to solve issue
+
+Clent Server application:
+---------------------------
+
+-> watsapp
+-> gmail
+->  snapchat
+
+Advantages:
+-> faster in access
+-> No data hacking
+-> virus
+-> Multiple users can access at a time
+-> data sharing is possible.
+
+disadvantages:
+-> insatllation is required
+->End user system memory is consumed less
+-> if server is down no user can access it
+
+-> the client and server communicates with each other to make applicaion work
+-> server software is completely installed at server side.
+-> the client software is installed at client side
+
+web based application:
+----------------------
+
+-> web based application are accessed by using url.
+-> yahoo
+-> gmail
+-> fb etc.
+
+Advantages:
+-> Faster in access depends upon bandwidth
+-> No data hacking
+-> novirus
+-> Multiple users can access at  a time
+-> data sharing is possible
+-> No End user memory is consumed.
+
+Disadvantages:
+-> if server is down no user can access it.
+
+**********************************************************************************
+16/11/2020:
+---------
+Web Server Application:
+
+           architecture:
+
+          transaction
+    user       ----->   Servers 
+                      1. Web server   2. Application server  3. Databse server
+
+
+One Transaction : one transaction is a combination of one request and coresponding response
+                  is known as one transaction.
+
+-> Web server , Application server and Database server are the supporting server
+   or supporting tool .
+
+-> Generally we use these three seperate servers so that the execution becomes faster
+  i.e quick response and the load reduces.
+
+WebServer: In this all the server all the pages related to the application are uploaded
+
+Application Server: In this all the files related to the business logic are uploaded
+                    which makes the funcationality to work as uploaded.
+
+Database Server: It consists of multiple tables where all the information regarding is s
+                 stored 
+
+-> generally depending on the request which server needs to be involved is deceided
+   so that the load on the main server is reduced and the users may have quick response
+   time.
+
+
+Client-Server Application:
+----------------------------
+
+                    architecture:
+
+              users  ----------> Servers
+             .exe file              1. Application server  2. Databse server
+
+              whatsappapp---------> Server
+
+
+-> In client server architecture the webserver is not required because user interface is 
+   already installed in user system which is   .exe file
+
+
+Stand Alone Application:
+------------------------
+
+-> In Stand Alone Application there is no server and all the three layers is insatlled
+   in the users machine in the form of .exe file
+
+************************************************************************************
+
+                                TEST PLAN:
+
+-> It is dynamic document that derives the entire testing activities.
+
+-> It is prepared in the beginning, as soon as we get the requirements.
+
+-> Test lead or test manager will prepare the test plan document.
+
+Test plan conatin 15 attributes:
+
+1. Object
+2. Scope
+3. Approach
+4. Test Methodology
+5. Test Environment
+6. Templates
+7. Roles and Responsibilties
+8. Effort Estimation
+9. Entry and Exit criteria
+10. Schedule
+11. Tools
+12. Deleivarables
+13. Assumptions
+14. risk
+15. Mitigation
+
+
+Objective:
+-------------
+          Aim of writing the test plan
+           Eg: Writing the test plan to test the functonality of the application
+                 Whatsapp release no:18.
+
+Scope:
+-------
+
+a. Inscope:  Features which need to be tested 
+             Eg: Gmail(login, compose, inbox, draft, logout)
+
+b. OutScope: Features which need not to be tested.
+
+EG: If we doing tessting for second release than components like login and logout which
+    are not effected by addition of components need not tobe tested.
+
+
+Test Methodolgy:
+-----------------
+  which type of testing to be performed on application.
+ 
+ -> Start with smoke testing
+ -> FT
+ -> IT
+ -> ST
+      -> UAT (Service based compnay)
+      -> Adhoc
+      -> d&b Testing( Product based compnay).
+
+ -> Compatability testing   (    "
+ -> performance testing     (   On Customer demenad)
+ -> usability testing       (    "
+
+
+Approch:
+---------
+     Approch talks about the flow of the application
+        -> login -> compose --> send  --> logout
+        -> login -> inbox -> logout
+
+Test Environment:
+-----------------
+   System in which application is installed
+
+1. Configuration:  
+       -> HardWare Configuration
+            ->hard drivee
+            -> Ram
+            -> Processor
+
+      -> Software Configuration
+           -> OS
+           -> Browser
+
+2. Test Url:
+             hhtp:\\admin\icici\ wipro.local
+
+
+Templates:
+---------
+-> Templates are the predifined format  used by the test engineer to prepare various type
+   of documents in order to maintain the uniformity
+   1. test case temaplate
+   2. test case reveiw template
+   3. RTM(Requirement tracebilty matrix) template
+   4. test execution report template
+
+Roles and Requirements:
+--------------------------
+1. Test Manager:  -> write or review test plan 
+                  -> conduct monthly status meet plan
+                  -> meetings with development team.
+                  -> meeting with customer
+
+2. Test lead :  -> write or review test plan
+                -> conducting daily status meeting
+                -> assigning test modules to the engneers
+                -> providing templates
+                -> holding schedules.
+
+3. TestEngineer:
+                -> Reading, undersatnding, and reviewing the requirements
+                -> writing test sceneros, test cases and preparing RTM documents
+                -> Executing test Cases
+
+Schedules:
+------------
+    It talks about the time duration given for each and every testing activities
+
+Tools: 
+------
+   Any tools like management tools or bug track tool, control version tool caused in thee
+   current releases are mentioned in the section
+
+ -> test management tool:
+                  -> quality centre 11.0(QC)
+                        -> store the requirement
+                        -> write and store test casses
+                        -> test execution process
+                        -> RTM
+                        -> logging and tracking of bug
+                   -> Automation
+                        -> selenium
+                        -> slick
+                        -> QTP
+
+Deliverables: 
+------------
+    List of documents which needs to be handed over to the customer along with the 
+     application
+          ->  this includes: test cases,test scripts, scenerios, Rtm , tests execution
+              reports and relese notes
+
+   Release Notes: ->user manual
+                  ->insatllation  guide
+                  ->platform on which application is tested
+                  ->list of existing bugs on the current release
+                  ->list of fixed bugs drom the previous relese
+
+Assumption:
+------------
+        these are the problems or the issues which may be faced during the test process
+      
+Risk:
+-----
+   This is the effeect of assume problem of the testing,
+
+Mitigation: 
+------------
+     Backup plan prepared by the test lead or test manager to overcome the assumed problem
+
+
+Entry and Exit Criteria:
+------------------------
+   These are the necessary conditions whch are to be satisfied before starting and  
+   stopping test process.
+
+Entry criteria for testing are : 
+   -> the complete test document should be ready.
+   -> Build should be created 
+   -> Modules should be assigned to the test engineer.
+   -> Necessary resources must be ready.
+
+Exit Criteria:
+   -> all the written test cases must be executed
+   -> most of the test cases must be passed.
+   -> their cant be any blocker critical and major bugs whereas few minor bugs can exist.
+
+
+Effort Estimation:
+--------------------
+  It talks about the effort which needs to be applied by each team member to achieve the 
+  goal 
+
+               
+ 
+ **********************************************************************
+
+* Bug Report Template: 
+---------------------
+
+  1. Bug #id
+  2. Test case name
+  3. Module name
+  4. Req #
+  5. Reporter
+  6. Date
+  7. Assigned to
+  8. CC
+  9. Status
+  10. SE
+  11. Priority
+  12. Server
+  13. Os & browser
+  14. Test data
+  15. Build #
+  16. Screenshot
+  17. Summary
+  18. Brief description
+               step to reproduce (nav steps)
+                 1. login user
+                 2. Comp mail, send
+
+     Observation: Send button not enabled
+     Expected: USer unable to click on send button.
+  
+--------------------------------------------------------------------------
+
+Service Based Company:
+
+-> Service Based Company baased companies are those companies wh provide services
+   to their customers i.e they develop application for their own customers where customer
+   is the owner of the product
+
+-> In servce based company the application is handed over to the customer along with 
+   the source code.as well as all the test documents
+
+-> in service based company one product is dedicatedly develop ans sold to a single 
+   customer 
+
+
+Product Based Company:
+
+-> Product Based Company are those companies who develop their own product and sell
+   them in the  market i.e the company is owner of the product
+
+-> In Product Based Company only the usable form of the application is handed over
+   to the customer 
+
+-> in prodct based company one product can be sold to multiple customers
+----------------------------------------------------------------------
+
+Exploratory Testing:
+--------------------
+   Whenever there is no clear requirement or no requirement in such case the test 
+   engineers go for exploratory testing
+
+-> In exploratory testing the TE explore the similar existing applications to create
+  the necessary test documnet and use them to test the application 
+
+-> Generally we should not prefer exploratory testing since some time features can
+   be misunderstood as bug and vice versa
+
+We will create test document for exporiatory testing by exploring the similar 
+  existing applications.
+
+
+
+
+

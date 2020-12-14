@@ -1,0 +1,245 @@
+                      STRING PROGRAMS:
+                   ------------------------
+
+
+1. Java program to count number of occurrence of any character on String:
+
+input : rahul reddy
+        r
+
+o/p: 2
+
+------
+
+package strings;
+
+import java.util.Scanner;
+
+public class CountCharacterOccurence {
+
+	public static void main(String[] args) {
+		@SuppressWarnings("resource")
+		Scanner in = new Scanner(System.in);
+		String input = in.nextLine();
+		
+		String str2 = in.nextLine();
+		char element = str2.charAt(0);
+		
+	int charCount =0;
+	
+	for(char ch: input.toCharArray()){
+        if(ch == element){
+            charCount++;
+        }
+    }    
+System.out.println(charCount);
+
+		
+	}
+
+}
+------------------------------------------------------------------------
+2. Progrmam to cont occuences of characters:
+
+
+class NoOfOccurenceOfCharacters { 
+    static final int MAX_CHAR = 256; 
+  
+    static void getOccuringChar(String str) 
+    { 
+        // Create an array of size 256 i.e. ASCII_SIZE 
+        int count[] = new int[MAX_CHAR]; 
+  
+        int len = str.length(); 
+  
+        // Initialize count array index 
+        for (int i = 0; i < len; i++) 
+            count[str.charAt(i)]++; 
+  
+        // Create an array of given String size 
+        char ch[] = new char[str.length()]; 
+        for (int i = 0; i < len; i++) { 
+            ch[i] = str.charAt(i); 
+            int find = 0; 
+            for (int j = 0; j <= i; j++) { 
+  
+                // If any matches found 
+                if (str.charAt(i) == ch[j])  
+                    find++;                 
+            } 
+  
+            if (find == 1)  
+                System.out.println("Number of Occurrence of " + 
+                 str.charAt(i) + " is:" + count[str.charAt(i)]);             
+        } 
+    } 
+    public static void main(String[] args) 
+    { 
+        Scanner sc = new Scanner(System.in); 
+        String str = "geeksforgeeks"; 
+        getOccuringChar(str); 
+    } 
+}
+
+
+o/p:Number of Occurrence of g is:2
+Number of Occurrence of e is:4
+Number of Occurrence of k is:2
+Number of Occurrence of s is:2
+Number of Occurrence of f is:1
+Number of Occurrence of o is:1
+Number of Occurrence of r is:1   
+
+
+----------------------------------------------------------------
+2. Vowel ans consonent count:
+
+
+package strings;
+
+public class CountVowelConsonant {
+	public static void main(String[] args) {  
+	
+	 int vCount = 0, cCount = 0;  
+     
+    
+     String str = "rahul" ;
+     
+     str = str.toLowerCase();  
+       
+     for(int i = 0; i < str.length(); i++) {  
+         
+         if(str.charAt(i) == 'a' || str.charAt(i) == 'e' || str.charAt(i) == 'i' || str.charAt(i) == 'o' || str.charAt(i) == 'u') {  
+             //Increments the vowel counter  
+             vCount++;  
+         }  
+         //Checks whether a character is a consonant  
+         else if(str.charAt(i) >= 'a' && str.charAt(i)<='z')  {    
+             //Increments the consonant counter  
+             cCount++;  
+         }  
+     }  
+     System.out.println("Number of vowels: " + vCount);  
+     System.out.println("Number of consonants: " + cCount);  
+ }  
+
+}        
+
+
+----------------------------------------------------------------------------------------
+3. Remove duplicate char from string:
+
+package strings;
+
+import java.util.LinkedHashSet;
+
+public class RemoveDuplicates {
+
+	void removeDuplicates(String str) 
+    { 
+        LinkedHashSet<Character> lhs = new LinkedHashSet<>(); 
+        for(int i=0;i<str.length();i++) 
+            lhs.add(str.charAt(i)); 
+          
+        // print string after deleting duplicate elements 
+        for(Character ch : lhs) 
+            System.out.print(ch); 
+    } 
+      
+    /* Driver program to test removeDuplicates */
+    public static void main(String args[]) 
+    { 
+        String str = "geeksforgeeks"; 
+        RemoveDuplicates r = new RemoveDuplicates(); 
+        r.removeDuplicates(str); 
+    } 
+ 
+
+}
+
+-----------------------------------------------------------------------------------
+
+4.String is anagram or not:
+
+
+
+import java.util.Arrays;  
+public class Anagram {      
+    public static void main (String [] args) {          
+        String str1="Brag";  
+        String str2="Grab";  
+          
+        //Converting both the string to lower case.  
+        str1 = str1.toLowerCase();  
+        str2 = str2.toLowerCase();  
+          
+        //Checking for the length of strings  
+        if (str1.length() != str2.length()) {  
+            System.out.println("Both the strings are not anagram");  
+        }  
+        else {  
+            //Converting both the arrays to character array  
+            char[] string1 = str1.toCharArray();  
+            char[] string2 = str2.toCharArray();  
+              
+            //Sorting the arrays using in-built function sort ()  
+            Arrays.sort(string1);  
+            Arrays.sort(string2);  
+              
+            //Comparing both the arrays using in-built function equals ()  
+            if(Arrays.equals(string1, string2) == true) {  
+                System.out.println("Both the strings are anagram");  
+            }  
+            else {  
+                System.out.println("Both the strings are not anagram");  
+            }  
+        }  
+    }  
+}  
+
+-----------------------------------------------------------
+
+1. Divide string into n parts?
+
+Input: aaaabbbbesscccc
+
+Output:
+aaaab
+bbbes
+scccc
+
+Program:
+---------
+package strings;
+
+public class DivideAString {
+
+	public static void main(String[] args) {
+		  String str = "aaaabbbbesscccc";  
+          int n=3;
+	      int len= str.length();
+	      int temp=0;
+	      int chars= len/n;
+	      String[] strarr = new String[n];
+	      
+	      
+	      if(len%n!=0) {
+	    	  System.out.println("cannot be divided");
+	      }
+	      else {
+	    	  for(int i=0;i<len;i=i+chars) {
+	    		  String part = str.substring(i,i+chars);
+	    		  strarr[temp]=part;
+	    		  temp++;
+	    	  }
+	    	  
+	    	  
+	      }
+	      for(int i=0;i<n;i++) {
+	    	  System.out.println(strarr[i]);
+	      }
+	      
+	      
+	        }  
+}
+---------------------------------------------------------

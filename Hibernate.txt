@@ -1,0 +1,1609 @@
+                                         HIBERNATE:
+                                       ------------------
+HISTORY:
+--------
+
+MVC: Consists of Three parts:
+          -> view : basic outer layout like login page etc
+          -> Controller: Jsp pages.
+          -> Model : Model consists of business logic and DAO(Databse Access Operations)
+
+-> to build model part EJB are used 
+-> but ejb has draw backs so hibernate ans spring came into play 
+  EJB-s -> Spring
+  EJb-e -> hibernate.
+
+Why Hibernate came into existence?
+
+->  we cant develop enterprise applications using core java due to security, transaction
+    mail etc drawbacks and verious resons
+
+-> But In order to overcome this gavin king devloper came up with EJB components
+   -> EJB is known as Enterprise Java Beans.
+
+-> EJB- S //Enterprise Java Beans - Session Beans
+-> EJB- E // Enterprise Java BEans - Entity Benas
+
+-> With the help of Ejb-s and Ejb-e we can make busineess part and Dao[DataBase Acess Objet]
+    part
+-> and we can get services(secutity,Transaction,mail etc) from application servers 
+                                                     i.e weblogic server
+                                                        Jboss server
+                                                        glass fish servers
+-> this services cant be added with simple java components such as jdbc. jsp etc.
+
+draw backs of basic java components
+----------------------------------
+-> But DAO can use Jdbc and connect with database but  why use EJB-s
+      -> Jdbc doesnt provide features like database independent 
+      -> and jdbc doesnt doesnt provide  concept of cache
+
+-> And now EJB-E provides featurs like databse independencey query  and cache , Query language
+    i.e Databse indenpendent queries means Ejb converts queries into database
+       understandale queries.
+-> SO finally basic java components is not suitable for enterprise applications
+  so EJB 's came .
+
+-----------------------
+Draw backs of EJB:
+------------------
+-> but there are also some draw backs in EJB's i.e 
+     ->  We have to first talk with session beans and then entity beans to access databse
+i.e it is having dependency on session beans
+
+
+SO finlly Hibernate came into play: in palce of EJB-E
+------------------------------------------------------
+
+-> so hibernate has same features of EJB featurs along with more features
+-> current hibernate version is 4
+
+i.e Jsp(Controller ) can directly talk with hibernate. 
+-> no dependecy on EJB-s.
+
+EJB-S and EJB-E are wrapped together in EAR file (Enterprise Archive file) and deploy on 
+web logic.
+
+-> in place of EJB-E we can use hibernate which provides more features than EJB-E
+they are:
+
+-> Hibernate dont have any dependencies such as session(EJB-s) and weblogic dependencies
+
+-> Hibernate can run independently and also EJB-s can also talk with hibernate
+
+--------------------
+
+Here EJB's are cost ineffective and not prefferd for small enterprise application
+ so Spring frame work came into play
+
+Spring frame work consists of componenets like security tarnsaction etc.
+
+---------------------------------------------
+***********************************************************************************
+
+                        HIBERNATE FEATURE:
+                        ----------------
+1. auto DDL feature.
+  i.e hibernate creates tables automatically
+
+2. HQL (databse independent)
+  i.e queries are converted to database specific using hibernate
+
+3.Cache
+
+4. No exceptions
+
+5.primary key generator
+  i.e hibernate provides feature of primarykey generator.
+
+6.validations(using anotations)
+
+7. ORM mapping:
+i.e 
+ 
+
+***************************************************************************************
+                         What is Hibernate?
+                        --------------------
+
+-> hibernate is a java frame work that simplifies the devlopment of java apllication that
+   interact with databases.
+-> It is an open source, lightweight, ORM (Object Relational Mapping) tool.
+-> Hibernate implements the specifications of JPA (Java Persistence API) for 
+   data persistence.
+
+
+                   ORM : Object Relational Mapping:
+              ----------------------------------------
+
+-> An ORM tool simplifies the data creation, data manipulation and data access.
+    It is a programming technique that maps the object to the data stored in the database.
+
+                    Adavatages of Hibernate:
+                    -------------------------
+
+-> open source and lightweight
+-> Fast performanece
+-> Database independent query
+-> Automatic table creation
+-> Simpifies complex join
+->  Provides Query Statistics and Database Status
+
+************************************************************************************************
+-----------------------------------------------------------------------------------------
+
+                                      Object Types: 
+                                  -----------------------
+
+there are three types of 3 types of object: (Scopes)
+
+-> Transient object
+-> persistent object
+-> detached object
+
+-> Basic object is known as trasient object
+-> once you attah object to hibernate i.e session.save(obj) 
+  it becomes persistent object
+-> If we remove object from hibernate then object is called detached object.
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------------------------------
+Steps to create hibernate application using maven project:
+---------------------------------------------------------
+
+Step 1 : Create a maven project
+step 2 : Mavin project consists of pom.xml at the end
+     -> In pom.xml file
+     -> get dependencies of hibernate from maven reposittories by getting dependencies
+     ->  now also get the mysql connector from maven rep and paste it in pom.xml
+** these gives us the dependencies required for hiberanate
+
+Step 4 : Now create a bean class with getters and setters method
+        -> and create a main  class with main method to store the object in db
+        ->  in oredr to do it we have to use
+
+    Configuration  con = new Configuration().configure().addAnnotatedClass(Alien.class);
+    SessionFactory sf=  con.buildSessionFactory();
+    Session session =  sf.openSession();
+     org.hibernate.Transaction tx =  session.beginTransaction();		
+      session.save(alien1);
+       tx.commit();      
+
+-> here sessionFactory and sesson are both interfaces so we use configuration class
+
+Step5: Now we have to install plugin of hibernate
+ -> this can be done by going into eclipse marketplace
+ -> and search hibernate download only hibernate files i/e install
+ -> this creates an hibernate.cfg.xml file in our project
+ -> which helps us to give details to connect with databse
+ -> 
+
+Step6: we have primary key using @Id and mention data  by @Entity
+
+Step7: we have to crete a table 
+     -> so we have to mention 
+         <property name="hbm2ddl.auto">update</property>
+      -> in hibernate.cfg.xml file.
+step 8: run.
+
+----------------------------------------------------------------------------------------
+                                   Using Annotations:
+                               ---------------------------
+                                     
+Example: 
+App.java.File:
+
+public class App 
+{
+    public static void main( String[] args ) 
+    {
+        Alien alien1 = new Alien();
+        alien1.setAid(1);
+        alien1.setAname("kkk");
+        alien1.setAcolor("green");
+        
+        Configuration  con = new Configuration().configure().addAnnotatedClass(Alien.class);
+        SessionFactory sf=  con.buildSessionFactory();
+        Session session =  sf.openSession();
+        org.hibernate.Transaction tx =  session.beginTransaction();		
+        session.save(alien1);
+        tx.commit();
+    }
+}
+---------------------------
+Step1: 
+             session.save(obj);
+-> get object of Session and session is an interface it should be implemented by 
+   some class but no class implements session 
+            *    Session session=
+
+-> so we get object of SessionFactory but it as interface so we cant create object of 
+   sessionFactory. 
+             * SessionFactory sf= 
+
+->SO  We have to create a object of ConfigurationClass 
+           * Configuration con = new Configuration()
+
+            * SessionFactory sf = con.buildSessionFatory();
+              -> But it is depricated  method 
+
+           * Session session = sf. opensession()
+              -> opensession() is a method which gives object of session.
+
+-> But we havent connected and configured with databse.             
+-> but we havent provided the configuration such as which databse to connect mysql
+  or orcale and databse name etc.
+
+ So in order to do it it we have to download hibernate plugin to connect to databse and 
+  configure the connetion between hibernate and databse.
+->  and create an xml file with necessary configuration.
+
+And we have to mention it in the main class 
+
+i.e   Configuration  con = new Configuration().configure().addAnnotatedClass(Alien.class);
+      -> configure() is used to mention the xml file as it is default we dont need to 
+         mention it
+      -> We have mention which classes we are working with i.e which class objects we
+         are storing in databse 
+          So the class should have @Entity annotation 
+     -> And that should me mention in main class with
+         .addAnnotatedClass(Alien.class);
+
+-------------------------------
+-> so inorder to make changes to databse we have follow acd properties
+-> To maintain that all the changes should be part of transaction.
+
+So we create an object of transaction by:
+         Transaction tx = session.beginTransaction();
+ 
+          tx.close();
+
+
+----------------------------------------------------------------------------------------
+
+Alien.jaava:
+
+@Entity
+public class Alien {
+    @Id
+	private int aid;
+	private String  aname;
+	private String acolor;
+	public int getAid() {
+		return aid;
+	}
+	public void setAid(int aid) {
+		this.aid = aid;
+	}
+	public String getAname() {
+		return aname;
+	}
+	public void setAname(String aname) {
+		this.aname = aname;
+	}
+	public String getAcolor() {
+		return acolor;
+	}
+	public void setAcolor(String acolor) {
+		this.acolor = acolor;
+	}
+	
+
+}
+--------------------
+
+-> So we need to store the object in database so we have mention that this class is 
+   allowed to store its object in database.
+   this can be done by : @Entity - > belongs to javaPersistance package.
+
+-> Every table in hibernate shoukd have a primary key So we use 
+   @Id tag to mention it as a primary key.
+
+------------------------------------------------------------------------------------
+pom.xml file for dependencies:
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>Rahul.maven</groupId>
+  <artifactId>demoproject</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>demoproject</name>
+  <url>http://maven.apache.org</url>
+  <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+  
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+   <dependencies>
+  
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    
+    
+     <dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-core</artifactId>
+    <version>4.1.6.Final</version>
+   
+    </dependency>
+     <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>8.0.16</version>
+</dependency>
+    
+  </dependencies>
+  
+</project>
+
+
+-------------------
+-> dependencies are the jar files we required for application normally we download it from
+   internet and build path to it
+-> But in maven project we simply copy dependencies of our required jar files from
+   maven repository and place it in pom.xml file 
+-> so maven downloads our dependencies.
+
+
+
+-------------------------------------------------------------------------------------
+hibernate.cfg.xml :File:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.password">password</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/sql_hr</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hbm2ddl.auto">update</property>
+          <property name = "show_sql">true</property>
+<!-- here hbm2ddl.auto is used to create table ot update anything in databadse  -- >
+
+    </session-factory>
+</hibernate-configuration>
+-----------------------------------------
+
+-> here property tage name : hdn2ddl.auto helps us in creating new table and updating the 
+  tabel.
+->   <property name = "show_sql">true</property> gives us sql commands in console.
+
+------------------------------------------------------------------------------------------
+
+// Deprived class:
+
+MainClass:
+
+public class App 
+{
+    public static void main( String[] args )
+    {
+        Alien alien1 = new Alien();
+        alien1.setAid(2);
+        alien1.setAname("kkk");
+        alien1.setAcolor("green");
+        
+        Configuration  con = new Configuration().configure().addAnnotatedClass(Alien.class);
+        ServiceRegistry reg = new ServiceRegistryBuilder().applySettings(con.getProperties()).buildServiceRegistry();
+        		
+        		
+        SessionFactory sf=  con.buildSessionFactory(reg);
+        Session session =  sf.openSession();
+        org.hibernate.Transaction tx =  session.beginTransaction();		
+        session.save(alien1);
+        tx.commit();
+    }
+}
+------------------------------------------------------------------------------ 
+
+                  TABLE NAME:
+
+-> So basically the the class name of object will be default table name in databse
+
+-> but we can change it to our prefereed name by using @Entity annotation
+      i.e @Entity (name= "table_name");
+
+-> And we change tablename with @Table(name= "table_name");
+
+Here entity name and table name is to differnt things but we can change the table name 
+ with entity and with table annoatations.
+
+                  COLUMN_NAME:
+
+-> so when we create variabels of class that will be the name of column_name in database
+   but we can change it by using annotation 
+   i.e @Column(name: "column_name");
+
+ @Transient:
+->  If we use transient for column it wont be stored in databse 
+
+------------------------------------------------------------------------------
+
+*******************************************************************************************
+                    Fetching Data from databse:
+
+
+-> we create an object of class i.e   Alien alien1 = new Alien();
+
+-> and we use it:  alien1 = (Alien) session.get(Alien.class, 1);
+
+-> and print the element;
+
+------------------------------------------------------------------------------------------
+
+                                 Embedded Object: // using annotations:
+                                ---------------------
+
+EmployeeNAme.java : Class:
+----------------------------
+
+
+import javax.persistence.Embeddable;
+
+@Embeddable
+public class EmployeeName {
+
+	private String firstName;
+	private String lastName;
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	
+	
+}
+--------------------------------------
+Employee.java: Class:
+
+
+import javax.persistence.Id;
+
+@Entity
+public class Employee {
+	@Id
+	private int eid;
+	private EmployeeName ename;
+	private String department;
+	private int salary;
+	public int getEid() {
+		return eid;
+	}
+	public void setEid(int eid) {
+		this.eid = eid;
+	}
+	public EmployeeName getEname() {
+		return ename;
+	}
+	public void setEname(EmployeeName ename) {
+		this.ename = ename;
+	}
+	public String getDepartment() {
+		return department;
+	}
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+	public int getSalary() {
+		return salary;
+	}
+	public void setSalary(int salary) {
+		this.salary = salary;
+	}
+	@Override
+	public String toString() {
+		return "Employee [eid=" + eid + ", department=" + department + ", salary=" + salary + "]";
+	}
+	
+	
+
+}
+---------------------------------
+Company.java: File:
+
+
+public class Company {
+	
+	
+	public static void main(String[] args) {
+		
+		
+		
+		EmployeeName ename = new EmployeeName();
+		ename.setFirstName("varun");
+		ename.setLastName("kumar");
+		
+		Employee emp = new Employee();
+		emp.setEid(101);
+		emp.setEname(ename);
+		emp.setDepartment("construction");
+		emp.setSalary(20000);
+		
+		
+		Configuration con = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Employee.class);
+		
+		 ServiceRegistry reg = new ServiceRegistryBuilder().applySettings(con.getProperties()).buildServiceRegistry();
+		
+		SessionFactory sf = con.buildSessionFactory(reg);
+		
+		Session session= sf.openSession();
+		
+		Transaction tx = session.beginTransaction();
+		
+		session.save(emp);
+		
+		tx.commit();
+		
+		
+		
+	}
+------------------------------------------------------------
+-> if we want to add a name object with three fileds we should use
+          @Embeddable annoatation.
+
+----------------------------------------------------------------------------
+
+
+                    Fetching Data from Databse:
+
+Company.java .: Class:
+{
+	
+		Employee emp ;
+		
+		
+		
+		Configuration con = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Employee.class);
+		
+		 ServiceRegistry reg = new ServiceRegistryBuilder().applySettings(con.getProperties()).buildServiceRegistry();
+		
+		SessionFactory sf = con.buildSessionFactory(reg);
+		
+		Session session= sf.openSession();
+		
+		Transaction tx = session.beginTransaction();
+		
+//		session.save(emp);
+		
+		emp =(Employee) session.get(Employee.class, 101);
+		
+		tx.commit();
+		
+     	System.out.println(emp);
+     
+		
+		
+		
+	}
+
+
+-> we should have toString() method in both clsses and print the object.
+
+
+------------------------------------------------------------------------------------
+**********************************************************************************************
+
+                          Hibernate using XML Mapping:
+                   -----------------------------------------
+
+Example:
+
+Company.java:
+
+
+public class Company {
+	
+	
+	public static void main(String[] args) {
+		
+	
+	Employee emp = new Employee();
+	
+	emp.setEid(101);
+	emp.setEname("rahul");
+	emp.setDepartment("construction");
+	emp.setSalary(20000);
+		
+		
+		Configuration con = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Employee.class);
+		
+		 ServiceRegistry reg = new ServiceRegistryBuilder().applySettings(con.getProperties()).buildServiceRegistry();
+		
+		SessionFactory sf = con.buildSessionFactory(reg);
+		
+		Session session= sf.openSession();
+		
+		Transaction tx = session.beginTransaction();
+		
+	session.save(emp);
+		
+	//	emp =(Employee) session.get(Employee.class, 101);
+		
+		tx.commit();
+		
+		
+	}
+                 
+-------------------------------------------------
+
+Employee.java:
+
+ublic class Employee {
+	
+	private int eid;
+	private String ename;
+	private String department;
+	private int salary;
+	public int getEid() {
+		return eid;
+	}
+	public void setEid(int eid) {
+		this.eid = eid;
+	}
+	public String getEname() {
+		return ename;
+	}
+	public void setEname(String ename) {
+		this.ename = ename;
+	}
+	public String getDepartment() {
+		return department;
+	}
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+	public int getSalary() {
+		return salary;
+	}
+	public void setSalary(int salary) {
+		this.salary = salary;
+	}
+
+}
+---------------------------------------------
+Mapping with xml file:
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name = "package3.maven.demoproject.Employee" table = "Employee">
+      
+      <meta attribute = "class-description">
+         This class contains the employee detail. 
+      </meta>
+      
+      <id name = "eid" type = "int" column = "id">
+         <generator class="native"/>
+      </id>
+      
+      <property name = "ename" column = "first_name" type = "string"/>
+     <property name = "department" column = "department" type = "string"/>
+      <property name = "salary" column = "salary" type = "int"/>
+      
+   </class>
+</hibernate-mapping>
+
+-> if hbm.xml file is throwing errors use normal xml file and extend it with hbm.xml.
+
+------------------------------------------------------------
+
+hibernate.xfg.xml:
+
+---------------
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.password">password</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/sql_hr</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+      
+        <property name="hbm2ddl.auto">create</property>
+         
+        <property name = "show_sql">true</property>
+          <mapping resource="mapping.hbm.xml"/>  
+    </session-factory>
+</hibernate-configuration>
+-----------------------------------------------------------------------------------
+******************************************************************************************
+
+                                 AUTO DDL OPERATIONS:
+
+DDL operations:
+-> create table : 
+-> update table: 
+-> alter table
+-> drop table :
+-> truncate table
+-> rename tble
+
+
+
+**   <property name="hbm2ddl.auto">create</property>
+
+in conatiner class:
+--------------------
+
+Configuration con = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Employee.class);
+		
+ ServiceRegistry reg = new ServiceRegistryBuilder().applySettings(con.getProperties()).buildServiceRegistry();
+		
+SessionFactory sf = con.buildSessionFactory(reg);
+------------------------------------
+i.e Configuration con = new Configuration().configure("hibernate.cfg.xml")
+   cfg.configure();
+   cfg.buildSessionFactory();
+
+// creates automatically tables in databse
+
+
+It has four Auto ddl command:
+--------------------------------
+-> create : drop previous existing tables and create new tables.
+
+-> update:  If any table require it will create it or update in the existing tables.
+                 and adding new columns in table in existing tables.
+               -> alter table if exists
+               -> else cretates new table.
+    Draw back: if you already have table and alter one column i.e adding new column
+            that column must be not null column.  else it throws exceptions.
+   i.e if we already have data in table and we want to add new column and mention column as 
+       not null it throws exceptions.
+
+Note:update doesnt cretae new table.
+
+-> validate: checks mapping schema against table schema 
+       i.e it checks wether the table in dtabase has required columns that it has in mapping 
+            file
+        -> required columns must be present in table  in databse.
+
+-> create- drop: i.e drop - create- drop// mainly used for test purposes
+                  step 1: first drops existing tables
+                  step 2: then creates the table
+                  step3: drop existing table
+-> Session factory sf = new SessionFactory();
+ -> we have call sf.close(); -> it executes drop 
+
+
+
+How it works?
+--------------
+
+step 1:  first we create a bean class and do mapping for it[i.e mapping.hbm.xml file]
+
+Step2 : this mapping file is added to hibernate config file(hibernate.cfg.xml) by using   
+        resouce tag.
+
+Step3: if we want to add this into database
+
+Step4: we have crete a container class
+      i.e configuration cfg = new configuration();
+          cfg.configure("hibernate.cfg.xml);
+
+-> we have to load configuration fle(hibernate.cfg.xml) into container class
+
+-> then it will check if the two xml files are valid or not(config file and mapping file)
+
+Step 5:         cfg.buildSession Factory();
+
+-> then it creates table by dropping the existing tbale in datbase.
+
+-> this basically perfrms operations such as update, create, etc.
+
+----------------------------------------------------------------------------------------
+
+If want to use dfferent databases we have to change dialect, cfg.xml file and 
+ configure(cfg.xml);
+-----------------------------------------------------------------------------------
+                            CRUD OPERATIONS
+                          -----------------------
+                            
+
+1. CREATE:  for saving data in database//save//insert
+
+-> for insert data in table we have multiple methods
+
+1. save()
+2. persist()
+3. saveOrUpdate()
+
+save(): save() method return type is primary key value i.e any datatype of primarykey 
+        that to serializable primary key.
+
+persist(): doesnt have any return type.
+
+saveOrUpdate():if we already have data in table and we update data then it will update in table
+               by compating it with object and table data.
+        -> if the data is already present it will upadte if data is not present it will create
+        -> no return type.
+
+internally saveorupdate(): first performs select operations with primarykey on table in database
+                           then it compares it with object if both are same and checks all columns
+                           if no update requires nothing happens
+                           else updation takes place
+
+------------------------------
+
+Update Data: for updating data.
+
+-> for update we have multiple methods:
+
+1. update(); some time update method fails but we can use merge method it will update at a
+             any cost. return void
+-> when we try to read a data  from table and it is stored in session
+-> and when we try to perform update  using update() method it results in duplicate exception.
+ i.e update() method comares it with read object in session
+
+2. merge();  return void
+
+-> In case of merge() method.
+-> when we try to read data from table and at the same time perform update operation
+  using merge() it will dirctly update in databse not like update().
+
+Note: It is not possible to update  primary key but remaining constraints can be updated.
+     and complete record u need to update.
+
+3. saveorupdate();
+------------------------------
+Delete : for deleting data
+
+-> delete(); return void.
+
+--------------------------------
+
+Read: Select operations:
+
+methods of Selet operations are:
+--------------------------------
+1. get() -> return object
+
+-> get() method fire query to database when calling the method get();
+
+2.load() ->  return object
+
+-> load() method fire query to databse oly for non primary key attributes.
+
+Note: for select operations no trasation is required.
+
+
+
+
+------------------------------------------------------------------------------------------------
+
+                          Generator class in Hibernate:
+
+-> The <generator> class is a sub-element of id. It is used to generate the unique identifier 
+   for the objects of persistent class.
+
+1. Assigned: user is responsible for id ,(default):
+
+2.increment: automatically selects max id and increments it by one value.
+
+assigned
+increment
+sequence
+hilo
+native
+identity
+seqhilo
+uuid
+guid
+select
+foreign
+sequence-identity
+
+***************************************************************************************8
+
+                          HIBERNATE ANNOTATIONS:
+                     -----------------------------------
+
+-> @Entity: use to mark class as entity.Basically makes class as a table with attributes
+
+-> @Table: Used to change table details.
+           And we change tablename with @Table(name= "table_name");
+
+-> @Id : to make any attribute as primary key.
+
+-> @GeneratedValue : used to automatically increment primary key value .
+                     it has many features refer upp.
+                      @GeneratedValue(strategy=GenerationType.AUTO)  
+
+-> @Column: Can be used to to specify column mappings. for example to chnage the column name
+            in table.
+
+                  COLUMN_NAME:
+
+    so when we create variabels of class that will be the name of column_name in database
+   but we can change it by using annotation 
+   i.e @Column(name: "column_name");
+
+-> @Transient : to tell the hibernate not to include the field in table.
+
+-> @Temporal: tells hibernate the format in which the date needs to be saved.
+
+-> @Lob : tells hibernate this is a large object (i.e clob or blob)
+
+->@OneToOne , @OneToMany , @ManyToOne , @JoinColumn.
+
+
+
+
+
+
+------------------------------------------------------------------------------------------
+
+SQL Dialects in Hibernate
+----------------------------
+
+The dialect specifies the type of database used in hibernate so that hibernate generate 
+appropriate type of SQL statements. For connecting any hibernate application with the database,
+ it is required to provide the configuration of SQL dialect.
+
+<property name="dialect">org.hibernate.dialect.Oracle9Dialect</property>  
+
+-----------------------------------------------------------------------
+***********************************************************************************************
+                    INHERITANECE MAPPING:
+             ----------------------------------------
+
+
+There are three inheritance mapping strategies defined in the hibernate:
+
+1.Table Per Hierarchy
+2.Table Per Concrete class
+3.Table Per Subclass
+--------------------------------------------------------------------------
+
+Table Per Hierarchy: 
+------------------
+
+-> By this inheritance strategy, we can map the whole hierarchy by 
+   single table only.
+
+-> Here, an extra column (also known as discriminator column) is created 
+   in the table to identify the class.
+
+
+-> we can map entire hierarchy into single table 
+
+-> here an aextra column known as discriminator column is used , which specifies
+   what type of data it is.
+
+-> and we have to mention the name of it in each class 
+   and also it is property in main class.
+
+Hibernate.hbm.xml: mapping File:
+---------------------------
+
+
+<hibernate-mapping>  
+<class name="com.javatpoint.mypackage.Employee" table="emp121" discriminator-value="emp">  
+<id name="id">  
+<generator class="increment"></generator>  
+</id>  
+  
+<discriminator column="type" type="string"></discriminator>  
+<property name="name"></property>  
+            
+<subclass name="com.javatpoint.mypackage.Regular_Employee" discriminator-value="reg_emp">  
+<property name="salary"></property>  
+<property name="bonus"></property>  
+</subclass>  
+            
+<subclass name="com.javatpoint.mypackage.Contract_Employee" discriminator-value="con_emp">  
+<property name="pay_per_hour"></property>  
+<property name="contract_duration"></property>  
+</subclass>  
+            
+</class>  
+            
+</hibernate-mapping>  
+
+
+
+****************************************************************************************
+                       Table Per Concrete Class:
+                     ------------------------------
+
+-> In case of Table Per Concrete class, there will be three tables 
+     in the database having no relations to each other.
+
+-> we will have three seperate tables for each class but each class can extend another
+   class and hve its properties.
+
+
+Example:
+-------
+
+Employee class:
+-----------------
+-> id
+-> ename
+
+Reg_ emp class extends Employee class:
+----------------------------------------
+-> salary
+-> bonous
+
+ConctractEmployee Extends Employee class:
+----------------------------------------
+-> pay_per_hour
+-> duration
+
+Test.java:
+----------
+public class Test {
+
+	public static void main(String[] args) {
+		
+		Employee e = new Employee();
+		e.setEname("varun");
+		
+		Reg_Employee rg = new Reg_Employee();
+		rg.setSalary(20000);
+		rg.setBonus(200);
+		
+		Contract_Emp ce = new Contract_Emp();
+	    ce.setPay_per_hour(20);
+	    ce.setContractDuration("2months");
+		
+		
+		Configuration con = new Configuration().configure("hibernate5.cfg.xml");
+		
+		SessionFactory sf = con.buildSessionFactory();
+		
+		Session s = sf.openSession();
+		
+		Transaction tx = s.beginTransaction();
+		
+		s.save(e);
+		s.save(rg);
+		s.save(ce);
+		
+		tx.commit();
+		sf.close();
+
+	}
+
+}
+
+hiberante mapping file:
+-----------------------
+
+<hibernate-mapping>
+ 
+ <class name = "tablePerConcreteXml.Employee" table = "employeetable">
+ 
+ <id name ="Eid">
+ <generator class = "increment"></generator>
+ </id>
+ <property name = "Ename"></property>
+ 
+ <union-subclass name = "tablePerConcreteXml.Reg_Employee" table = "RegularEmployee">
+ <property name = "salary"></property>
+ <property name = "bonus"></property>
+ 
+ </union-subclass>
+ 
+ <union-subclass name = "tablePerConcreteXml.Contract_Emp" table = "ContractEmployee">
+ 
+ <property name = "pay_per_hour"></property>
+ <property name = "contractDuration"></property>
+ 
+ </union-subclass>
+ 
+ 
+ </class>
+ 
+ </hibernate-mapping>
+
+
+Note:
+
+-> It creates three sepearte tables for eeach class but parent class properties can be 
+   extended to child class.
+
+
+Table per Concrete Class using Annotation:
+-----------------------------------------------------
+
+Employee: class:
+----------------
+
+@Entity
+@Table (name ="Employee")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+
+public class Employee {
+	@Id
+	@GeneratedValue(strategy = GenerationType.TABLE)
+	@Column (name ="Eid")
+	private int Eid;
+	@Column (name ="Ename")
+	private String Ename;
+	
+	// genetrate getters an setters
+	
+
+}
+
+Contract_Employee:
+------------------
+
+
+@Entity
+@Table (name = "Concrete_Emp")
+@AttributeOverrides({
+	@AttributeOverride(name ="Eid", column = @Column),
+	@AttributeOverride(name = "Ename",column=@Column)
+})
+public class Contract_Emp extends Employee{
+	  @Column(name="pay_per_hour")  
+	private float pay_per_hour;
+	  @Column(name="contract_duration")  
+	private String contractDuration;
+	
+// generate getters and Setters.	
+	
+	
+}
+
+Regular_Employee:
+------------------
+
+@Entity
+@Table (name = "Reg_Employee")
+@AttributeOverrides({
+	@AttributeOverride(name ="Eid", column = @Column),
+	@AttributeOverride(name = "Ename",column=@Column)
+})
+public class Reg_Employee  extends Employee{
+	@Column(name="salary") 
+	private float salary;
+	@Column(name="bonus") 
+	private int bonus;
+	
+// generate getters and setters methods
+	
+	
+
+}
+
+Test Class:
+-------------
+
+public class Test {
+
+	public static void main(String[] args) {
+		
+		Employee e = new Employee();
+		e.setEname("varun");
+		
+		Reg_Employee rg = new Reg_Employee(0,"kk",23,44);
+		
+		
+		Contract_Emp ce = new Contract_Emp(0, "name",20,"2months");
+		
+		
+		Configuration con = new Configuration().configure("hibernate6.cfg.xml");
+		
+		SessionFactory sf = con.buildSessionFactory();
+		
+		Session s = sf.openSession();
+		
+		Transaction tx = s.beginTransaction();
+		
+		s.save(e);
+		s.save(rg);
+		s.save(ce);
+		
+		tx.commit();
+		sf.close();
+
+	}
+
+}
+
+Configuratin file:
+
+Note:
+
+-> use as it is above some wrongs in javatpoint.
+
+
+
+***************************************************************************************
+
+                       Table Per SubClass:
+                      ---------------------
+-> In case of Table Per Subclass, subclass mapped tables are related to
+   parent class mapped table by primary key and foreign key relationship.
+
+-> The <joined-subclass> element of class is used to map the child class 
+  with parent using the primary key and foreign key relation.
+
+-> In this type three tables are created where they have relation ship between them
+  by foreign key and primary key.
+
+TSC using XML:
+--------------
+
+Employee Class:
+--------------
+-> Eid
+-> Ename
+-> getter and setters
+
+Regular_Emp class:
+-----------------
+
+-> salary
+-> bonus
+-> getter and setter methods
+
+
+Contract_Employee  Class:
+-----------------------
+
+-> payperhour
+-> nooofhours
+-> getter and setter methods
+
+Test Class:
+---------
+-> create container
+-> create seddion factory
+-> open session
+-> transaction
+-> save session.
+
+
+Confiuration class:
+-------------------
+
+
+Hibernate mapping file: 
+---------------------
+
+<hibernate-mapping>
+
+<class name = "tableperSubClass.Employee" table = "Employee">
+<id name = "Eid" >
+<generator class = "increment"></generator>
+</id>
+<property name ="Ename"></property>
+
+<joined-subclass name = "tableperSubClass.Reg_Employee" table = "RegularEmployee">
+<key column="Eid"></key> 
+<property name = "salary"></property>
+<property name = "bonus"></property>
+</joined-subclass>
+
+<joined-subclass name = "tableperSubClass.Contract_Emp" table ="ContractEmployee">
+<key column="Eid"></key> 
+<property name = "pay_per_hour"></property>
+<property name = "contractDuration"></property>
+
+</joined-subclass>
+
+</class>
+
+
+</hibernate-mapping>
+
+
+---------------------------------------------------------
+
+                              TablePerSubClass using Annotation:
+                              -------------------------------------
+
+-> We need to specify @Inheritance(strategy=InheritanceType.JOINED) in the parent class 
+    and @PrimaryKeyJoinColumn annotation in the subclasses.
+
+Employee Class:
+----------------
+
+
+  
+@Entity  
+@Table(name = "employee103")  
+@Inheritance(strategy=InheritanceType.JOINED)  
+  
+public class Employee {  
+@Id  
+@GeneratedValue(strategy=GenerationType.AUTO)  
+      
+@Column(name = "id")  
+private int id;  
+  
+@Column(name = "name")  
+private String name;  
+  
+//setters and getters  
+}  
+
+
+Regular_Emp Class:
+-------------------
+
+  
+@Entity  
+@Table(name="regularemployee103")  
+@PrimaryKeyJoinColumn(name="ID")  
+public class Regular_Employee extends Employee{  
+      
+@Column(name="salary")    
+private float salary;  
+  
+@Column(name="bonus")     
+private int bonus;  
+  
+//setters and getters  
+}  
+
+Contract_Employee:
+--------------------
+
+import javax.persistence.*;  
+  
+@Entity  
+@Table(name="contractemployee103")  
+@PrimaryKeyJoinColumn(name="ID")  
+public class Contract_Employee extends Employee{  
+      
+    @Column(name="pay_per_hour")  
+    private float pay_per_hour;  
+      
+    @Column(name="contract_duration")  
+    private String contract_duration;  
+  
+    //setters and getters  
+}  
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------------------------------------
+******************************************************************************************
+
+                      Hibernate One TO One Mapping /Annotaion:
+                 ----------------------------------------------------
+
+-> onetoOne mapping creates a relationship between two tables using foreign key which is
+  not created by user.
+
+-> In such case, no foreign key is created in the primary table.
+
+-> One To one mapping is of unidirectional and bidirectional.
+
+Steps To Create OneTO OneMapping:
+-------------------------------
+
+ Question Class: 
+----------------
+
+-> int Qid;
+-> String Qname;
+   @OneTOOne
+-> Answer answer
+
+// generate geeters and setters.
+
+Answer Class:
+---------------
+
+-> int Aid;
+-> String Answer;
+
+// genea=rate getters and setters.
+
+Test.Class:
+----------
+
+
+Question q = new Question();
+
+q.setQid(1);
+q.setQname("what id java");
+
+Answer a = new Answer();
+a.setAid(1);
+a.setanswer("java is programming lang");
+
+q.setAnswer(a);
+
+// save question and answer.
+
+
+
+--------------------------
+this creates two tables in java 
+
+-> one with questions consists of attributes(Qid, Qname, Answer A_id);
+-> a seperate column is created for foreign key of answer in Question table.
+-> answer table consissts of attributes(Aid, Answer)
+
+----------------------------------------------
+
+Step 2: Inorder to make it bidirectional :
+
+Question Class: 
+----------------
+
+-> int Qid;
+-> String Qname;
+   @OneTOOne
+-> Answer answer
+
+// generate geeters and setters.
+
+Answer Class:
+---------------
+
+-> int Aid;
+-> String Answer;
+@OneToOne(mapped by ="answer");
+-> Question question;
+
+// genea=rate getters and setters.
+
+
+-> these generates two tables answer and question with join columns
+-> in order to display only one join column in question we use /mapped by in answer : in 
+  answer class
+**********************************************************************
+
+Requirements:
+-------------
+
+-> in order to establish a one to one relationship between two classes
+
+-> we need two perssistenat class emp and emp address
+
+->emp class has to have empaddress refrence object and should have one to one relationship.
+  i.e  
+@OneToOne(targetEntity=Address.class,cascade=CascadeType.ALL)  
+private Address address; 
+
+
+->this creates two tables 
+ employee table: with foreignkey to address table
+ emp_Address table: consists of address.
+
+-> and we have to configure hbm.xml mapping resources using
+ <mapping class = ""/>  -> instead of resource because we are using annotatons.
+-------------------------------
+
+Step:1 Create two persistant class employee and employee_Adress.
+
+Employee: :java.
+
+package com.javatpoint;  
+import javax.persistence.*;  
+  
+@Entity  
+@Table(name="emp220")  
+public class Employee {    
+      
+    @Id  
+    @GeneratedValue(strategy=GenerationType.AUTO)  
+    @PrimaryKeyJoinColumn
+  
+private int employeeId;    
+private String name,email;   
+ 
+@OneToOne(targetEntity=Address.class,cascade=CascadeType.ALL)  
+private Address address; 
+
+// generate getters and setters for every property.
+
+
+--------------------------
+
+Emp_address.java: File:
+
+
+package com.javatpoint;  
+import javax.persistence.*;  
+  
+@Entity  
+@Table(name="address220")  
+public class Address {    
+      
+    @Id  
+    @GeneratedValue(strategy=GenerationType.AUTO)  
+private int addressId;    
+
+private String addressLine1,city,state,country;    
+
+private int pincode;    
+  
+ // create getter and setter methods.
+
+----------------------------
+
+Test main:class
+
+public class Store {    
+public static void main(String[] args) {    
+      
+    StandardServiceRegistry ssr=new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();  
+    Metadata meta=new MetadataSources(ssr).getMetadataBuilder().build();  
+      
+    SessionFactory factory=meta.getSessionFactoryBuilder().build();  
+    Session session=factory.openSession();  
+      
+    Transaction t=session.beginTransaction();   
+      
+    Employee e1=new Employee();    
+    e1.setName("Ravi Malik");    
+    e1.setEmail("ravi@gmail.com");    
+        
+    Address address1=new Address();    
+    address1.setAddressLine1("G-21,Lohia nagar");    
+    address1.setCity("Ghaziabad");    
+    address1.setState("UP");    
+    address1.setCountry("India");    
+    address1.setPincode(201301);    
+        
+    e1.setAddress(address1);    
+    address1.setEmployee(e1);    
+        
+    session.persist(e1);    
+    t.commit();    
+        
+    session.close();    
+    System.out.println("success");    
+}    
+}    
+
+---------------------------------------------------------
+*****************************************************************************************
+                   OneTO Many // Many To one:
+                  ---------------------------
+
