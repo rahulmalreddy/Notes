@@ -1,0 +1,445 @@
+                                SPRING MVC PROJECT:
+                             -------------------------
+
+SETUP// Creating a spring mvc Project:
+
+-> create a maven project with arctype as web-app
+-> it creates a maven dynamic web project and if it shows any error in jsp page
+-> configure build path of the tomcat server i.e add libraries of tomcat server
+-> now add depenedency of spring mvc from maven rpeository into the web.xml file
+
+
+Steps To configure Spring mvc Project:
+---------------------------------------
+
+Step 1: Configure the dispatcher Servlet
+
+
+  <servlet>
+     <servlet-name>spring</servlet-name>
+     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+     <servlet-name>spring</servlet-name>
+     <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+-> it basically tells which url request to handle
+
+Step 2: create a spring configuration file
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:context = "http://www.springframework.org/schema/context"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans     
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   http://www.springframework.org/schema/context 
+   http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+  
+   
+  <context:component-scan base-package="springmvc.controller"/>
+  
+  <bean class ="org.springframework.web.servlet.view.InternalResourceViewResolver" name = "viewResolver">
+  <property name="prefix" value = "/WEB-INF/views/"  />
+  <property name ="suffix" value =".jsp"></property>
+  
+  </bean>
+
+</beans>
+
+Step 3: Configure View Resolver
+
+
+  <bean class ="org.springframework.web.servlet.view.InternalResourceViewResolver" name = "viewResolver">
+  <property name="prefix" value = "/WEB-INF/views/"  />
+  <property name ="suffix" value =".jsp"></property>
+
+Step 4: Create a controller
+
+Step 5: create a view to show(jsp page)
+
+
+
+                      Sending Data from Controller to view : 
+              ---------------------------------------------------
+
+-> this can be done by two ways
+    1. Model 
+    2. ModelAndView
+
+Model: 
+-------
+
+
+Methods:
+
+-> addAttribute(String Key, Object value);
+
+-> Object can be any thing int,collection,userdefineobject
+
+EG:
+Controller:
+
+	@RequestMapping("/home")
+	public String home(Model model)
+	{
+		System.out.println("printing");
+		model.addAttribute("name","Rahul Reddy");
+		model.addAttribute("id", 2000);
+		return "index";
+
+	
+//		List <String> friends = new ArrayList<String>();
+//		friends.add("varun");
+//		friends.add("kumar");
+//		model.addAttribute("f",friends);
+//	
+		
+	}
+
+JSP page:
+
+<h1> this is home page</h1>
+
+<%
+  String name = (String)request.getAttribute("name");
+  int id = (Integer)request.getAttribute("id");
+  // List<>= (List<String>)request.getAttribute("f");
+%>
+<h1>name is <%=name %></h1>
+<h1>Id is <%=id %></h1>
+
+<% for(String s:friends){
+%>
+<h1> <% = s %> </h1>
+
+
+
+
+
+ModelAndView:
+-------------
+
+Method:
+
+-> addObject(String key, Object value)
+
+-> Object can be any thing int,collection,userdefinedobject
+
+eg:
+
+@RequestMapping("/help")
+	public ModelAndView help()
+	{
+	
+		ModelAndView modelandview = new ModelAndView();
+		
+		modelandview.addObject("name","varun");
+		modelandview.addObject("id",2222);
+		
+		modelandview.setViewName("help");
+		
+		return modelandview;
+	}
+	
+	
+
+jsp page:
+
+<%
+String name = (String)request.getAttribute("name");
+int id = (Integer)request.getAttribute("id");
+
+%>
+<h1> this is help page</h1>
+<h1> name is <%=name %></h1>
+<h2> id is <%=id %></h2>
+
+</body>
+
+-------------------------------------------------------
+                        JSP Expression Language:
+                      --------------------------------
+
+-> Add jstl library for traversing
+
+-> and add <@ taglib prefi="c" .....>
+   from net
+
+-> we can print values in jsp page without using request.getAttribute by simply
+   using 
+
+** <%@ page isELIgnored = "false" %>
+
+and using: ${name }
+
+Eg:
+
+<%@ page isELIgnored = "false" %>
+
+<h1> this is help page</h1>
+<h1> name is <%--<%=name %> --%>  ${name }</h1>
+<h2> id is <%--<%=id %> --%> ${id }</h2>
+
+<c:forEach var ="items" items ="${marks }">
+
+<h1> ${items }
+</h1>
+
+</c:forEach>
+
+</body>
+
+
+
+                 Sending Data from view to Controller: 
+               ------------------------------------------
+
+->** always give relative path in form action
+   ie. action = "processform"   not : action = "/processform"
+
+
+-> in order to send data from view to controller we use @RequestParam("viewparametername") String variable
+
+ex:
+
+Controller:
+
+
+	@RequestMapping("/login")
+	public String login()
+	{
+		return "login";
+	}
+	
+	@RequestMapping(path="/processform",method=RequestMethod.POST)
+	public String processform(@RequestParam("fname") String fname,
+			                  @RequestParam("mail") String mail,
+			                  @RequestParam("password") String password,
+			                  Model model)
+	{
+		System.out.println(fname);
+		System.out.println(mail);
+		System.out.println(password);
+		
+		model.addAttribute("name", fname);
+		model.addAttribute("mail",mail);
+		model.addAttribute("password",password);
+		return "success";
+	}
+
+Login page:
+
+<form action="processform" method="post" >
+       <label for= "fname">FirstName:</label><br>
+       <input type = "text" id = "fname" name = "fname"><br>
+       
+        <label for= "fname">mail id:</label><br>
+       <input type = "text" id = "mail" name = "mail"><br>
+       
+        <label for= "fname">Password:</label><br>
+       <input type = "text" id = "password" name = "password"><br>
+       
+       <input type ="submit" value ="submit">
+       
+       </form>
+
+Success page:
+
+<h1> Thankyou for logging in</h1>
+
+<p> yourr name is ${fname }</p>
+<p> your email is ${mail }</p>
+<p> your password is ${password  }</p>
+
+---------------------------------------------------------------------
+Without Model Attribute:
+---------------------------
+
+1. --> we need to get all the parameters from form to controller using @RequestParam
+2. --> then we need to create an object for entity class(model) to store all the data coming
+       from view 
+3. ---> then we need to create a model object to add all the parameters of the view page 
+        to access them in another view page
+
+** and a entity class with getter and setters
+
+EG:
+@RequestMapping("/login")
+public String login()
+{
+	return "login";
+}
+
+@RequestMapping(path="/processform",method=RequestMethod.POST)
+public String processform(@RequestParam("fname") String fname,
+		                  @RequestParam("mail") String mail,
+		                  @RequestParam("password") String password,
+		                  Model model)
+{
+//	System.out.println(fname);
+//	System.out.println(mail);
+//	System.out.println(password);
+	
+	User user = new User();
+	user.setFname(fname);
+	user.setMail(mail);
+	user.setPassword(password);
+	
+//	model.addAttribute("name", fname);
+//	model.addAttribute("mail",mail);
+//	model.addAttribute("password",password);
+	
+	model.addAttribute(user);
+	return "success";
+}
+
+Jsp page:
+
+<h1> Thankyou for logging in</h1>
+
+<p> yourr name is ${user.fname }</p>
+<p> your email is ${user.mail }</p>
+<p> your password is ${user.password  }</p>
+
+
+                       @ModelAttribute:
+                      ---------------------
+
+-> can be used in two ways:
+
+Use 1:
+--------
+-> but now with @ModelAttribute:
+
+-> here @ModelAttribute 
+     -> replaces the @RequestParam for fetching data
+     -> and it  stores data of view in entity object
+     -> and it adds the entity object to Model which then can be accessed in view pages
+
+Controller :
+
+@RequestMapping(path="/processform",method=RequestMethod.POST)
+	public String processform(@ModelAttribute User user,
+			                  Model model)
+	{
+        
+		return "success";
+	}
+
+Jsp page:
+
+<h1> Thankyou for logging in</h1>
+
+<p> yourr name is ${user.fname }</p>
+<p> your email is ${user.mail }</p>
+<p> your password is ${user.password  }</p>
+
+Model:
+
+create a model class with same names as of view page to map and store it in model class
+
+
+USE 2:
+-------
+-> Here with the help of @ModelAttribute we can use the common values in any methods:
+
+eg:
+
+
+	@ModelAttribute
+	public void common(Model m)
+	{
+		m.addAttribute("Header","these is LoginPage");
+		m.addAttribute("Desc","these is description page");
+	}
+	
+	
+	@RequestMapping("/login")
+	public String login(Model m)
+	{
+//		m.addAttribute("Header","these is LoginPage");
+//		m.addAttribute("Desc","these is description page");
+		
+		return "login";
+	}
+	
+	@RequestMapping(path="/processform",method=RequestMethod.POST)
+	public String processform(@ModelAttribute User user,
+			                  Model model)
+	{
+
+       System.out.println(user);
+		
+
+		return "success";
+	}
+
+Jsp Pages:
+
+login:
+
+<h1>${Header}</h1>
+<p> ${Desc }</p>
+<form action="processform" method="post" >
+       <label for= "fname">FirstName:</label><br>
+       <input type = "text" id = "fname" name = "fname"><br>
+       
+        <label for= "fname">mail id:</label><br>
+       <input type = "text" id = "mail" name = "mail"><br>
+       
+        <label for= "fname">Password:</label><br>
+       <input type = "text" id = "password" name = "password"><br>
+       
+       <input type ="submit" value ="submit">
+       
+       </form>
+
+Succes:;
+
+<body>
+<h1> Thankyou for logging in</h1>
+<hr>
+<h1> ${Header}</h1>
+<p> ${Desc }</p>
+
+<p> yourr name is ${user.fname }</p>
+<p> your email is ${user.mail }</p>
+<p> your password is ${user.password  }</p>
+
+</body>
+
+-> here we only created Header an Desc in common method using @Model Attribute and accessed
+   it in evry method
+
+
+
+
+-----------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

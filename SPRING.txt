@@ -314,7 +314,7 @@ public void setEvmodel(String evmodel) {
 		this.cost = cost;
 	}
 
-	//	public EvCar(String evmodel, int cost) {
+	//	public EvCar(String evmodel, int cost) {1
 //		
 //		this.evmodel = evmodel;
 //		this.cost = cost;
