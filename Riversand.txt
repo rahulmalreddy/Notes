@@ -1,0 +1,436 @@
+                         Riversand:
+                     ---------------------
+
+https://riversand.atlassian.net/wiki/spaces/RIKB8V/pages/365330562/Business+rule+collection
+-> business rule refernce link:
+
+Base Data Model:
+----------------
+
+
+
+
+
+
+
+
+
+Refernce data Model:
+---------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ascend:   Data Modelling:
+------------------------
+
+Entity: Entity are things which are mastered in rp
+
+eg:   item
+      Bundle
+      customer
+      vendor
+
+Attributes: properties describing variuos enties or relationships
+ 
+Eg:  
+Customer:   customerid, name, billing address, shippingid
+
+
+Relationships: are links between two differnt entity types
+
+Eg: 1.  bundle contains shirt and jeans
+    2. is child of   : parentitem ------------> item
+                                   is child of
+    3. has images
+    4. frequently brought together
+
+
+EAR Mapping: 
+
+-> EAR allows u to map entites with attributes and relationships
+-> attributes to relationships known as relationship based attributes
+-------------------
+-> riversand supports 7 entity types by default
+
+
+1. Entity :
+ Eg: item, bundle, customer, vendor item.
+
+2. Attributes:
+-> consider a shirt entity has various attributes i.e color, size, description
+   brand etc.
+
+3. Relationships:
+  -> the link between two differnt entity types:
+
+
+Attribute data types:
+------------------------
+Datatype                Display type              validations 
+
+1. String -------  textbox/textarea/rich text     minlength/maxlength/multi values
+
+2.Decimal            TectBox                      rangefrom/rangeto/precision                
+                      20.25 
+
+3.integer
+
+4.boolean           dropdown
+
+5. date
+
+6.date time
+
+7. list of values
+
+
+      Relationships:
+       --------------
+
+EAR Model:
+----------
+
+
+-------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Master Data Management:
+------------------------
+
+MasterData: Master data represent people,places or things that an organization . //nouns
+
+Transaction Data: represents the evnet in which the master data participates in.  //verbs
+
+-> transaction data will be highly volataile
+-> master data will be consistent.
+
+** the goal of MDM is to provide synchronization to the most critical pieces of information stored in 
+   different locations in company.
+Step 1: provides a focal point which is Master Data.
+Step 2: produce the plumming to synchronize the data between the master data and different data pieces
+Step 3: Data quality // to assure the data getting synchronized is correct.
+
+Product Information Management:
+-------------------------------
+
+
+
+Riversand Platform overview:
+ ---------------------------
+
+-> riversand is a Saas based platform.
+-> riversand mdm is used to manage complete information lifecycle of an item. 
+   dataonboarding --> management ---> syndicate 
+
+
+                 Data Modelling:
+           ------------------------
+
+
+1. Entity :
+ Eg: item, bundle, customer, vendor item.
+
+2. Attributes:
+-> consider a shirt entity has various attributes i.e color, size, description
+   brand etc.
+
+3. Relationships:
+  -> the link between two differnt entity types:
+
+
+Attribute data types:
+------------------------
+Datatype                Display type              validations 
+
+1. String -------  textbox/textarea/rich text     minlength/maxlength/multi values
+
+2.Decimal            TectBox                      rangefrom/rangeto/precision                
+                      20.25 
+
+3.integer
+
+4.boolean           dropdown
+
+5. date
+
+6.date time
+
+7. list of values
+
+
+      Relationships:
+       --------------
+
+EAR Model:
+----------
+
+
+
+
+-------------------------------------------------------
+       Data governance:
+
+-> data governance is sued to ensure required information is 
+   avalable and accurate
+-> is of two types:
+
+1. process ---> workflows and business functions
+
+2. Data -----> data model level constraints/rules
+               business rules
+               business conditions
+               workflow related rules
+
+Workflow:
+ -> helps stream line and automate repeatable business tasks,
+    minimmizing room for errors
+-> is a sequence of actioons and conditions defining a business
+   process
+-> is also a series of stages an entity goes through to
+   achieve the final process or result
+
+
+Busines function:
+-> provides a sequential guided approach to perform a task
+-> helps users to navigate the process correctly and provide
+mandatory attributes and relationship information
+-> provides info to the user abut the stage at which the 
+   entity is in the process
+
+data model:
+-> determines the structure of all data objects(or entities)
+ of the organization and ensures that they are represented 
+  accurately
+-> determines how data can be stored and accessed
+-> data governence at data model u ca specify certain rules
+  and constraints
+
+Business Condition:
+-> logical condition
+
+RBL:
+-----
+
+IIF(): 
+
+syntax: IIF(boolean_Excpression, true_value, false_value)
+
+ITERATE Keyword:
+
+for looping state,ents:
+
+
+Expression:
+-------------------
+ BODMAS order:
+
+operators:
+
+Keywords:
+----------
+-> Native : 
+-> core: to build business rules
+       
+-> govern service keyword:
+-> post process kwywords:
+-> content genration keywords
+
+
+Data Govenanace: 
+-----------------
+
+-> drive smarter decision making
+-> accuracy and completness of info
+-> dynamic data governance
+-> adv entity intospection
+
+three types;
+-> data model level rules
+-> adv brs for computation and validation
+->workflow related rules
+
+same as above governace concepts
+
+entity goes through entity process while created , updated
+
+governace model:
+----------------
+-> business rules
+-> business conditions
+-> governance context
+-. governance mapping
+
+
+1.b
+2.d
+3.A
+4. b
+5.a
+
+
+---------------------------------------------------------
+   Workflow and business process:
+-----------------------------------
+
+5 types of workflow actions: computation and validation
+  Exit criteria: this action ensures workflow cannot exit 
+                  until it satisfies one or more business 
+                   conditions
+  skip criteria:is used to skip a step of workflow if it satisfies
+                 oone or mode BC
+  activity entry:this action is used to execute BR and BC when
+                  entity enters the step
+  activity exit : execute br and bc when an entity exits a step
+
+ resume: this option is used to automatically trigger a workflow
+          transition
+         
+Steps:
+
+   Step1:
+   Step 2:  create business rule
+   step 3: Map BR with Business Condition
+   Step 4: create workflow context
+   step 5: create governance mapping
+
+Exit Criteria:
+-------------
+  cannot exit a workflow unless BR or Bc satisfies:
+
+Skip Criteria:
+--------------
+   whwen all the Br and Bc are satisfied
+
+--------------------------------------------------------------
+     Data Vizualization and Reporting:
+    --------------------------------------
+
+Entity summary Reports:
+---------------
+-> the repor dispalys all the entities tht are distributed across entities types
+-> we can add filter according to entity type, relationship etc
+Widgets:
+-> enity types: describes all the entity types
+-> Hierarchy Details: No of entity types available in each hierarchy
+-> context:
+-> relationships:
+-> created users:
+-> modified users:
+-> Entity List : displays all the entties of entity type.
+
+Data Quality Report:
+--------------------
+-> allows us to view entites based on various business conditions
+Widgets:
+-> Total Business rule failure
+-> Rule type
+-> Attribute view of errors
+-> entity type
+-> BC
+-> Govern Entity list
+
+Workflow SLA Report:
+-------------------
+-> displays the analysis of entity workflow in realworld
+
+Trend Report:
+--------------
+-. displayed to only system admin
+-> enables us to analyse the trend of data complienece and 
+ export entites for give period of timee
+
+
+           UI Configuration:
+          -------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------------
+          API:
+           -----
+
+       Entity App Service:
+ -------------------------
+
+
+----------------------------------------------------------
+         Data Integeration:
+      -----------------------
+
+-> content onboarding app allows u for upstream and downstrea,
+
+Import the profile to download digitalasset automatically:
+-------------------------------------------------------
+
+Step1: define collect,trasform, and publish in import profile
+Step2:define overides and upload profile
+Step3: define collect,transform and publish to download assets
+Step4: upload the json.
+-----------------------------------------------------------------------------------------
+
+
+                     POSTMAN API
+                  --------------------
+
+
+-----------------------------------------------------------------------------------------
+                     Schedular:
+            --------------------------------
+
+Link:
+
+https://riversand.atlassian.net/wiki/spaces/RIKB8V/pages/578322490/How+to+setup+the+schedule+for+entity+export
+

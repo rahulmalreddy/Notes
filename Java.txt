@@ -1142,7 +1142,7 @@ ie. Exception is top in hierarchy i.e child class cannot declare Ecxception unle
     different ways
 
 -> **In other words, polymorphism allows you define one interface and have multiple implementations. 
-
+y3
 -> Polymorphism is of two types:
                 1. Compiletime Polymorphism[Static polymorphism][ method overloading]
                 2. Runtime Polymorphism
@@ -1772,6 +1772,555 @@ Disaadvantages: IT increases waiting time.
 
 -----------------------------------------------------------------------------
                          
+
+                    Lambda In java 1.8:
+             --------------------------------------
+
+-> Every method in a an interface is known as abstract void method 
+
+Functional interface : means having only one abstarct method in an interface.
+
+Syntax: -> 
+
+
+
+Eg:  Normal polymorphic implemetation
+
+@FunctionalInterface
+interface Cab{
+  void bookCab();
+}
+
+class UberX implements Cab{
+ public void bookCab(){
+    System.out.println("uberx is booeked");
+   }
+}
+public class LamdaApp{
+ public static void main(String[] args){
+  Cab cab = new Uberx();
+  cab.bookCab();
+}
+}
+
+Eg2 : by using anonymous class Implementation:
+
+ @FunctionalInterface
+interface Cab{
+  void bookCab();
+}
+
+public class LamdaApp{
+ public static void main(String[] args){
+ 
+   // Anonymous class implementation
+  Cab cab  = new Cab(){
+  @override
+  public void bookCab(){
+    System.out.println("uberx is booeked");
+}
+};
+  cab.bookCab();
+}
+
+Eg3 : Using lambda concept:
+  
+ 
+ 
+@FunctionalInterface
+interface Cab{
+  void bookCab();
+}
+
+public class LamdaApp{
+ public static void main(String[] args){
+  Cab cab = () -> {
+   System.out.println("Uberx is booked");
+   };
+   cab.bookCab();
+}
+}
+
+---------------------
+ Lambda PArameters and can have return value:
+------------------ 
+  zero paraemters
+  one parameters
+  Multiple parametrs
+
+
+Eg:
+
+
+ 
+@FunctionalInterface
+interface Cab{
+  double bookCab(String source, String Destination);
+}
+
+public class LamdaApp{
+ public static void main(String[] args){
+  Cab cab = (Source, Destination) -> {
+   System.out.println("Uberx is booked"+Source+" to "+Destination+");
+   return 22.5;   
+};
+  double temp = cab.bookCab("hyd" , " nalgonda" );
+System.out.println(temp);
+
+}
+}
+
+
+--------------------------------
+Variable: 
+----------------
+
+-> java lambda expression can access variables that are declared outside the lambda 
+   function body under certain cercumstances
+
+Local variable
+instance vvariable
+Static variable
+
+
+EG:
+
+
+ 
+@FunctionalInterface
+interface Cab{
+  void bookCab();
+}
+
+public class LamdaApp{
+    int instancenum =10;
+   static String staticname = "rahul;
+ 
+ public static void main(String[] args){
+  Cab cab = () -> {
+    int localvariablevalue =20
+   System.out.println("Uberx is booked");
+
+   System.out.println(localvariblevalue);
+
+   System.out.println(instancenum);
+
+   System.out.println(LambdaApp.staticname);
+   };
+   cab.bookCab();
+}
+}
+
+-----------------------------------------
+
+********************************************************************************
+Topics:
+
+ -> lambda Expressions:
+ -> Functional interfaces:
+          --> every method inside an interface is an public abstract method and 
+              variables are public static variables applicable for 1.7 version
+          -> from 1.8 we can declare concrete methods in 1.8 version known 
+             as default methods
+          ->  we can even declare static methods inside interface from 1.8
+
+   Prdefined Functional Interfaces:
+ ----------------------------- ---
+   -> Predicate is  an predefined functinal interface
+   -> function is  an predefined functinal interface
+   -> consumer is  an predefined functinal interface
+
+
+-> :: operators
+      -> used for method refernce and constructor refernce by double colon operator
+
+** java 1.8 is introduced to enable functional programming concepts through 
+   lambdas.
+**  to enable parallel processing:
+
+
+--> lambda function is an anaonymus function(i.e it is not having any name)
+    not having return type, modifiers,name is known as lambda functions.
+
+example: 1
+
+   public void run() 
+      {
+        s.o.p.ln("hello world");
+       }
+
+
+lambda function: 
+       () -> { s.o.p.ln("hello world");  }
+       () ->  s.o.p.ln("hello world");  
+
+example 2: 
+    
+     public void add(int a, int b) 
+      {
+        s.o.p.ln(a+b);
+       }
+
+  
+   (int a, int b) -> {  s.o.p.ln(a+b); }
+
+example 3: 
+
+    public void square(int n) 
+      {
+        return n*n;
+       }
+
+   (n) -> { return n*n;}
+
+   n -> n*n;
+ -> because we have only one parameter
+ -> and only one statement so no curly brases
+ -> and only one return value.
+
+-> in some context compiler will be able to know the type of parameter
+   also.
+
+
+ Conclusions:
+ ---------------
+  -> a lambda expression can have any number of paramaters
+ -> for one argument lambda expression paarenthesis are optional
+ -> based on context compiler can guess type of parameter
+ -> if body containd more than one statement then paraetesis are mandatory.
+
+Now How to call or invoke lambda expression: ?
+ --------------------------------------
+***
+-> in order to call a lmbda expression we need to use concept of Functional Interfaces
+
+ Functional Interfaces: An interface which conatins single abstract method
+                        are known as functional interfaces.
+   But functinal interface can contain any number of default and static methods.
+
+-> some of normal interfaces: 
+      -> Runnable  ==> run()
+         Callable  ==> call()
+         Camaparable ===>compareTo()
+           -> these interfaces contain only one abstarct method so they are 
+                functional Interfaces
+     
+      ->   serializable, Random Access,clonable,singlethread
+           -> these interfaces doesnt contain any method is called marker interfaces
+***
+->To indicate a Interface explecitlly as functional interface there is an anotation
+   known as @FunctionalInterface
+
+-> all the default and static methods are default  has public access modifiers
+----------------
+
+@FunctionalInterface vs inheritence:
+ --------------------------
+ ex: @FunctionalInterface
+       interface A
+        {
+          public void m1() ;      --------> abstract method
+        }
+        @FunctinalInterface
+       interface B extends A 
+         {
+          }
+ -> ** these is valid because interface B extends interface A so it has all the4
+       properties that interface A has 
+      
+eg:  @FunctionalInterface
+       interface A
+        {
+          public void m1() ;      --------> abstract method
+        }
+        @FunctinalInterface
+       interface B extends A 
+         {
+           public void m1();
+          }
+  ---> this is valid functional interfaces
+
+eg: @FunctionalInterface
+       interface A
+        {
+          public void m1() ;      --------> abstract method
+        }
+        @FunctinalInterface
+       interface B extends A 
+         {
+           public void m2();
+          }
+-> this is invalid because in interface B we are having one abstract method and
+   also another abstract inherited method so it is invalid.
+
+how to call lambda expression:
+-------------------------
+      we can call lamda expression only using functional interface:
+
+
+   example:
+ 
+              interface interf 
+                 {
+                  public void m1();
+                  }
+              class Demo implenets intref
+                {
+                  public void m1()
+                   {
+                     s.o.p.ln("m1 implenetation");
+                    }
+                 }
+                class test
+                   {
+                     public static void main(String[] args)
+                       {
+                        Demo d = new Demo();
+                          d.m1();
+                         }
+                        }
+
+o/p: m1 implementation      here we basicalli create an object of demo class and  
+                             call the method using the object.
+
+ 
+        example 2: 
+                  
+              
+              interface interf 
+                 {
+                  public void m1();
+                  }
+              class Demo implenets intref
+                {
+                  public void m1()
+                   {
+                     s.o.p.ln("m1 implenetation");
+                    }
+                 }
+                class test
+                   {
+                     public static void main(String[] args)
+                       {
+                       intref i = new Demo()
+                          i.m1();
+                         }
+                        }
+
+o/p": m1 implenetation
+-> here parent class refernce is used to call the child class
+-> that is we can take the refernce of Interface and the call it.        
+
+
+By using lamda expression: we can reduce it :
+-------------
+        So basically we can have only declare the method in interface but 
+ we need to have an implenetation class to implenet the methods but with
+ the help of lamda expressiona nd functional interface we can directly implement
+ the method without any immplenetation class.
+
+
+ex: 
+                interface interf 
+                 {
+                  public void m1();
+                  }
+            
+                class test
+                   {
+                     public static void main(String[] args)
+                       {
+                        intref i = () -> { S.o.pln("m1 implentation");}
+                           i.m1();
+                         }
+                   }
+
+o/p: m1 implentation   
+        
+example 3:
+
+                interface interf 
+                 {
+                  public void add(int a ,int b);
+                  }
+            
+                class test
+                   {
+                     public static void main(String[] args)
+                       {
+                        intref i = (a,b) -> { S.o.pln("the sum is "+ (a+b));}
+                           i.add(10,20);
+                         }
+                   }
+
+
+o/p: the sum is 30
+
+example : 4:
+  
+             interface interf 
+                 {
+                  public void add(int a ,int b);
+                  default void m1()
+                   {
+                    s.o.p.ln("m1 implementation");
+                   }
+                   static void m2()
+                    {
+                      s.o.p.ln("m2 implementation");
+                    }
+                  }
+                class test
+                   {
+                     public static void main(String[] args)
+                       {
+                        intref i = (a,b) -> { S.o.pln("the sum is "+ (a+b));}
+                         i.add(10,20);
+                         i.m1();
+                         interf.m2(); ---->  * static methods should be called using
+                                                 interface name
+                         }
+                   }
+
+o/p: the sum is 30 
+     m1 implementation
+     m2 implementation
+********************************************************************
+
+
+
+
+*************************************************************
+
+                    STREAMS:
+                 -------------------
+
+Collection:If we want to represent a group of objects as single 
+           entity we go for collection
+
+Stream: IF we want to process objects from collection then we 
+        should go for Stram concept.
+
+-> Stream s = c.stream() 
+  here c is collection.
+
+-> stream is an Interface present in java.util.stream.pkg.
+
+-> if you want to filter the collectuion object according to condition use
+   filter() method.
+Eg:
+ java.util.*;
+ java.util.stream.pkg;
+ class Test{
+  public static void main(String[] args)
+  {
+  ArrayList<Integer> list = new Arraylist<Integer>();
+  list.add(1);
+  list.add(2);
+  list.add(3);
+  list.add(4);
+  list.add(5);
+  list.add(6);
+  System.out.println(list);
+  ArrayList<Inetegr> updatedList =  list.stream().filter( i->i%2==0).collect(Collectors.toList());
+  
+  // here stream() method gets all the objects in list
+  // and filter filters the  objects according to our requirement 
+  // and collect(Collectors.toList()) collets the list 
+
+  System.out.println(updatedList);
+}
+}
+
+o/p": 1,2,3,4,5,6
+      1,2,4,6
+
+---------------------------
+
+-> if we want make changes(perform operation) to each and every object in collection 
+   we can use map();
+
+Eg:
+
+
+java.util.*;
+ java.util.stream.pkg;
+ class Test{
+  public static void main(String[] args)
+  {
+  ArrayList<Integer> list = new Arraylist<Integer>();
+  list.add(1);
+  list.add(2);
+  list.add(3);
+  list.add(4);
+  list.add(5);
+  list.add(6);
+  System.out.println(list);
+  ArrayList<Inetegr> updatedList =  list.stream().map( i->i+5).collect(Collectors.toList());
+  
+  // here stream() method gets all the objects in list
+  // and filter filters the  objects according to our requirement 
+  // and collect(Collectors.toList()) collets the list 
+
+  System.out.println(updatedList);
+}
+}
+
+o/p": 1,2,3,4,5,6
+      6,7,8,9,10,11
+
+----------------------------------
+
+filter(Predicate) --> Predicate return value will always be a boolean
+map(Function) --> return int or another datatype.
+
+**count() : if you want to count the no of the objects according to a condition
+            we can go woth the count().
+
+Eg:
+
+ class Test{
+  public static void main(String[] args)
+  {
+  ArrayList<Integer> list = new Arraylist<Integer>();
+  list.add(1);
+  list.add(2);
+  list.add(3);
+  list.add(4);
+  list.add(5);
+  list.add(6);
+  System.out.println(list);
+  long  noofElements=  list.stream().filter( i->i<5).count();
+ 
+  System.out.println(noofElements);
+}
+}
+
+
+o/P:  4
+
+-----------------------------------------
+
+sorted(): if you want to sort all the objects in collection we go with sorted();
+
+-> for custom sorting we can use 
+
+eg: 
+
+ArrayList<Integer> list = new Arraylist<Integer>();
+  list.add(1);
+  list.add(2);
+  list.add(3);
+  list.add(4);
+  list.add(5);
+  list.add(6);
+  System.out.println(list);
+
+ArrayList<Integer> updatedlist=  list.stream().sorted((i1,i2)->((i1<i2)?1:(i1>i2)?-1:0)).collect(Collectors.toList());
+
+System.out.println(updatedlist);
+
+o/p: 6,5,4,3,2,1
 
 
 

@@ -257,6 +257,7 @@ s.op.ln(b.id+""+b.name+""+);}
 map.put("abc" ,1) -> Key, value pair
 map.put("abs" ,2) - >
 
+
 -> this creates hashcode
    i.e hashcode = hash(key);
 -> hashcode helps us to store the key/value  in specific index.

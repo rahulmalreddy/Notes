@@ -1,0 +1,598 @@
+
+
+VirtualMAchine: A virtual machine is just like traditional computer we can install which
+                os or software we need.
+
+AppService: App sevice is automated verison of vm . you simply upload your code and it 
+          diploys the application for you.
+
+Functions: functions in azure have server less acrchiture and ment to execute the background
+           tasks.
+          -> will not deploy the application but performs background tasks.
+
+Object storage: Object storage, also known as object-based storage, is a strategy that
+ manages and manipulates data storage as distinct units, called objects. These objects
+ are kept in a single storehouse and are not ingrained in files inside other folders.
+  Instead, object storage combines the pieces of data that make up a file, adds all
+   its relevant metadata to that file, and attaches a custom identifier.
+
+Blob Storage:
+---------------
+
+
+----------------------------------------------
+
+-> batch account
+-> resource group
+-> storage
+--------------------------------------------------------------------------------------
+                        AZURE BATCH:
+                     ------------------
+
+
+-> azure batch is a service in which you can distribute your workload
+   within multiple nodes in your environment and you can specify what jobs
+  you want to execute.
+
+-> Azure Batch to run large-scale parallel and high-performance computing
+   (HPC) batch jobs efficiently in Azure. Azure Batch creates and 
+    manages a pool of compute nodes (virtual machines), installs the
+    applications you want to run, and schedules jobs to run on the nodes.
+
+-> Batch works well with intrinsically parallel (also known as "embarrassingly parallel")
+   workloads. Intrinsically parallel workloads have applications which can
+   run independently, with each instance completing part of the work. 
+   When the applications are executing, they might access some common data,
+   but they don't communicate with other instances of the application. 
+   Intrinsically parallel workloads can therefore run at a large scale, 
+
+eg: Software test execution
+    VFX and 3D image rendering
+    Image analysis and processing
+
+-> You can also use Batch to run tightly coupled workloads, where the applications 
+   you run need to communicate with each other, rather than running independently. 
+  Tightly coupled applications normally use the Message Passing Interface (MPI) API.
+
+
+** cpmputer nodes are the VMs that execute your tasks. 
+** When you add tasks to a job, the Batch service automatically schedules the tasks
+   for execution on the compute nodes in the pool.
+
+
+
+Azure Batch:
+------------
+Steps:
+-> firstly we have to create a resource group
+-> then create a storage account
+-> now create a batch account.
+-> in the batch account click application and name it ffmpeg and select the zip file
+-> here we upload our application.
+-> 
+
+
+
+
+
+     Overview of BAtch Api and tools:
+ ---------------------------------------------
+
+->  Your client application or service can use the Batch APIs to communicate
+     with the Batch service. With the Batch APIs, you can create and manage 
+     pools of compute nodes, 
+
+-> You can efficiently process large-scale workloads for your organization,
+ or provide a service front end to your customers so that they can run jobs
+ and tasks--on demand, or on a schedule--on one, hundreds, or even thousands
+ of nodes.
+
+-> Azure batch has two set of API 1. service-level and Management level 
+
+-> Only actions from the management APIs are tracked in the activity
+ log. Service level APIs bypass the Azure Resource Management layer
+ (management.azure.com) and are not logged.
+
+Appliation Failures & Errors:
+ -----------------------
+
+-> the Batch service writes standard output and standard error output to 
+  stdout.txt and stderr.txt files in the task directory on the compute node. 
+
+-----------------------------------------------------------------------
+********************************************************************
+Batch service workflow and resources: 
+       ------------------------------
+
+ steps:
+
+  1.Upload the data files that you want to process to an Azure Storage account. 
+     Batch includes built-in support for accessing Azure Blob storage, and your
+      tasks can download these files to compute nodes when the tasks are run.
+  
+  2. Upload the application files that your tasks will run. or use application
+       managment in batch to upload application
+
+  3. Create a pool of compute nodes. 
+
+  4. Create a job. A job manages a collection of tasks. You associate each job 
+      to a specific pool where that job's tasks will run.
+
+  5. Add tasks to the job. Each task runs the application or script that you 
+     uploaded to process the data files it downloads from your Storage account.
+     As each task completes, it can upload its output to Azure Storage.
+
+------------------------------------------
+  Batch Account and Storage Accounts:
+       --------------------------
+  -> An Azure Batch account is a uniquely identified entity within the Batch 
+     service. Most Batch solutions use Azure Storage for storing resource files 
+    and output files, so each Batch account is usually associated with a 
+    corresponding storage account.
+
+ -> All processing and resources are associated with a Batch account.
+ 
+ ->  When your application makes a request against the Batch service, it 
+    authenticates the request using the Azure Batch account name, 
+    the URL of the account, and either an access key or an Azure Active Directory
+    token.
+
+     Storage Account:
+       -------------
+ 
+  -> Most Batch solutions use Azure Storage for storing resource files 
+    and output files. For example, your Batch tasks (including standard tasks, 
+    start tasks, job preparation tasks, and job release tasks)
+
+     Nodes and pools:
+       ---------------
+  
+  -> refer to doc.
+
+    Jobs and Tasks :
+      -----------------
+
+   -> A job is a collection of tasks. It manages how computation is performed by
+        its tasks on the compute nodes in a pool.
+   
+   -> job priority: You can assign an optional job priority to jobs that you
+                     create. The Batch service uses the priority value of the
+                      job to determine the order of scheduling (for all tasks
+                       within the job) wtihin each pool.
+
+   -> job manager task: Your client application can add tasks to a job, or you
+ can specify a job manager task.
+      ->  A job manager task contains the information that is necessary to create 
+          the required tasks for a job, with the job manager task being run on one 
+          of the compute nodes in the pool. 
+      -> The job manager task is handled specifically by Batch; it is queued
+          as soon as the job is created and is restarted if it fails. 
+     **-> A job manager task is required for jobs that are created by a job
+          schedule, because it is the only way to define the tasks before 
+          the job is instantiated.
+
+       Tasks:
+      ---------
+   -> A task is a unit of computation that is associated with a job.
+      It runs on a node. and is part of job
+  
+      when you create a task you can specify following:
+        *  commandLine
+          1. resource files: 
+          2. environment variables:
+          3. constraints
+          4. applicaton package
+          5. container image
+ 
+         Start Task:
+          -----------
+        -> By associating a start task with a pool, you can prepare the operating
+            environment of its nodes. i.e setting up application,
+             enivornmet settings,
+        -> The start task runs every time a node starts, 
+
+         *** Batch limits the total size of a start task, which includes 
+             resource files and environment variables. 
+
+          Job Manager Task:
+          ------------------
+
+        -> A job manager task is started before all other tasks. 
+
+          Environment settings for tasks
+           -----------------------------
+        -> Each task executed by the Batch service has access to environment 
+          variables that it sets on compute nodes. 
+  
+        -> This includes environment variables defined by the Batch service
+         (service-defined and custom environment variables that you can define
+         for your tasks
+       
+        -> You can set custom environment variables at the task or job level
+            by populating the environment settings property for these entities
+
+
+  Files and Directories:
+  ---------------------
+ 
+   -> In Azure Batch, each task has a working directory under which it can create
+     files and directories. This working directory can be used for storing 
+     the program that is run by the task, the data that it processes,
+      and the output of the processing it performs.
+  
+  -> Tasks can access the root directory by referencing the 
+     AZ_BATCH_NODE_ROOT_DIR environment variable.
+  
+         The root directory of tasks: 
+               applications: Tasks can access this directory by referencing
+                              the AZ_BATCH_APP_PACKAGE environment variable.
+               fsamounts  : AZ_BATCH_NODE_MOUNTS_DIR 
+               shared 
+               startup
+               volatile
+               workitems
+     
+
+************************************************************************
+
+Manage Job and Tasks:
+ ----------------------
+
+ preparation and job release tasks:
+       --------------------------
+      An Azure Batch job often requires some form of setup before its tasks 
+      are executed, and post-job maintenance when its tasks are completed. 
+
+->  You might need to download common task input data to your compute  
+    nodes, or upload task output data to Azure Storage after the job complete
+
+-> You can use job preparation and job release tasks to perform these operations.
+
+what are job preparation and relese tasks ?
+
+  Before a job's tasks run, the job preparation task runs on all compute nodes
+ scheduled to run at least one task. 
+  Once the job is completed, the job release task runs on each node in the pool 
+ that executed at least one task
+
+--------------------------------------------------------------------------------------------------
+          AZURE Storage:
+           --------------
+
+Storage: Storage is used to store objects which are random in nature for example videos
+         music files etc.
+
+Database: Datbase are used for data or records which are more related to each other
+          wich may change with time and can be updated.
+
+
+-> ** Firstle create a storage account in azure.
+-> ** After creating storage account we can choose what type of service we need.
+
+Containers : are folders that we have inside a blob.
+
+Core storage services: 
+
+-> Azure Blob : is a servcie that stores unstructured data in the cloud as aobjects/blobs
+                Blob storage can store any type of text or binary data, such as socuments,media file, or
+                application installer. It is also referred as Object Storage
+                -> firstly create a storage account
+                -> then choose service as blob service
+                -> then create a container for storing the data/ objects
+                -> we can accesss the data in blob by using link from anywhere in the world
+
+-> Azure Queues : Queus storage is a service for storing large number of messages that can be accessed
+                  from anywhere in the world via authenticated calls using http or https . 
+                   -> A single queue msg can be upto 64 kb in size and queue can contain millions of msg
+                   -> firstly we have create a storage account then create a new queue in it.
+                   -> now your the request from your website can be stored in queue service until it 
+                      is processed
+                   -> once the process is done it is deleted. 
+                   -> but we have to give key and connection string in your code so that your applocation
+                      can connect with the azure queue service.
+
+** with the example of image proceesing app many people can upload the files at one they all are stored in images 
+   in blob and the text is stored in queue for the processing.
+   
+
+
+-> Azure Files (File System) :A File Storage share is an SMB file share in azure . All directories and files must be
+                              created in aparent share. an account can contain an unlimted number of shares, and a 
+                              share can store an unlimted number of files, upto 5tb total capacity of the file share.
+                             -> firstly we have to create a File system directory in azure storage with name and quota(Storage)
+                             -> now click on connect we will get a link now copy the link
+                             -> in your virtual machine open map network drive 
+                             -> ad give the details such as folder and username and key
+                        
+-> Azure Tables :the azure table storage services store large amounts of structured data. the service is a nosql database
+                  which accepts authenticated calls from inside and outside from azure cloud. azure tables are ideal
+                  for storing structures and non relational data. 
+                 -> firstly create a table srvice in storage account
+                 -> now copy the connection string and call the api to upload the data.
+                 -> partition key : when we try to uplad data they are stored in different nodes(Servers)
+                     these nodes are identifed  by using  partition key.
+                 -> Row Key: In the table every row has to be uniquely identifed thsese can be doone by using
+                      rowkey. 
+                 -> if we give a differnt column the azure table automatically creates it without any 
+                    intervention from us. 
+
+
+-> Azure Disks
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+                                    AZURE FUNCTIONS:
+                               ----------------------------
+
+-> Azure Functions is a serverless solution that allows you to write less code, 
+   maintain less infrastructure, 
+->  Azure Functions provides "compute on-demand"
+-> Azure Functions allows you to implement your system's logic into readily
+    available blocks of code. These code blocks are called "functions".
+
+Azure Functions:
+    Azure Functions is a serverless application platform. It allows developers
+    to host business logic that can be executed without provisioning 
+    infrastructure
+
+-> functiona are event driven that means they only run in response to any events
+    -> events can be of any types like http req
+    -> storage queue etc.
+
+---------------------------
+
+Durable functions:
+       Durable Functions is an extension of Azure Functions that lets you write
+       stateful functions in a serverless compute environment.
+
+Function chaining:
+       In the function chaining pattern, a sequence of functions executes in a
+       specific order. In this pattern, the output of one function is applied
+       to the input of another function.
+      -> You can use Durable Functions to implement the function chaining
+         pattern concisely
+   
+
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------
+                                       AZURE KEYVAULT:
+                        ------------------------------------------------
+
+-> Key vault serves as a tore of cryptographic keys amd secrets, such as
+   autentication keys, storage account keys, data encryption keys, PFX and
+   any password.
+
+-> Normally we do it in wen.config file but it can be viewed by everyone 
+   so we use Azure keyvault.
+
+-> Keys
+-> Secrets
+-> certificaates
+
+Steps:
+
+-> click on + icon and search for keyvault app
+-> give necessray details and create
+
+
+*** Azure Key Vault provides a way to store credentials and other secrets 
+with increased security. But your code needs to authenticate to Key Vault 
+to retrieve them. Managed identities for Azure resources help to solve 
+this problem by giving Azure services an automatically managed identity 
+in Azure Active Directory (Azure AD). 
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------
+                                        Azure Event Grid Subscriptions:
+                                 --------------------------------------------
+** Fully managed event routing servce:
+
+-> Azure event grid allows for uniform event consumption using a publish subscriobe model
+   allowing react to relevent events across both azure and non azure services in 
+   real time fashion.
+
+KeyConcepts:
+
+Event:  What happened// if somethhing happens
+
+Event Source:  where event took place 
+               ->  Bllob storage, resource group, azure subscriptions,
+                    event hubs, iot hub,azure maps etc
+
+Topic :  the endpoint where publishers send events
+
+Event subscription: whenever an event comes into topic you can subscribe
+                    and handle those events within your application
+
+Event handlers: Those are the applications that handle those subscriptions
+                 and the event that are coming from them
+          eg:  serverless code -> az functions
+               serverless workfolw and integration : logic apps
+               buffering and competinf consumers : event hubs, Storage queues etc
+               other serveices and applications: 
+
+
+  Event Source  -->           Event Grid         ----->  Event handlers   
+    Event                 Topic ---> Subscription 
+
+
+USe cases: 
+
+-> when an event occours in blob storage  we can react with event grid and process
+   it according to our requirement
+
+-> Application Integration: we can integrate our application using concept
+   called event grid topics.
+
+
+Demo Example:
+---------------
+** For the event occoured in blob Storage in logic app:
+
+-> firstly create a storage account and a resource group.
+-> Event grid is default we dont have to create anything.
+-> now create a logic app and 
+->> now create a container in blob storage account which we upload a file
+-> ** and we have to check event grid is registered
+     subscrotions--> visual studio enetrprise --> resource provdoers-->event grid(in search)
+
+-> Now go to logic app start and select blank application use event grid
+-> ** we need to set filters if we want to react for event in only one conatiner.
+
+
+Custom Event:
+----------------
+** for custom event we should use event grid topic 
+
+-> search for event grid and select create topic and create it.
+    now we can see event grid topic in resource group
+
+-> Now go to logic app and create an logic app go to resource and select http request
+     to send some custom event to our event grid topic
+   -> now select azure event grid publish and publish event grid
+   -> In here give connection name 
+   -> and also end point
+   -> ssa token(access key in grid topic) which we created previoulsy.
+   -> once that is done we can send event to topic
+
+** but no one is listenting to events we have create an subscrption
+
+-> now createsubscription in event grid topic and give it a name.
+    -> slect type of end point in case of logic app go with webhook
+    -> now create a logic app to listen to event
+    -> and select http request and copy url.
+
+-> now go back to subscription and give url at end point.
+
+
+** now if you run the first logic app it will send event to topic and then 
+   to subscription to logic app.
+
+** we can have multiple subscriptions for one topic.
+
+
+ 
+
+-> and select azure event grid publish
+-> 
+
+
+
+
+********************************************************************************
+  Azure Event Grid:
+ ---------------------
+ -> Azure Event Grid allows you to easily build applications with event-based 
+    architectures.
+ 
+ -> First, select the Azure resource you would like to subscribe to, 
+ -> and then give the event handler or WebHook endpoint to send the event to. 
+ ->  Event Grid has built-in support for events coming from Azure services, 
+     like storage blobs and resource groups.
+ ->  Event Grid also has support for your own events, using custom topics.
+
+  -> Event sources: are the place where an event occured:
+      Eg:
+         Azure Blob Storage
+         Azure Communication Services
+         Azure Container Registry
+         Azure Event Hubs
+
+  -> Event Handlers: Are the ones which handles the events
+         eg:
+         Azure Automation
+         Azure Functions
+         Event Hubs
+         Relay Hybrid Connections
+         Logic Apps
+         Power Automate (Formerly known as Microsoft Flow)
+         Service Bus
+         Queue Storage
+         WebHooks
+
+
+->Between these two comes the Event Grid:
+
+Event Filters:
+-------------
+ -> By default, all event types for the event source are sent to the endpoint. 
+
+ ->You can decide to send only certain event types to your endpoint.
+ 
+ ->  For example, you can get notified of updates to your resources,
+     but not notified for other operations like deletions. 
+
+ -> In that case, filter by the Microsoft.Resources.ResourceWriteSuccess
+ 
+ -> Provide an array with the event types, or specify All to get 
+    all event types for the event source.
+
+   eg: "filter": {
+  "includedEventTypes": [
+    "Microsoft.Resources.ResourceWriteFailure",
+    "Microsoft.Resources.ResourceWriteSuccess"
+  ]
+}
+
+    Subject Filtering:
+      -------------
+   -> you can also specify to filter on the basis of .txt ending or anyting
+
+   -> or belongigng to specific container  by specifying the path.
+
+eg: "filter": {
+  "subjectBeginsWith": "/blobServices/default/containers/mycontainer/log",
+  "subjectEndsWith": ".jpg"
+}
+
+    Advanced Filtering:
+       --------------
+  
+     -> refer doc.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

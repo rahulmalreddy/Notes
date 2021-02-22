@@ -1,0 +1,280 @@
+                XML:  Extensible MArkup Language.
+             --------- 
+
+-> xml consists of: 
+   ->  elements
+   ->  attributes
+   ->  Entity references
+
+
+elment eg: <Employee>
+           <Name>rama</Name>
+           <Salary>10000</salary>
+           <Emplyee>
+
+here employeee,name,salary are elements :
+
+-> Elemenets contsins:
+         -> child elements
+         -. attributes
+         -> text data
+         -> mix of all
+
+Attribute: the attribute is used to extra information of element.
+--------
+ ex:
+     <employee empno="101" name="kk" > </employee>
+
+->  here empno ,name are attributes.
+-> attributes are similar of child elements
+
+
+Entity Refernces:
+ ---------------
+
+eg:
+
+ <employee>
+ <name> rahul </name>
+ <age> age is less than &lt; 18 </age>
+ <employee>
+
+  -> in the place of < we should use &lt; to make it as <
+  -> there are 5 entity refernces default:
+        1. &lt;  <
+        2. &gt;  >
+        3. &amp; &
+        4. &apos; '
+        5. &quot; "
+
+ -> we can create our custom own entity refernce:
+************************************************************************************************
+
+ What is Schema?
+  -> A schema is a "Structure", and the actual document or data that is represented through the
+     schema is called "Document Instance".
+
+
+-> We can define the structure of xml document through 3 types:
+Document Type Definition (DTDs)
+XML Schema Definition (XSD)
+XML Data Reduced (XDR) -proprietary to Microsoft Technology
+
+
+What is XSD?
+
+-> XSD provides the syntax and defines a way in which
+   elements and attributes can be represented in a XML document.
+
+-> It also advocates that the given XML document should be of a specific format
+    and specific data type.
+
+
+
+Data types in XSD:
+ ---------------------
+                                 Datatypes
+                                    |
+                SimpleTypes                        ComplexTypes
+                    |                                    |
+ Userdefined types     Built in(44)          1.Empty    2.simplecontent      3.ComplexContent
+        |                |                                                          | 1.sequence
+                                                                                      2.choice
+1.automic            1.primitive                                                      3.all
+2.nonautomic         2.Derived 
+
+
+BuiltIn Types: 
+ ------------
+    -> 19 Primitive
+    -> 25 Derived
+
+
+
+XSD Elements:
+ --------------
+
+-> XSD Elements are 2 types:
+      1. Simple elements
+      2. Compllex elements
+
+   Simple elements:
+   ---------
+   -> it doesnt containa any chid elements:
+      eg: 
+            <name> rahul </name>
+            <age> 22 </age>
+ 
+            or
+
+       <element name ="empno" type = "int"/>
+
+   Complex elements:
+   -------------
+    -> if an element cosists of attributes or child elements it is known as Complextype
+   eg: 
+    <employee >
+      <name> rahul </name>
+      <age> 22</age>
+   <employee>
+ 
+          complex elements can be: 
+                > elements with text data and attributes
+               -> elements with empty contenet and attributes
+               -> elements with with child elements nd/or attribute  
+               -> elements with mixed content and/or attributes           
+
+ 
+
+
+
+
+
+
+
+Example of XML and XSD:
+
+Xml:
+
+<?xml version="1.0" ?> 
+<Employees xmlns="http://www.abccorp.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.abccorp.com/employee.xsd"> 
+ <Employees>
+ <Employee> 
+ <SSN>737333333</SSN> 
+ <Name>ED HARRIS</Name>
+ <DateOfBirth>1960-01-01</DateOfBirth>
+ <EmployeeType>FULLTIME</EmployeeType>
+ <Salary>4000</Salary>
+ </Employee>
+ </Employees>
+
+xsd:
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"> 
+ <xsd:element name="Employee" minOccurs="0" maxOccurs="unbounded">
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element name="SSN="xsd:string>
+    <xsd:element name="Name" type="xsd:string"/>
+    <xsd:element name="DateOfBirth" type="xsd:date"/>
+    <xsd:element name="EmployeeType" type="xsd:string"/> 
+    <xsd:element name="Salary" type="xsd:long"/> 
+   </xsd:sequence>
+  </xsd:complexType> 
+ </xsd:element> 
+</xsd:schema>
+
+
+Schema Decleration:
+
+ -> For an XSD Schema, the root element is <schema>. The XSD namespace'
+   declaration is provided with the <schema >to tell the XML parser that
+   it is an XSD Schema.
+
+ -> <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+ -> The namespace that references an XSD Schema is the W3C recommended
+   version of XSD. The "xsd:" prefix is used to make sure we are dealing 
+   with XSD Schema, but any prefix can be given.
+
+ -> Element Declaration
+
+"Element" is the important part of the schema because it specifies the kind 
+ of information. The following element declaration in our example 
+  is going to deal with Employee information.
+
+<xsd:element name="Employee" minOccurs="0" maxOccurs="unbounded">
+
+-> some of basic data types:
+   xsd:string
+   xsd:int
+   xsd:date
+
+-> With the help of simple types we can define uder defined data types:
+
+<xsd:simpleType name="ssnumber">
+ <xsd:restriction base="xsd:string"> 
+    <xsd:length value="11"/> 
+    <xsd:pattern value="\d{3}\-\d{2}\-\d{4}"/> 
+ </xsd:restriction>
+</xsd:simpleType>
+
+-> <xsd:pattern value="\d{3}\-\d{2}\-\d{4}"/>
+
+To explain the pattern,
+
+-> \d{3} specifies that there should be three characters in the start. 
+       Followed by two characters after the first "-" 
+    and finally followed by four characters after the second "-".
+
+-> now we can use <xsd:element name="SSN= type ="xsd:ssnumber>
+
+
+-> now if we need it to specific element not for global scope:
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+ <xsd:element name="Employee" minOccurs="0" maxOccurs="unbounded">
+   <xsd:complexType> 
+     <xsd:sequence>
+       <xsd:element name="SSN="xsd:string>
+            <xsd:simpleType> 
+            <xsd:restriction base="xsd:string">
+            <xsd:length value="11">
+            <xsd:pattern value="\d{3}\-\d{2}\-\d{4}"/>
+            </xsd:restriction>
+            </xsd:simpleType> 
+        <xsd:element name="Name" type="xsd:string"/> 
+        <xsd:element name="DateOfBirth" type="xsd:date"/> 
+        <xsd:element name="EmployeeType" type="xsd:string"/> 
+        <xsd:element name="Salary" type="xsd:int"/> 
+      </xsd:sequence> 
+    </xsd:complexType>
+   </xsd:element> 
+</xsd:schema>
+
+
+*** Now we can also restict the data by givivng options and
+    should choose only from them other than that becomes invalid.
+
+Let's validate further by adding a "FullTime" or "PartTime"Employee Type element.
+
+To provide the validation, we should create a Simple Element Type
+  called "emptype".
+
+<xsd:simpleType name="emptype">
+   <xsd:restriction base="xsd:string">
+       <xsd:enumeration value="fulltime"/> 
+       <xsd:enumeration value="parttime"/> 
+   </xsd:restriction>
+ </xsd:simpleType>
+
+The above schema will successfully create a Simple Type element with
+  base type as "string" data type. The enumeration values are specified 
+  in enumeration attributes, which will basically restrict within two values.
+
+eg:
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"> 
+  <xsd:element name="Employee" minOccurs="0" maxOccurs="unbounded"> 
+    <xsd:complexType>
+       <xsd:sequence> 
+         <xsd:element name="SSN="xsd:ssnumber> 
+         <xsd:element name="Name" type="xsd:string"/>
+         <xsd:element name="DateOfBirth" type="xsd:date"/> 
+         <xsd:element name="EmployeeType" type="xsd:emptype"/>
+         <xsd:element name="Salary" type="xsd:int"/> 
+       </xsd:sequence> 
+    </xsd:complexType>
+  </xsd:element> 
+ <xsd:simpleType name="ssnumber"> 
+  <xsd:restriction base="xsd:string">
+   <xsd:length value="11">
+   <xsd:pattern value="\d{3}\-\d{2}\-\d{4}"/> 
+  </xsd:restriction>
+ </xsd:simpleType> 
+ <xsd:simpleType name="emptype"> 
+   <xsd:restriction base="xsd:string"> 
+     <xsd:enumeration value="fulltime"/>
+     <xsd:enumeration value="parttime"/>
+    </xsd:restriction>
+   </xsd:simpleType> 
+</xsd:schema>

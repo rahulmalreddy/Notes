@@ -17,6 +17,33 @@ Types of White Box Testing:
 4. Memory Testing
 5. Response Time
 
+
+Path Testing:
+-------------
+-> In the path testing, we will write the flow graphs and test all independent paths. 
+   Here writing the flow graph implies that flow graphs are representing the flow of 
+   the program 
+
+Loop Testing:
+-------------
+-> In the loop testing, we will test the loops such as while, for, and do-while, etc.
+    and also check for ending condition if working correctly and if the size of the conditions is enough.
+
+Condition /Testing:
+------------------
+-> In this, we will test all logical conditions for both true and false values; that is, we will verify
+   for both if and else condition.
+
+Memory Testing:
+--------------
+-> Testing based on the memory (size) perspective
+
+Response Testing;
+---------------
+-> Test the performance (Speed, response time) of the program
+
+
+
 Note: White box testing is not responsible to make the applcaton stable.It is done by the
       developers for their own satisfaction.
    -> white box testing is also known as glass box testing. or transparent testing.
@@ -250,7 +277,7 @@ Downward Scalabilty testing:
 
 5. Soak Testing:
 ----------------
-       Checking the ebhaviour of an app in an unsuppory=tive environment is known as
+       Checking the ebhaviour of an app in an unsupporytive environment is known as
    soak testing
    EG:  4gb ram , 5 gb....... 
   -> the testing should be done in 4gb ram , 500gb. if we reduce it will not work 
@@ -848,6 +875,9 @@ Exploratory Testing:
    Whenever there is no clear requirement or no requirement in such case the test 
    engineers go for exploratory testing
 
+-> Exploratory testing is a hands-on approach in which testers are 
+   involved in minimum planning and maximum test execution. 
+
 -> In exploratory testing the TE explore the similar existing applications to create
   the necessary test documnet and use them to test the application 
 
@@ -857,7 +887,233 @@ Exploratory Testing:
 We will create test document for exporiatory testing by exploring the similar 
   existing applications.
 
+------------------------------------------------------------------------------------
+
+                                   Regression Testing:
+                               -------------------------
+
+-> Regression testing is a black box testing techniques. It is used to authenticate a 
+   code change in the software does not impact the existing functionality of the product.
+   Regression testing is making sure that the product works fine with new functionality,
+    bug fixes, or any change in the existing feature.
+-> 
+
+Smoke Testing:
+-----------------
+
+-> smoke testing is performed ater initail build to check wether core functionalities are
+    working fine.
+**
+-> It is a broad approach to testing where all parts of the application are tested.
+
+->In the smoke testing, we only focus on the positive flow of the application and enter
+   only valid data, not the invalid data. In smoke testing, we verify every build is 
+   testable or not; hence it is also known as Build Verification Testing.
+
+Advantages of smoke testing:
+
+It is a time-saving process.
+In the early stage, we can find the bugs.
+It will help to recover the quality of the system, which decreases the risk.
+It is easy testing to perform because it saves our test effort and time.
+
+ Sanity Testing:
+-----------------
+
+-> Sanity testing performed at the time of receiving software build
+   (with minor changes in code) from the development team. The purpose of 
+   sanity testing is to ensure that all the defects have been fixed and
+   no further issues come in existence due to these changes. 
+
+ ->  It's a kind of regression testing with a focus on a few impacted functionalities only.
+**
+-> It is a narrow approach to testing where specific parts of the application are tested.
+
+-> Sanity testing can be done without test cases or scripts.
+
+UseCase Testing:
+-----------------
+
+-> use case testing is a functional block box testing that helps the testers to identify
+   the test scenerios that exercise the whole system on eah transaction basis from start 
+   to end. 
+
+
+            Static Testing / Dynammic Testing:
+        -----------------------------------------
+
+Static Testing:
+
+-> In static testing, we will check the code or the application without executing the code.
+
+-> Static testing includes activities like code Review, Walkthrough, etc.
+
+-> Static testing is a Verification Process.
+
+Dynamic Testing:
+
+-> In dynamic testing, we will check the code/application by executing the code.
+
+-> Dynamic testing includes activities like functional and non-functional
+   testing such as UT (usability testing), IT (integration testing), 
+   ST (System testing) & UAT (user acceptance testing).
+
+-> Dynamic testing is a Validation Process.
+
+-> Dynamic testing is used to find and fix the defects.
+
+                 Alpha Testing / Beta Testing:
+           -------------------------------------------
+
+Alpha Testing:
+
+-> Alpha testing is a type of acceptance testing, which is performed to identify 
+   all possible bugs/issues before releasing the product to the end-user.
+
+-> Alpha testing performed by a team of highly skilled testers who are usually
+   the internal employee of the organization.
+
+-> Alpha testing performed at the developer's site; it always needs a 
+  testing environment or lab environment.
+
+-> Alpha testing performed before the launch of the product into the market.
+
+Beta Testing:
+
+-> Beta Testing is a type of acceptance testing; it is the final test 
+   before shipping a product to the customers. Beta testing of a 
+   product is implemented by "real users "of the software 
+   application in a "real environment." 
+
+-> In this phase of testing, the software is released to a limited number 
+  of end-users of the product to obtain feedback on the product quality.
+
+->Beta testing performed by clients or end-users in a real-time 
+  environment, who is not an employee of the organization.
+
+-> Beta testing doesn't need any lab environment or the testing environment; 
+   it is performed at a client's location or end-user of the product.
+
+                Quality Assurance / Quality control:
+               ---------------------------------------
+
+Quality Assurance:
 
 
 
 
+
+
+*********
+-> Let us see the seven different testing principles, one by one:
+
+ 1.Testing shows the presence of defects
+ 2.Exhaustive Testing is not possible
+ 3.Early Testing
+ 4.Defect Clustering
+ 5.Pesticide Paradox
+ 6.Testing is context-dependent
+ 7.Absence of errors fallacy
+
+-> Defect Clustering: When a small number of modules contains most of the bugs detected 
+                       or show the most operational failures. 
+
+-> Pesticide Paradox: If the same tests are repeated over and over again, eventually
+                      the same test cases will no longer find new bugs.
+
+-> Absence-of-errors is a fallacy
+   If your software or system is unusable (or does not fulfill users' wishes) then it
+    does not matter how many defects are found and fixed – it is still unusable.
+
+     Software Testing LifeCycle:
+     ----------------------------
+
+ 1.Requirement Analysis
+ 2.Test Plan Creation
+ 3.Environment setup
+ 4.Test case Execution
+ 5.Defect Logging
+ 6.Test Cycle Closure
+
+***
+Build:
+--------
+-> build is a stand alone artifact generated after converting source code into
+   to an executable code that can be run on a computer.
+
+Release:
+---------
+
+-> It is the distribution of final version of application.
+
+****
+Test Suite:
+--------------
+-> In software development, a test suite, less commonly known as a 'validation suite', 
+   is a collection of test cases that are intended to be used to test a software 
+   program to show that it has some specified set of behaviours.
+
+TestCase:
+-------------
+-> A TEST CASE is a set of actions executed to verify a particular feature or
+  functionality of your software application. A Test Case contains test steps,
+  test data, precondition, postcondition developed for specific test scenario 
+  to verify any requirement. 
+
+TestScenerio:
+----------------
+-> A Test Scenario is defined as any functionality that can be tested. It is 
+  a collective set of test cases which helps the testing team to determine
+   the positive and negative characteristics of the project.
+
+                        Bug Life Cycle:
+                     ------------------
+
+                                                     Close
+                                                       | Fixed properly
+           New/open ----> Assigned ------>fixed ----->Retest
+                                                        | not fixed properly
+                                                      reopen
+
+-> As soon as the test engineer finds the bug, status is given as New, which 
+    indicates that a bug is just found.
+
+-> This new bug needs to be reported to the concerned Developer by changing 
+   the status as Assigned so that the responsible person should take care of 
+    the bug.
+
+-> Then the Developer first go through the bug, which means that the Developers
+    read all the navigation steps to decide whether it is a valid bug or not.
+
+-> Based on this, if the bug is valid, the Developer starts reproducing the
+   bug on the application, once the bug is successfully reproduced, the 
+   Developer will analyze the code and does the necessary changes, 
+    and change the status as Fixed.
+
+-> Once the code changes are done, and the bug is fixed, the test engineer 
+   re-test the bug, which means that the test engineer performs the same 
+  action once again, which is mentioned in the bug report, and changes 
+   the status accordingly:
+
+-> Close, if the bug fixes properly, and functionally working according to 
+  the requirement.
+
+OR
+
+-> Re-open, if the bug still exists or not working properly as per the 
+   requirement, then the bug sends it back to the Developer once again.
+
+-> This process is going on continuously until all the bugs are fixed and closed.
+
+
+
+
+           Software Developments Models:
+           --------------------------------
+
+Agile Methodology:
+-----------------
+-> AGILE methodology is a practice that promotes continuous iteration of 
+   development and testing throughout the software development lifecycle 
+   of the project. In the Agile model, both development and testing 
+    activities are concurrent

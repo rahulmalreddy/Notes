@@ -1,0 +1,80 @@
+   Entity level permissions:
+
+In the authorization data model for intended user role we can set the
+permission say read permission whch allows user to only read the etity.
+
+Step:
+
+-> go to role and user authorization app
+> download authoriation data model template
+-> we can give permissions to different role for entity in Base permissions page
+-> 
+
+Permissioms at attribute level:
+
+-> we can set the permissions at attribute level for different type of entities
+   
+Step 1:
+
+-> go to role and user authorisation app
+
+-> download authorization data model
+
+-> In the data model template: 
+  -> we have variuos roes such as vendor, supplier, business admin, content enricher
+     etc.
+  -> and users have roles assigned to them (mapped to them)
+  -> it is possible to assign multiple roles to one user
+
+** by default every user will have read,write and modify options
+
+-> but we can customize it in EARC Permissions
+
+-> after completing upload it to to platform and the changes like permissios
+   will be live
+
+
+            Exclusive:
+          ----------------
+
+Set permission at domain level:
+
+-> in exclusive we can even set authorization at domain level:
+
+-> this can be done by setting permissions in base page in the data model template
+
+-> 
+
+Set permission at entity level:
+
+Set permission at attribute level:
+
+-> we can give only read permission at attribute level even though the user is 
+   given edit and delete permission at entity level
+  
+-> by giving RW at entity 
+-> and by yes and no no in attribute level
+
+
+Hide entity type:
+
+-> when the admin leaves the permission columns blank  at entity then the
+   user role , cannot view the entoty 
+
+
+
+Set Context level permission:
+
+--> we can even set the permissiona t context level 
+-> In base permission worksheet set contexttype and contecxt name and
+     give permission for role
+-> and in Earc worksheet map the attribute with context name and type 
+
+
+Ownership data permission
+
+-> if detemines entity ownership is set to yes then it will not allow any
+   other vendors to look at the data.
+
+-> if ownership edit data is set to yes it will not allow any other vendors to 
+   edit data.

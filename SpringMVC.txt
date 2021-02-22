@@ -1,5 +1,7 @@
-                                SPRING MVC PROJECT:
+                                 SPRING MVC PROJECT:
                              -------------------------
+Relative url : " url";
+Absolute url :  " /url";
 
 SETUP// Creating a spring mvc Project:
 
@@ -418,6 +420,315 @@ Succes:;
 
 
 -----------------------------------------------------------------------------------------
+
+                                    Redirect : 
+                              ---------------------
+
+1. redirect prefix:
+2. RedirectView:
+
+redirect prefix:
+-----------------
+
+when you want to redirect from one url to another mainly used for displaying error pages and 
+success pages:
+
+EG:
+
+return "redirect:/url";
+
+
+@controller
+public class contoller{
+
+@ReguestMapping("/one")
+publicc string one(){
+s.o.pln("this is first");
+
+return "redirect:/enjoy";
+}
+
+-> this takes you to where you want to go by using redirect
+
+@RequestMapping("/enjoy")
+public String two(){
+
+S.o.pln("this is two ");
+
+return " ";
+}
+
+}
+
+-> We can also redirect by using Redirectview:
+
+
+Eg:
+
+
+@controller
+public class contoller{
+
+@ReguestMapping("/one")
+publicc string one(){
+s.o.pln("this is first");
+
+RedirectView redirectview = new RedirectView();
+redirectview.setUrl("enjoy");
+return redirectview
+
+}
+
+-> this takes you to where you want to go by using redirect
+
+@RequestMapping("/enjoy")
+public String two(){
+
+S.o.pln("this is two ");
+
+return " ";
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+____________________________________________________________________________________________________________________________________
+
+
+Spring Web Annotations:
+------------------------
+
+
+1. @RequestMapping:
+
+@Controller
+@RequestMapping(value = "/vehicles", method = RequestMethod.GET)
+class VehicleController {
+
+    @RequestMapping("/home")
+    String home() {
+        return "home";
+    }
+}
+
+-> Moreover, @GetMapping, @PostMapping, @PutMapping, @DeleteMapping, and @PatchMapping 
+   are different variants of @RequestMapping with the HTTP method already set to
+    GET, POST, PUT, DELETE, and PATCH respectively.
+
+
+
+2. @RequestBody
+
+->  @RequestBody – which maps the body of the HTTP request to an object:
+
+@PostMapping("/save")
+void saveVehicle(@RequestBody Vehicle vehicle) {
+    // ...
+}
+
+3. @Pathvariable
+
+
+4.@RequestParam:
+
+-> We use @RequestParam for accessing HTTP request parameters:
+
+@RequestMapping
+Vehicle getVehicleByParam(@RequestParam("id") long id) {
+    // ...
+}
+
+-> It has the same configuration options as the @PathVariable annotation.
+
+-> In addition to those settings, with @RequestParam we can specify an
+   injected value when Spring finds no or empty value in the request. 
+   To achieve this, we have to set the defaultValue argument.
+
+Providing a default value implicitly sets required to false:
+
+@RequestMapping("/buy")
+Car buyCar(@RequestParam(defaultValue = "5") int seatCount) {
+    // ...
+}
+
+-> Besides parameters, there are other HTTP request parts we can access:
+   cookies and headers. We can access them with the annotations 
+   @CookieValue and @RequestHeader respectively.
+
+We can configure them the same way as @RequestParam.
+
+
+5. . @ResponseBody
+
+-> If we mark a request handler method with @ResponseBody, Spring treats
+   the result of the method as the response itself:
+
+@ResponseBody
+@RequestMapping("/hello")
+String hello() {
+    return "Hello World!";
+}
+
+-> If we annotate a @Controller class with this annotation, all 
+   request handler methods will use it.
+
+
+6. @ExceptionHandler
+
+-> With this annotation, we can declare a custom error handler method.
+   Spring calls this method when a request handler method throws any 
+   of the specified exceptions.
+
+-> The caught exception can be passed to the method as an argument:
+
+@ExceptionHandler(IllegalArgumentException.class)
+void onIllegalArgumentException(IllegalArgumentException exception) {
+    // ...
+}
+
+
+7. @ModelAttribute
+
+-> With this annotation we can access elements that are already in 
+   the model of an MVC @Controller, by providing the model key:
+
+
+@PostMapping("/assemble")
+void assembleVehicle(@ModelAttribute("vehicle") Vehicle vehicleInModel) {
+    // ...
+}
+
+Like with @PathVariable and @RequestParam, we don't have to specify the model key if the argument has the same name:
+
+@PostMapping("/assemble")
+void assembleVehicle(@ModelAttribute Vehicle vehicle) {
+    // ...
+}
+
+Besides, @ModelAttribute has another use: if we annotate a method with it, Spring will automatically add the method's return value to the model:
+
+@ModelAttribute("vehicle")
+Vehicle getVehicle() {
+    // ...
+}
+
+-> 
+
+@ModelAttribute
+Vehicle vehicle() {
+    // ...
+}
+Before Spring calls a request handler method, it invokes all @ModelAttribute annotated methods in the class.
+
+8.  @CrossOrigin
+------------------
+@CrossOrigin enables cross-domain communication for the annotated request handler methods:
+
+@CrossOrigin
+@RequestMapping("/hello")
+String hello() {
+    return "Hello World!";
+}
+If we mark a class with it, it applies to all request handler methods in it. 
+
+
+-----------------------------------------------------------------------------------------
+
+                       Spring MVC: @RequestMapping.
+
+-> the annotation is used to map web requests to Spring Controller methods.
+
+
+
+
+---------------------------------------------------------------------------------------
+                            @RequestParam / @pathvariable
+
+-> While @RequestParams extract values from the query string, @PathVariables 
+    extract values from the URI path:
+
+
+@GetMapping("/foos/{id}")
+@ResponseBody
+public String getFooById(@PathVariable String id) {
+    return "ID: " + id;
+}
+Then, we can map based on the path:
+
+http://localhost:8080/foos/abc
+----
+ID: abc
+
+
+And for @RequestParam, it will be:
+
+@GetMapping("/foos")
+@ResponseBody
+public String getFooByIdUsingQueryParam(@RequestParam String id) {
+    return "ID: " + id;
+}
+Which would give us the same response, just a different URI:
+
+http://localhost:8080/foos?id=abc
+
+-> Both @RequestParam and @PathVariable can be optional.
+ i.e
+
+ @GetMapping({"/myfoos/optional", "/myfoos/optional/{id}"})
+@ResponseBody
+public String getFooByOptionalId(@PathVariable(required = false) String id){
+    return "ID: " + id;
+}
+----
+ID: abc
+
+---------------------------------------------------------------------------------------------------------------------
+
+                                        @ModelAttribute:
+
+-> @ModelAttribute can be used either as a method parameter or at the method level.
+-> 
+
+At the Method Level
+
+-> When the annotation is used at the method level it indicates the purpose of that method
+   is to add one or more model attributes. Such methods support the same argument types 
+   as @RequestMapping methods but that cannot be mapped directly to requests.
+
+Let's have a look at a quick example here to start understanding how this works:
+
+@ModelAttribute
+public void addAttributes(Model model) {
+    model.addAttribute("msg", "Welcome to the Netherlands!");
+}
+
+->In the example, we show a method that adds an attribute named msg to all models defined in the controller class.
+
+-> In general, Spring-MVC will always make a call first to that method, before it calls any request
+   handler methods. That is, @ModelAttribute methods are invoked before the controller methods 
+   annotated with @RequestMapping are invoked. The logic behind the sequence is that, the model object 
+   has to be created before any processing starts inside the controller methods.
+
+-> It is also important that you annotate the respective class as @ControllerAdvice. Thus, you can add 
+   values in Model which will be identified as global. This actually means that for every request a 
+    default value exists, for every method in the response part.
+
+ 
+
+
+
+
+
 
 
 

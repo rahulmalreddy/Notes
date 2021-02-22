@@ -1,0 +1,93 @@
+                  ACES :Aftermarket Catalog Exchange Standard (ACES)
+            -------------------------------------------------------------
+
+-> ACES app is an out-of-the-box solution to manage the complete information
+   lifecycle of a Catalog.  
+
+->  The automated rule based data management ensures better quality of data,
+    faster onboarding of data, and efficient product life cycle aided by
+     the system’s workflow management.
+
+-> ACES app provides schema of a machine-readable format (XML) for customers
+  to exchange the automotive data while adhering to industry standards. 
+
+-> It also includes set of basic pre-configured use-cases to Onboard, Enrich, Govern,
+   and Publish Application and Catalog records in the platform.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  PIES: Product Information Exchange Standard (PIES)
+           ---------------------------------------------------------------------
+
+-> for the management of Part information by utilizing multiple related databases, 
+which contains specific classifications, related attributes, brands, and
+ other related data
+
+-> The offerings are built to manage part information and can be leveraged to 
+   accomplish the business needs and achieve better business productivity.
+
+-> PIES app is an out-of-the-box solution to manage the Part information lifecycle.
+   PIES app provides schema of a machine-readable format (XML) for customers 
+   to exchange the automotive data while adhering to industry standards.
+
+PIES has Data base Componentes:
+-------------------------------
+
+Product Classification Data Base (PCdb): provides the part information such as
+                                         Part terminology, Classification information,
+                                          and so on,
+
+Product Attributes Data Base (PAdb):  provides information of classification attributes
+                                         for the specific part type or classification. 
+
+Product Classification and Attributes Data Base (PCAdb),
+->  and Brand database defined by Auto Care industry.
+
+-> ** PIES app is primarily designed to provision and manage the large-scale data 
+      of the vendor or supplier users. 

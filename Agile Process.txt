@@ -1,0 +1,76 @@
+                       Agile process:
+                  ------------------------
+
+
+Agile Methodology:
+-----------------
+-> AGILE methodology is a practice that promotes continuous iteration of 
+   development and testing throughout the software development lifecycle 
+   of the project. In the Agile model, both development and testing 
+    activities are concurrent
+
+-> both developers and testers work parallely.
+
+
+Terminologies:
+------------------
+
+Epic,Features, Story, Task:
+
+-> epic are one big requirements(larger requirement/High level Req)
+
+-> It is divided into features and furthur classified to stories(Smaller requirements)
+
+-> For each story has multiple tasks
+
+-> task is an action we need to perform on that particular story.
+
+-> 
+
+Agile Roles:
+-------------
+
+Product Owner:
+---------------
+->  Responsible for getting requiremnets (one time point to customer)
+
+Scrum Master: 
+-------------
+-> is the facilitator for an agile development team
+-> enable close cooperation across all roles and functions
+
+Scrum Team:
+------------
+
+-> developers and QA
+
+--------------------------------------------
+DOR : Defination of Ready
+
+-> means it is ready for testing
+
+DOD : Defination of Done
+
+-> it contains set of rules if statifies then it is done
+
+Product Backlog:
+----------------
+
+->product backlog is prepared by product owner which contains the requirements
+  (epics/stories)
+
+Sprint/iteration:
+--------------------
+-> at very high level the stories are divided into multiple sprints(multiple intervals)
+
+StoryPoints:
+-------------
+-> gives the estimation by tester and developers for each stories
+
+-> always give in fibonacci sequence 1,2,3,4,8,13,21.
+
+
+Sprint Backlog:
+--------------
+-> what are all story(requirements) should be cmpleted in the particular sprint.
+

@@ -1,0 +1,65 @@
+
+1.how to clone repo using git bash?
+ 
+-> it clones it into your folder.
+git clone url
+
+-------------------------------------
+-> creating directory in git
+  
+ mkdir name
+-----------------
+git init: 
+
+-> 
+
+***********************************************
+
+-> git status : tells which branch you are on and also files which are not added to git.
+
+->git commit : helps you to commit the files into git
+
+-> git branch :  tells you which branch are you on.
+
+-> how to create a branch?
+     **  git checkput -b branchname 
+     -> creates a new branch from the branch which you are already in
+        and new branch contains all the files.
+     -> now if you make changes in created branch then it will be
+        only in created branch until you merge it with other branch.
+
+-> how to switch between one branch to another ?
+     ** git switch branchname
+
+-> how to push changed files in created branch to git hub?
+      ** git push -u origin branchname
+          -> here if our repo is created first time the branch name 
+              would be master 
+          -> and then we branch out from master and create our own branches
+          -> ** git push by default pushes all branches to git
+ 
+-> how to merge fetaure branch with master barnch(main branch)?
+         -> if we want to merge our code changes into develop
+            branch we have to raise a pull request from devlop
+            branch and give base as develop branch and compare as feature branch
+         -> now it shows the changes in our feature branch comparing it to base bramch 
+          -> and give the name and create pull request.
+          -> once the review is done we will merge it to branch
+           
+            
+   
+******************************************************************
+              git in Intellij
+            ------------------
+
+-> 
+
+
+Ii7QT6uSb7py2aKc2O1atMMJg0DZJMYNlhtgBYlhChcLVe5s3Uz74Q==
+
+
+https://testinfrmfunction2.azurewebsites.net/api/HttpTrigger1?code=Ii7QT6uSb7py2aKc2O1atMMJg0DZJMYNlhtgBYlhChcLVe5s3Uz74Q==
+
+      
+
+   

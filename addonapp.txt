@@ -1,0 +1,10 @@
+Before you Begin
+Here is a list of recommended topics to learn before you start. You must understand:
+
+Basics of web components specifications and life cycle events 
+Basics of Polymer / LitElement 
+ES6 classes and language, including async/await and promises 
+Object Oriented JavaScript, 
+JSON structure, and properties 
+HTML5 and CSS3
+ git and github.com

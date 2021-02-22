@@ -1,0 +1,73 @@
+                Automation Testing: 
+               ----------------------
+
+-> selenium is a suite of software tools to automate web browsers.
+-> it is open source and mai ly used for functional testing and regression testing.
+
+Locators: locators can be termed as a address that identifies a web element uniquely
+          identfies a web element uniquely within a web page.
+
+Types of Locators:
+
+1. Id
+2. Name
+3. LinkText
+4. Css Selector
+5. partial link text
+6. Xpath. //tagname[@Attribute = 'value']
+
+
+
+               Selenium Grid:
+           -------------------
+
+-> allows us to execute test script on differnt machines at the same time.
+
+-> execution is possible on
+      1. Different machines with differnt browsers
+      2. same browsers but different versions
+
+-> it saves a lot of time and effort for execution
+
+-> it consists of hub and multiple nodes
+     1. hub works as central point cotrolling all the nodes
+     2. nodes are actual machines on whicg execution is done
+
+Hub:
+-----
+-> central point where you load your tests
+-> only one hub in a grid
+-> loads only on a single machine
+
+Nodes:
+------------
+-> selenium instances that will execeutes the tests
+-> one or more nodes in a grid
+-> launched on multiple machines with different platform and differnt versions
+
+
+Starting the hub:
+--------------------
+
+-> have your selenium server satandalone.jar at the same location in all the systems
+
+
+Run the command in terminal:
+
+hub:
+-------
+
+java -jar selenium-server-standalone-2.3.3jar -role hub
+
+nodes:
+--------
+ 
+java -jar selenium-server-standalone-2.3.3jar -role node -hub https:// -- register  
+
+Step 2: to register node to hubs
+
+java -Dwebdriver.chrome.driver-location of driver -jar selenium-server-standalone-2.3.3jar -role node -hub https:// -- register 
+
+-> we have switch off firewall for grid to work.
+
+ 

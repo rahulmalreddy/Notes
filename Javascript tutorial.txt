@@ -1,6 +1,8 @@
                JAVASCRIPT:
          --------------------------
 
+** fn + f12 opens debugger menu inn browser.
+
 -> we can write js in html file by using script tag: 
 
     Eg:
@@ -25,9 +27,36 @@ index.html is file name
 
 
 Comments in javascript:
+---------------------------
 
   Single line comment:  //
   Multiline comment : /*  */
+
+
+-> JavaScript Can Change HTML Content
+    1. getElementById() : document.getElementById("demo").innerHTML = "Hello JavaScript";
+      and html page should have a tag with id demo.
+
+Java script display possibilities:
+----------------------------------
+
+JavaScript can "display" data in different ways:
+
+Writing into an HTML element, using innerHTML.
+Writing into the HTML output using document.write().
+Writing into an alert box, using window.alert().
+Writing into the browser console, using console.log().
+
+-> Using document.write() after an HTML document is loaded, will delete all existing HTML:
+
+-> In JavaScript, the window object is the global scope object, that
+    means that variables, properties, and methods by default belong  
+     to the window object
+
+
+
+
+
 
 
 Javascript Variables: There are two types of js variables i.e local and global:
@@ -105,4 +134,427 @@ Null	  :  null i.e. no value at all
 Object	: instance through which we can access members
 Array	: group of similar values
 RegExp	: regular expression
+
+---------------------------------------
+                  JS Objects:
+               -----------------
+-> java script object is collection of unordered properties.
+
+-> js object: 
+
+var person = {
+  firstName: "John",
+  lastName: "Doe",
+  age: 50,
+  eyeColor: "blue"
+};
+
+-> accessing object properties:
+   person.lastName;
+
+
+-> accessing the properties of object:
+
+-> var person = {
+  firstName: "John",
+  lastName : "Doe",
+  id     :  5566
+};
+// Display some data from the object:
+document.getElementById("demo").innerHTML =
+person["firstName"] + " " + person["lastName"];
+
+-> an object can also have methods in it:
+ eg: 
+   
+  var person = {
+  firstName: "John",
+  lastName : "Doe",
+  id       : 5566,
+  fullName : function() {
+    return this.firstName + " " + this.lastName;
+  }
+};
+
+   Methods in object can be accessed by : name = person.fullName();
+
+   document.getElementById("demo").innerHTML = person.fullName();
+
+->  *** When a JavaScript variable is declared with the 
+        keyword "new", the variable is created as an object:
+
+---------------------------------------------------------------
+                   JS Function:
+               -------------------------
+
+-> A JavaScript function is a block of code designed to perform a particular task.
+
+-> A JavaScript function is executed when "something" invokes it (calls it).
+
+Eg:
+
+ var x = myFunction(4, 3);   // Function is called, return value will end up in x
+
+function myFunction(a, b) {
+  return a * b;             // Function returns the product of a and b
+}
+
+output: 12:
+
+-> we can store result of function in object aswell.
+
+Eg: 2:
+
+function toCelsius(fahrenheit) {
+  return (5/9) * (fahrenheit-32);
+}
+document.getElementById("demo").innerHTML = toCelsius();
+
+output: 35;
+
+-> Using the example above, toCelsius refers to the
+   function object, and toCelsius() refers to the function result.
+
+-----------------------------------------------------------------------
+ 
+                      JS Events:
+                     ------------------
+
+-> HTML events are "things" that happen to HTML elements.
+
+-> When JavaScript is used in HTML pages, JavaScript can "react" on these events.
+
+
+Eg: <button onclick="document.getElementById('demo').innerHTML = Date()">The time is?</button>
+
+eg2 : <button onclick="this.innerHTML = Date()">The time is?</button>
+
+
+Common HTML Events:
+-----------------------
+
+onchange	An HTML element has been changed
+onclick	        The user clicks an HTML element
+onmouseover	The user moves the mouse over an HTML element
+onmouseout	The user moves the mouse away from an HTML element
+onkeydown	The user pushes a keyboard key
+onload	        The browser has finished loading the page
+
+
+--------------------------------------------------------------------
+    
+                 JS Strings: 
+              ----------------
+
+-> A JavaScript string is zero or more characters written inside quotes.
+
+eg:   var x = "John Doe";
+eg 2: var carName1 = "Volvo XC60";  // Double quotes
+      var carName2 = 'Volvo XC60';  // Single quotes
+
+
+eg 3:
+
+-> You can use quotes inside a string, as long as they don't match 
+  the quotes surrounding the string:
+
+ var answer1 = "It's alright";
+var answer2 = "He is called 'Johnny'";
+var answer3 = 'He is called "Johnny"';
+
+-> ** length of String: 
+
+var txt = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var sln = txt.length;
+
+-> we can use these for quotes inside a string:
+
+\'	'	Single quote
+\"	"	Double quote
+\\	\	Backslash
+
+eg: 
+var x = "We are the so-called \"Vikings\" from the north.";
+
+
+-> Normally Strngs are primitive values but can be converted to objects as:
+
+eg: 
+var x = "John";
+var y = new String("John");
+
+// typeof x will return string
+// typeof y will return object
+
+-> ** x== y -> checks for the values inside x and y if both of them are same then returns
+               true.
+
+-> ** x===y  -> cheks for the type of object both of them holding is same then returns 
+                true else false.
+
+          String Methods:
+      ---------------------------
+
+indexof() : 
+
+eg: var str = "Please locate where 'locate' occurs!";
+    var pos = str.indexOf("locate");
+
+o/P:  7
+
+lastIndexOf() : 
+
+eg: var str = "Please locate where 'locate' occurs!";
+    var pos = str.lastIndexOf("locate");
+
+o/p: 21
+
+-> **Both indexOf(), and lastIndexOf() return -1 if the text is not found.
+
+search() :
+ 
+-> The search() method searches a string for a specified value and returns 
+   the position of the match:
+
+eg: var str = "Please locate where 'locate' occurs!";
+    var pos = str.search("locate");
+
+o/p : 7
+
+
+-> Extracting String Parts: 
+  -----------------------------
+
+slice(start, end):
+
+ eg: var str = "Apple, Banana, Kiwi";
+     var res = str.slice(7, 13);
+
+o/p: Banana
+
+-> If a parameter is negative, the position is counted from the end of the string.
+
+slice() :
+
+eg; var str = "Apple, Banana, Kiwi";
+    var res = str.slice(-12, -6);
+
+o/p: Banana
+
+-> If you remove the second parameter, the method will slice out the rest of the string:
+
+substring():
+
+var str = "Apple, Banana, Kiwi";
+var res = str.substring(7, 13);
+
+o/p: Banana
+
+-> ** substring() is similar to slice().
+       The difference is that substring() cannot accept negative indexes.
+-> ** substr() is similar to slice()
+      The difference is that the second parameter specifies the length 
+       of the extracted part.
+
+replace():
+
+str = "Please visit Microsoft!";
+var n = str.replace("Microsoft", "W3Schools");
+
+-> toUpperCase():
+-> toLowerCase():
+
+concat():
+---------
+
+ex: var text1 = "Hello";
+    var text2 = "World";
+    var text3 = text1.concat(" ", text2);
+
+ex 2: var text = "Hello" + " " + "World!";
+      var text = "Hello".concat(" ", "World!");
+
+
+trim():
+-------
+
+var str = "       Hello World!        ";
+alert(str.trim());
+
+**
+Extracting String Characters
+There are 3 methods for extracting string characters:
+
+charAt(position)
+charCodeAt(position)
+Property access [ ]
+
+-> ** A string can be converted into an array by using splirt method:
+
+Eg: 
+function myFunction() {
+  var str = "a,b,c,d,e,f";
+  var arr = str.split(",");
+  document.getElementById("demo").innerHTML = arr[0];
+}
+
+o/p: a
+
+
+
+
+
+
+-> javascript supports if, ifelse,if elseif conditions
+
+if:
+var a=20;  
+if(a>10){  
+document.write("value of a is greater than 10");  
+}  
+
+if else:
+-------
+var a=20;  
+if(a%2==0){  
+document.write("a is even number");  
+}  
+else{  
+document.write("a is odd number");  
+}  
+
+if elseif
+------------
+var a=20;  
+if(a==10){  
+document.write("a is equal to 10");  
+}  
+else if(a==15){  
+document.write("a is equal to 15");  
+}  
+else if(a==20){  
+document.write("a is equal to 20");  
+}  
+else{  
+document.write("a is not equal to 10, 15 or 20");  
+}  
+
+ o/p: a is equal to 20
+
+----------------------------------------------------------
+           Switch Statement:
+           -----------------
+
+<script>  
+var grade='B';  
+var result;  
+switch(grade){  
+case 'A':  
+result="A Grade";  
+break;  
+case 'B':  
+result="B Grade";  
+break;  
+case 'C':  
+result="C Grade";  
+break;  
+default:  
+result="No Grade";  
+}  
+document.write(result);  
+</script>  
+
+output: B Grade
+
+-----------------------------------------------------------------
+      JS loops:
+
+-> There are four types of loops in JavaScript.
+
+1.for loop
+2.while loop
+3.do-while loop
+4.for-in loop
+
+for loop:
+----------
+
+<script>  
+for (i=1; i<=5; i++)  
+{  
+document.write(i + "<br/>")  
+}  
+</script>  
+
+
+while loop:
+--------------
+
+<script>  
+var i=11;  
+while (i<=15)  
+{  
+document.write(i + "<br/>");  
+i++;  
+}  
+</script>  
+
+do while:
+--------
+
+var i=21;  
+do{  
+document.write(i + "<br/>");  
+i++;  
+}while (i<=25); 
+
+o/p:
+
+21
+22
+23
+24
+25
+
+
+***********************************************************************************
+                         JS Classes: 
+                   -------------------------
+
+class Syntax:
+------------
+
+class ClassName {
+  constructor() { ... }
+  method_1() { ... }
+  method_2() { ... }
+  method_3() { ... }
+}
+
+eg:
+
+class Car {
+  constructor(name, year) {
+    this.name = name;
+    this.year = year;
+  }
+}
+
+myCar = new Car("Ford", 2014);
+document.getElementById("demo").innerHTML =
+myCar.name + " " + myCar.year;
+
+o/p : Ford 2014
+
+
+-> Constructor:
+
+The constructor method is a special method:
+
+It has to have the exact name "constructor"
+It is executed automatically when a new object is created
+It is used to initialize object properties
+If you do not define a constructor method, JavaScript will add an empty 
+constructor method.
+
 

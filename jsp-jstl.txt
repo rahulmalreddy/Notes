@@ -33,3 +33,60 @@ XML tags	The XML tags provide flow control, transformation, etc.
 
 SQL tags	The JSTL SQL tags provide SQL support.
 ->  The URL for the SQL tags is http://java.sun.com/jsp/jstl/sql and prefix is sql.
+
+
+-----------------------------------------------------------------------------
+
+                           JSTL Core Tags:
+
+1. c:out :
+-------------
+->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> checkbox
+-> of not present in one databse no display
+-> 
+
+
+
+
+
+
+jsp page:
+
+-> databses
+
+
+Controleer:
+-> String[] dattabase
+>
