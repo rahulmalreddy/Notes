@@ -1,0 +1,338 @@
+
+Java Anonymous inner class:
+--------------------------------
+-> A class that have no name is known as anonymous inner class in java.
+   It should be used if you have to override method of class or interface. 
+    Java Anonymous inner class can be created by two ways:
+
+1. Class (may be abstract or concrete)
+2. Interface
+
+eg:
+
+interface Playing{
+	public void play();
+}
+public class Anaonymusclass {
+	
+	public static void main(String[] args) {
+		
+		Playing p = new Playing() {
+			public void play() {
+				System.out.println("playing");
+			}
+		};
+		p.play();
+		
+	}
+
+}
+
+o/p: playing
+
+
+example 2:
+
+ abstract class Running{
+	public abstract  void play();
+}
+public class ananymous_Abstractclass {
+	
+	public static void main(String[] args) {
+		Running pp = new Running() {
+			public void play() {
+				System.out.println("playing kkk");
+			}
+		};
+		pp.play();
+	}
+
+}
+
+o/p: playingkkk
+
+-----------------------------------------------------------------------------------
+
+     Java Lambda Expressions:
+       -------------------------
+
+-> Lambda expression is a new and important feature of Java which was 
+  included in Java SE 8. It provides a clear and concise way to represent 
+  one method interface using an expression. It is very useful in collection
+   library. It helps to iterate, filter and extract data from collection.
+
+-> The Lambda expression is used to provide the implementation of an 
+   interface which has functional interface. It saves a lot of code.
+   In case of lambda expression, we don't need to define the method again
+   for providing the implementation. Here, we just write the implementation code.
+
+-> Java lambda expression is treated as a function, so compiler does not 
+  create .class file.
+
+Example without lambda expression:
+---------------------------------
+
+interface Drawable{  
+    public void draw();  
+}  
+public class LambdaExpressionExample {  
+    public static void main(String[] args) {  
+        int width=10;  
+  
+        //without lambda, Drawable implementation using anonymous class  
+        Drawable d=new Drawable(){  
+            public void draw(){System.out.println("Drawing "+width);}  
+        };  
+        d.draw();  
+    }  
+} 
+o/p: Drawing 10
+
+
+
+example with lambda expression:
+--------------------------
+
+@FunctionalInterface  //It is optional  
+interface Drawable{  
+    public void draw();  
+}  
+  
+public class LambdaExpressionExample2 {  
+    public static void main(String[] args) {  
+        int width=10;  
+          
+        //with lambda  
+        Drawable d2=()->{  
+            System.out.println("Drawing "+width);  
+        };  
+        d2.draw();  
+    }  
+} 
+
+
+o/p: Drawing 10 
+------------------------------
+
+
+ex:   No Parameter
+
+package test1;
+interface Swimming{
+	public abstract void swim();
+}
+
+public class LambdaTest1 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Swimming s = () ->{
+			System.out.println("swiimming");
+		};
+		
+		s.swim();
+
+	}
+
+}
+
+o/p: swimming:
+
+
+exampe : with one parameter:
+
+interface Swimming{
+	public abstract void swim(String name);
+}
+
+public class LambdaTest1 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Swimming s = (name) ->{
+			System.out.println("swiimming"+name);
+		};
+		
+		s.swim("rahul");
+
+	}
+
+}
+
+o/p: swimmingrahul
+
+Example: with return keyword
+-----------------------
+
+interface Addable{  
+    int add(int a,int b);  
+}  
+  
+public class LambdaExpressionExample6 {  
+    public static void main(String[] args) {  
+          
+        // Lambda expression without return keyword.  
+        Addable ad1=(a,b)->(a+b);  
+        System.out.println(ad1.add(10,20));  
+          
+        // Lambda expression with return keyword.    
+        Addable ad2=(int a,int b)->{  
+                            return (a+b);   
+                            };  
+        System.out.println(ad2.add(100,200));  
+    }  
+}
+
+o/p: 30
+     300
+
+------------------------------------
+
+lambda Expression with forEach loop:
+
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class LamdaTest2 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		List<String> list = new ArrayList<String>();
+		
+		list.add("rahul");
+		list.add("mayank");  
+        list.add("irfan");  
+        list.add("jai");  
+        
+        list.forEach(n->System.out.println(n));
+		
+
+	}
+
+}
+o/p: rahul
+     mayank
+
+----------------------------
+
+example: 
+class Product{  
+    int id;  
+    String name;  
+    float price;  
+    public Product(int id, String name, float price) {  
+        super();  
+        this.id = id;  
+        this.name = name;  
+        this.price = price;  
+    }  
+}  
+
+public class LamdaTest2 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+//		List<String> list = new ArrayList<String>();
+//		
+//		list.add("rahul");
+//		list.add("mayank");  
+//        list.add("irfan");  
+//        list.add("jai");  
+        
+     //list.forEach(n->System.out.println(n));
+        
+        List<Product> list=new ArrayList<Product>();  
+        list.add(new Product(1,"Samsung A5",17000f));  
+        list.add(new Product(3,"Iphone 6S",65000f));  
+        list.add(new Product(2,"Sony Xperia",25000f));  
+        list.add(new Product(4,"Nokia Lumia",15000f));  
+        list.add(new Product(5,"Redmi4 ",26000f));  
+        list.add(new Product(6,"Lenevo Vibe",19000f));  
+        
+        Stream<Product> ll = list.stream().filter(p-> p.price>00000);
+          
+        
+       ll.forEach(l->System.out.println(l.name));
+		
+
+	}
+
+}
+
+o/p:
+
+Samsung A5
+Iphone 6S
+Sony Xperia
+Nokia Lumia
+Redmi4 
+Lenevo Vibe
+
+----------------------------------------------------------------------------
+
+                           Method Reference:
+
+Java Method References:
+
+-> Java provides a new feature called method reference in Java 8. 
+    Method reference is used to refer method of functional interface. It is
+    compact and easy form of lambda expression. Each time when you are using
+    lambda expression to just referring a method, you can replace your lambda 
+    expression with method reference. 
+
+-> Types of Method References
+
+There are following types of method references in java:
+
+Reference to a static method.
+Reference to an instance method.
+Reference to a constructor.
+
+
+
+Refernce to a static method:
+
+Syntax: ContainingClass::staticMethodName  
+
+
+ex:
+
+
+interface Sayable{
+	 void say();
+}
+
+public class MethodRefernceTest {
+	
+	public static void saysomethig() {
+		System.out.println("sayomg something");
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Sayable s =  MethodRefernceTest::saysomethig;
+		
+		s.say();
+		
+		Runnable r = MethodRefernceTest::saysomethig;
+		r.run();
+		
+		Thread t = new Thread(MethodRefernceTest::saysomethig);
+		t.start();
+
+	}
+
+}
+
+o/p: saysomething
+     saysomething
+     saysomething
+
+-------------------------------------------------------

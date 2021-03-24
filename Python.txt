@@ -1,0 +1,385 @@
+                          PYTHON:
+                         ----------
+
+Python Indentation:
+  --------------
+-> Indentation refers to the spaces at the beginning of a code.
+-> in other programming lang identation is used for only redability but in 
+   pythn if we don't follow proper indentation causes errors
+
+->** Python uses indentation to indicate a block of code.
+
+ex: if 5>2:
+     print("hello")
+
+ o/p: hello
+
+ex2 : if 5>2:
+      print("hello")
+
+o/p : error
+
+
+Comments: # this is a comment:
+------------------------------
+
+                    Python Variables:
+                     ---------------
+ -> In python variables are created when you assiagn a value to it:
+
+   x=5;
+   y="hello world"
+
+ Creating Variables:
+ ---------------- 
+-> Python has no command for declaring a variable.
+-> A variable is created the moment you first assign a value to it.
+
+ex: 
+x = 5
+y = "John"
+print(x)
+print(y)
+
+o/p: 5 John
+
+ Casting:
+  --------
+  -> if you want to specify the data type of avariable we use
+    ex:
+       x=str(3)
+       y=int(3)
+       z=float(3)
+    o/p: '3' , 3, 3.0
+
+-> ** we can get the type of variable by using:  type() function
+    ex:  c= int(3)
+         print(type(c))
+ 
+       o/p: 3
+
+ex: 
+  x = "awesome"
+print("Python is " + x)
+
+o/p: python is awesome
+
+ex:
+x = "Python is "
+y = "awesome"
+z =  x + y
+print(z)
+
+o/p: Python is awesome
+
+ Global Variables:
+  -> variables that are created outside  afunction are called global variables:
+   
+ex: 
+
+x = "awesome"
+
+def myfunc():
+  print("Python is " + x)
+
+myfunc()
+
+o/p: Python is awesome
+
+-> ** If you create a variable with the same name inside a function, this variable
+    will be local, and can only be used inside the function. The global variable
+    with the same name will remain as it was, global and with the original value
+
+ex:
+x = "awesome"
+
+def myfunc():
+  x = "fantastic"
+  print("Python is " + x)
+
+myfunc()
+
+print("Python is " + x)
+
+o/p: Python is fantastic
+     Python is awesome.
+
+-> Normally, when you create a variable inside a function, that variable is local, 
+   and can only be used inside that function.
+-> To create a global variable inside a function, you can use the global keyword.
+ 
+ ex:
+
+def myfunc():
+  global x
+  x = "fantastic"
+
+myfunc()
+
+print("Python is " + x)
+
+
+o/p: Python is fantastic
+
+                            
+------------------------------------------------------------------------------ 
+                              DataTypes:
+                           -----------------
+
+x = str("Hello World")	str	
+x = int(20)	int	
+x = float(20.5)	float	
+x = complex(1j)	complex	
+x = list(("apple", "banana", "cherry"))	list	
+x = tuple(("apple", "banana", "cherry"))	tuple	
+x = range(6)	range	
+x = dict(name="John", age=36)	dict	
+x = set(("apple", "banana", "cherry"))	set	
+x = frozenset(("apple", "banana", "cherry"))	frozenset	
+x = bool(5)	bool	
+x = bytes(5)	bytes	
+x = bytearray(5)	bytearray	
+x = memoryview(bytes(5))
+
+
+
+  Python Numbers:
+ ----------------
+ -> There are three numeric types in python:
+     1.int
+     2.float
+     3.complex
+ 
+ -> Type Conversion: you can convert one datatype to another:
+    ex:
+
+    x=1
+    print(type(x))
+
+    a = float(x)
+    print(type(a))
+ 
+   o/p: <class int>
+        <class Float>
+  
+  -> Random Number: In order to generate a random number we use:
+    
+     eex:
+         import random
+
+         print(random.randrange(1,10))
+
+         o/p:3
+
+
+   Python Strings: 
+    ---------------
+-> Strings in python are surrounded by either single quotation marks, 
+   or double quotation marks.
+
+  print("Hello")
+  print('Hello')
+
+Strings are Arrays
+
+-> Like many other popular programming languages, strings in Python are arrays of
+   bytes representing unicode characters.
+
+-> However, Python does not have a character data type, a single character is
+   simply a string with a length of 1.
+
+-> Square brackets can be used to access elements of the string.
+
+a = "Hello, World!"
+print(a[1])  o/p: e
+
+
+** Looping through a String:
+ 
+     for x in "banana":
+       print(x)  o/p: b a n a n a
+
+** To find the length of a string:
+         a ="Hello World"
+         print(len(a))   o/p: 10
+
+** To check if a phrase or a character present in String we use:
+
+        txt = "The best things in life are free"   
+        print("free" in text); o/p: True
+
+         txt = "The best things in life are free"   
+         print("free" not in text); o/p: True
+   
+      -> return boolean 
+
+** Slicing
+ -> You can return a range of characters by using the slice syntax.
+
+ -> Specify the start index and the end index, separated by a colon, to return a
+     part of the string.
+
+      ex: b = "Hello, World!"
+          print(b[2:5])
+
+   Python Booleans: 
+  --------------------
+
+-> Boolean Values
+
+-> In programming you often need to know if an expression is True or False.
+
+-> You can evaluate any expression in Python, and get one of two answers, True or4
+    False.
+
+-> When you compare two values, the expression is evaluated and Python returns the
+   Boolean answer:
+
+ex: 
+  print(10 > 9)  -> True
+print(10 == 9) --> False
+print(10 < 9) --> False
+
+
+ex: 
+
+a = 200
+b = 33
+
+if b > a:
+  print("b is greater than a")
+else:
+  print("b is not greater than a")
+
+
+o/p: b is not grater than a
+
+
+
+
+*********************************************************************************
+                          Python FunctionS:
+                        --------------------
+
+-> A function is a block of code which only runs when it is called.
+
+-> You can pass data, known as parameters, into a function.
+
+-> A function can return data as a result.
+
+-> In Python a function is defined using the def keyword:
+
+ex: def my_function():
+    print("hello function")
+   
+    my_function()
+
+0/p:  hello function
+
+
+Arguments:
+
+-> Information can be passed into functions as arguments.
+
+-> Arguments are specified after the function name, inside the parentheses. 
+   You can add as many arguments as you want, just separate them with a comma.
+
+eex: 
+
+   def my_function(fname)
+      print(fname+ " name is ")
+
+   my_function("rahul")
+
+ o/p: rahul name is
+
+
+-> ** Arguments are often shortened to args in Python documentations.
+
+** Arbitrary Arguments, *args
+
+-> If you do not know how many arguments that will be passed into your function, 
+    add a * before the parameter name in the function definition.
+
+-> This way the function will receive a tuple of arguments, and can access the
+   items accordingly: 
+
+ex: 
+  def my_function(*args):
+     print("The youngest child is " + args[2])
+
+my_function("Emil", "Tobias", "Linus")
+
+o/p: Linus
+
+ex2:
+
+def my_function(*kids):
+  print("The youngest child is " + kids[2])
+
+my_function("Emil", "Tobias", "Linus")
+
+o/p: Linus
+
+
+Keyword Arguments:
+
+-> You can also send arguments with the key = value syntax.
+
+-> This way the order of the arguments does not matter.
+
+ex:
+
+def my_function(**Kwargs):
+  print("The youngest child is " + Kwargs["child3"])
+
+my_function(child1 = "Emil", child2 = "Tobias", child3 = "Linus")
+
+o/p: The youngest kid is Linus
+
+ex:
+
+def my_function(child3, child2, child1):
+  print("The youngest child is " + child3)
+
+my_function(child1 = "Emil", child2 = "Tobias", child3 = "Linus")
+
+o/p: The youngest kid is Linus
+
+
+****
+-> You can send any data types of argument to a function (string, number, list, 
+   dictionary etc.), and it will be treated as the same data type inside the function.
+
+-> E.g. if you send a List as an argument, it will still be a List when it
+   reaches the function:
+
+ex:
+
+def my_function(food):
+  for x in food:
+    print(x)
+
+fruits = ["apple", "banana", "cherry"]
+
+my_function(fruits)
+
+
+o/p: apple, banana. cherry
+
+**Return Values:
+
+-> To let a function return a value, use the return statement:
+
+ex:
+
+def my_function(x):
+  return 5 * x
+
+print(my_function(3))
+print(my_function(5))
+print(my_function(9))
+
+
+
+
