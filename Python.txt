@@ -380,6 +380,130 @@ print(my_function(3))
 print(my_function(5))
 print(my_function(9))
 
+---------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
+
+
+
+Kwargs and args:
+ ----------------
+ 
+     -> In Python, we can pass a variable , number of arguments to a function using special symbols. There are two special symbols:
+     
+     
+  Special Symbols Used for passing arguments:-
+
+1.)*args (Non-Keyword Arguments)
+
+2.)**kwargs (Keyword Arguments)
+
+
+
+eG:
+
+
+def myFun(arg1, *argv):
+    print ("First argument :", arg1)
+    for arg in argv:
+        print("Next argument through *argv :", arg)
+ 
+myFun('Hello', 'Welcome', 'to', 'GeeksforGeeks')
+
+
+First argument : Hello
+Next argument through *argv : Welcome
+Next argument through *argv : to
+Next argument through *argv : GeeksforGeeks
+
+
+
+
+eg:
+
+def myFun(**kwargs):
+    for key, value in kwargs.items():
+        print ("%s == %s" %(key, value))
+ 
+# Driver code
+myFun(first ='Geeks', mid ='for', last='Geeks') 
+
+
+last == Geeks
+mid == for
+first == Geeks
+
+
+----------------------------------------------------------------------------------------------------------
+
+  __init__(self )_
+  
+  -> Whenever object oriented programming is done in Python, we mostly come across __init__ method 
+
+  -> The __init__ method is similar to constructors in C++ and Java. Constructors are used to initialize the object’s state. 
+  
+  -> 
+  
+  eg:
+  
+ 
+class Person:  
+      
+    # init method or constructor   
+    def __init__(self, name):  
+        self.name = name  
+      
+    # Sample Method   
+    def say_hi(self):  
+        print('Hello, my name is', self.name)  
+      
+p = Person('Nikhil')  
+p.say_hi()  
+
+
+o/p: Hello, my name is Nikhil
+
+
+
+eg: 2:
+
+
+
+class Person:  
+      
+    # init method or constructor   
+    def __init__(self, name):  
+        self.name = name  
+      
+    # Sample Method   
+    def say_hi(self):  
+        print('Hello, my name is', self.name)  
+  
+# Creating different objects     
+p1 = Person('Nikhil')  
+p2 = Person('Abhinav')
+p3 = Person('Anshul')
+  
+p1.say_hi()  
+p2.say_hi()
+p3.say_hi()
+
+
+o/p:
+
+Hello, my name is Nikhil
+Hello, my name is Abhinav
+Hello, my name is Anshul
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
 
 
 

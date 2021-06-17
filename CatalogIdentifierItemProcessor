@@ -1,0 +1,21 @@
+
+
+
+ CatalogIdentifierItemProcessor catalogIdentifierItemProcessor = new CatalogIdentifierItemProcessor(
+ 
+ jobStatus,  -> is for storing in cosmosDb
+ context,    -> 
+ taskStatusManager,  -> for sending external events          
+  Main::retrieveExistingData, -> this is method in main class which helps us to download the backup zip file which contains the app and appgroups,catalog
+   Main::retrieveExistingIdsData, -> this is the method in main class which helps us to download the backup file of id
+    catalogStaticFieldProperties,  -> it is an object of class catalogStaticFieldProperties which extends the class StaticFieldProperties
+                                      which has an hashmap called staticFields which has key and values
+    masterIdGenerator,             ->is an object of MasterIdGenerator class which is used to generate the masterid 
+     mapDB,                        ->
+      allCatalogData,             ->  is an hashmap which is intialized
+      catalogFields,              -> immutable list of brandaaid, parttype
+      brandMapper,                ->
+       partMapper,               ->
+       catalogLockManager,      -> is an object of class catalogLockManager which helps us to know weather the catalog can be processed or not
+        invalidPartNumberValidatorItemProcessor); -> next processor
+     

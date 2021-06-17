@@ -1,0 +1,32 @@
+
+{
+    "params": {
+        "query": {
+            "contexts": [
+                {
+                    "app": "RSConnect",
+                    "service": "ENTITY_IMPORT",
+                    "channel": "AZURE_BLOB_REF",
+                    "format": "JSON",
+                    "source": "internal",
+                    "role": "admin",
+                    "user": "system",
+                    "subtype": "System",
+                    "order": "10"
+                }
+            ],
+            "filters": {
+                "typesCriterion": [
+                    "integrationprofile"
+                ],
+                "excludeNonContextual": true
+            }
+        },
+        "fields": {
+            "attributes": [
+                "_ALL"
+            ]
+        }
+    }
+}
+

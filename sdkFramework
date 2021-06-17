@@ -1,0 +1,92 @@
+  SDK app Code template:           refer: add-on-app template repo
+   -------------
+   
+ ->  sdk framework asks app developers to write code in aspecific way so that it can understand so that it can and package the code in right way
+ 
+ eg: spring framework 
+ 
+ -> riversand sdk framework  defined a code template which app developers should follow to develop apps:
+ 
+ 
+ --------------
+ 
+ the main structure of sdk are:
+ 
+ batch/job_defs
+ resources
+ source
+ application.json
+ version.properties:
+ 
+ -> application.json: these is place where you define id of your app:
+ 
+ -> versionproperties: gieves the version of app
+ 
+ 
+ *** job_def folder name sholud be same as of jobdef id:
+ job_defs: is the main requirement sdk framework look for packaging.
+ 
+ ---------------------------------------------------------------------------------------------
+ ** we have git repo dataplatform-apps-sdk which is sdk app template which helps us to package all our code 
+        -> which has shell scripts helps us to package our code using job_defs
+        
+        
+        ------------------------------------------------------------------
+        
+        
+      In  job_defs folder we have something called triggers:
+        
+        
+        Triggers:
+        --------
+        
+        -> triggers helps us how we want to invoke your job defination in your app:
+        
+        4 types of triigers:
+        
+          -> eventgrid trigger
+          -> rest trigger
+          -> schedule recurring  trigger : schedule.json
+          -> schedule one time trigger
+          
+          
+   EventGridTrigger: 
+       -> when ever a xml gets uploaded into vendoruploadcontainer I need this job should be triggerd
+          -> blob watcher trigger
+              
+       
+   RestTrigger: 
+   
+      -> we can have it as a rest call
+      -> where we can specify the appid and job_def
+      -> which inturn triggers our application
+      
+      -> proxyservice in rdf a service which takes care our rest call 
+      
+ ***      api/proxyservice/call:
+      
+      
+      *** 
+       -> there are four sdk app functions which you can find in azure portal:
+       
+             1. base_eventgrid_trigger :   is a blobwatcher trigger
+             2. batch_rest_trigget
+             3.schedule_batch_rest_trigger
+       
+         
+ 
+ ----------------------------------------------------------------------
+ 
+             resources folder:
+             ------------
+             
+             
+             -> has the json files which help in creating resources on the azure while deployment:
+             
+                   containers/ tables
+             
+                    -> like creating vendor container:
+                    etc
+             
+ 
+ -> if the resources are already there in storage account then this step will be skipped:

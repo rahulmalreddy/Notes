@@ -1,0 +1,48 @@
+
+mymath.py
+---------
+
+ def add (a, b):
+   return a+b
+   
+ print(add(10,16)
+ 
+ 
+ 
+ 
+ test.py
+ ---------
+ 
+ print(mymath.add(2,3))
+ 
+ 
+ if we run test.py :
+   26  --> sum of mymath.py
+   5   ---> sum of test.py
+   
+   
+   ------------------------------------------
+   
+   ** we want only to use add method but not execute entire script
+   
+   
+   -> thats where we use __name __ == __main__
+   
+   **__name__ is special built in keyword in python whose value will be equal to __main__ or module name i.e mymath
+   
+   -----------------------------------
+   
+   -> under what condition __name__ becomes module name 
+    i.e __name__ == mymath
+    
+    whenever we run test.py module __name__ becomes __mymath__
+    
+    i.e basically when we call it from other module 
+    
+  -> under what condition __name__ becomes __main__
+    
+    i.e __name__ ==__main__
+   
+    whenever we run same module 
+   
+   

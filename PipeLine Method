@@ -1,0 +1,188 @@
+
+              Application PipeLine :
+              
+              --------------------------
+              
+              
+              
+       private static ItemProcessor getApplicationPipeline(Context context, JobStatus jobStatus, TaskStatusManager taskStatusManager,
+                                                        DB mapDB, VCdbData vcdbData, PCdbData pcdbData,
+                                                        CustomReferenceData customReferenceData, CatalogStaticFieldProperties catalogStaticFieldProperties,
+                                                        ApplicationStaticFieldProperties appStaticFieldProperties,
+                                                        BrandFieldProperties brandFieldProperties,
+                                                        HashMap<String, CatalogData> allCatalogData, TaskScheduler taskScheduler )
+            throws IOException, SQLException, ClassNotFoundException {
+        String fieldsNotToInclude = "id|action|validate|source|allnotespatterntext|allnotekeys|Relationships|sysinitialnotes|AssetName|AssetItemOrder|AssetItemRef|DisplayOrder|linenumber|acesCheckVersion|DatabaseVersions|servicetype|friendlybrandname|friendlycatalogdescriptivename|friendlypartname|friendlypositionname|Catalog|Vehicle|pcdb_validation|vcdb_validation";
+        String attributesNotToInclude = "source";
+        MasterIdGenerator masterIdGenerator = new MasterIdGenerator(fieldsNotToInclude, attributesNotToInclude);
+        InvalidApplicationsManager invalidApplicationsManager = new InvalidApplicationsManager(taskStatusManager);
+
+        List<Stream> noteProcessStreamList = new ArrayList<>();
+        noteProcessStreamList.add(customReferenceData.getCustomNoteReplacementTextsStream());
+        noteProcessStreamList.add(customReferenceData.getCustomNoteRemoveAllTextsStream());
+
+        Map<String, String> noteTypes = ImmutableMap.of(
+                "Note", "Note",
+                "MfrLabel", "Mfr Label",
+                "Qual", "Qualifier");
+
+        List<FieldValue> catalogFields = ImmutableList.of(
+                new FieldValue("BrandAAIAID", Constants.SystemFields.CONTENT),
+                new FieldValue("PartType", "id")
+        );
+
+        CatalogHandlerItemProcessor catalogHandlerItemProcessor =
+                new CatalogHandlerItemProcessor(jobStatus, catalogFields, allCatalogData);
+
+        ItemProcessor digitalFileInformationRelationshipHelper = new DigitalFileInformationRelationshipHelperProcessor(catalogHandlerItemProcessor, context);
+        // Initial Pipeline
+        // App: StaticFieldAppender -> SimpleFieldValidator -> YearBasedRecordExplosion
+        //          -> BaseVehicleIdLookup -> SubModelAndRegionExplosion
+        //          -> MasterID -> Duplicate -> CatalogHandler
+        // Header: AppHeader -> CatalogHeader -> SimpleStatus
+        // Footer: SimpleStatus
+
+        DuplicateItemProcessor duplicateItemProcessor =
+                new DuplicateItemProcessor(mapDB, invalidApplicationsManager, jobStatus, digitalFileInformationRelationshipHelper);
+        MasterIDItemProcessor masterIDItemProcessor =
+                new MasterIDItemProcessor(duplicateItemProcessor, masterIdGenerator);
+        SubModelAndRegionExplosionItemProcessor subModelAndRegionExplosionItemProcessor =
+                new SubModelAndRegionExplosionItemProcessor(mapDB, vcdbData.getVehicleStream(), masterIDItemProcessor, invalidApplicationsManager, jobStatus, new DatabaseAttributeFilter(vcdbData, pcdbData));
+        BaseVehicleIdLookupItemProcessor baseVehicleIdLookupItemProcessor =
+                new BaseVehicleIdLookupItemProcessor(mapDB, invalidApplicationsManager, jobStatus, vcdbData.getBaseVehicleStream(), subModelAndRegionExplosionItemProcessor);
+        YearExplosionItemProcessor yearExplosionItemProcessor =
+                new YearExplosionItemProcessor(mapDB, baseVehicleIdLookupItemProcessor, invalidApplicationsManager, jobStatus);
+        NoteIdentifierItemProcessor noteIdentifierItemProcessor = new NoteIdentifierItemProcessor(mapDB, jobStatus, masterIdGenerator, noteTypes, noteProcessStreamList, taskScheduler, yearExplosionItemProcessor);
+        InvalidPartNumberValidatorItemProcessor invalidPartNumberValidatorItemProcessor = new InvalidPartNumberValidatorItemProcessor(mapDB, ModuleConfig.FileProcessorConfig.InvalidPartNumbers, invalidApplicationsManager, jobStatus, noteIdentifierItemProcessor);
+
+        BrandNameMap brandMapper = new BrandNameMap(mapDB);
+        PartNameMap partMapper = new PartNameMap(mapDB);
+        PositionNameMap positionMapper = new PositionNameMap(mapDB);
+
+        CatalogEntityManager catalogLockManager = new CatalogEntityManager();
+
+        CatalogIdentifierItemProcessor catalogIdentifierItemProcessor = new CatalogIdentifierItemProcessor(jobStatus, context, taskStatusManager,
+                Main::retrieveExistingData,Main::retrieveExistingIdsData, catalogStaticFieldProperties, masterIdGenerator, mapDB, allCatalogData, catalogFields, brandMapper, partMapper, catalogLockManager,invalidPartNumberValidatorItemProcessor);
+        FriendlyNameAppenderItemProcessor friendlyNameAppenderItemProcessor = new FriendlyNameAppenderItemProcessor(brandMapper, partMapper, positionMapper, catalogIdentifierItemProcessor);
+        ValidatePartTypeItemProcessor partTypeValidator = new ValidatePartTypeItemProcessor(mapDB, pcdbData, invalidApplicationsManager, jobStatus, friendlyNameAppenderItemProcessor);
+        SimpleFieldValidatorItemProcessor simpleFieldValidatorItemProcessor =
+                new SimpleFieldValidatorItemProcessor(mapDB, invalidApplicationsManager, jobStatus, partTypeValidator);
+        BrandFieldItemProcessor brandFieldItemProcessor = new BrandFieldItemProcessor(simpleFieldValidatorItemProcessor, brandFieldProperties);
+        masterIdGenerator.reportTotalTime();
+        return new StaticFieldAppenderItemProcessor(brandFieldItemProcessor, appStaticFieldProperties);
+    }
+
+
+
+
+
+
+  -> In this method we initialize the classes and create and object from start and pass it to next line where
+  
+  -> it agian initializes the class of that line in which we send the previous object also
+  
+  -> so finally what happens is we return  the last object which has all the objects in it 
+  
+  -> which gets caputured by the ItemProcessor: 
+  
+    ItemProcessor applicationItemProcessor = getApplicationPipeline(context, jobStatus, taskStatusManager, mapDB,
+                                vcdbData, pcdbData, customReferenceData, catalogStaticFieldProperties,
+                                applicationStaticFieldProperties, brandFieldProperties, allCatalogData, taskScheduler);
+                                
+                                
+     
+     
+     so now when we call parse.parse()
+     
+     
+     
+     -> after parsinng we call the process method:
+     
+               handlers.get(localName).process(current);
+               
+               
+      -> this directly calls the staticfield itemProcessor object but it doesn't have Process method 
+      
+      -?> so what happens now is staticfield itemProcessor:
+      
+      
+      
+public class StaticFieldAppenderItemProcessor extends ForwardingItemProcessor {
+
+    private StaticFieldProperties staticFieldProperties = new StaticFieldProperties();
+
+    public StaticFieldAppenderItemProcessor(ItemProcessor next, StaticFieldProperties staticFieldProperties) {
+        super(next);
+        this.staticFieldProperties = staticFieldProperties;
+    }
+
+    @Override
+    protected void handleItem(JSONObject jsonObject) {
+        staticFieldProperties.getStaticFields().forEach((name, value) -> {
+            if (!jsonObject.has(name)) {
+                jsonObject.put(name, value);
+            }
+        });
+    }
+}
+
+-> this class extends the ForwardingItemProcessor which has Process method
+
+     -> in inheritence concept we say If we extend a class we get the propertyies, methods of that class right so we call now:
+     
+     
+public abstract class ForwardingItemProcessor implements ItemProcessor {
+    private ItemProcessor next;
+    private boolean closed = false;
+    private Timer timer;
+    private String clazzName;
+
+    public ForwardingItemProcessor(ItemProcessor next) {
+        final Throwable t = new Throwable();
+        clazzName = t.getStackTrace()[1].getClassName();
+        this.next = next;
+        this.timer = new Timer(clazzName);
+    }
+
+    @Override
+    public final void process(JSONObject item) {
+        timer.resume();
+        handleItem(item);
+        timer.suspend();
+        next.process(item);
+    }
+    
+   
+    -> so thats how we call process method which inturn calls handleItem() method in StaticFieldAppenderItemProcessor class
+    
+    -> handleItem() in StaticFieldAppenderItemProcessor class does some processing and control returns to forwardingItemProcessor
+    
+    -> in the next line we call the process method of next object in the pipeline 
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+                 
+
+
+
+
+
+
+
+              
